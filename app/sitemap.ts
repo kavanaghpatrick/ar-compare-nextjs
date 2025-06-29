@@ -33,9 +33,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/market-analysis`,
+      lastModified: new Date('2024-12-29'), // Updated with new interactive features
+      changeFrequency: 'weekly' as const,
+      priority: 0.95, // Boosted priority for enhanced interactive features
+    },
+    {
+      url: `${siteUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.85,
+    },
+    {
+      url: `${siteUrl}/reviews`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      priority: 0.75,
+    },
+    {
+      url: `${siteUrl}/search`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     },
   ];
 

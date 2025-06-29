@@ -1,0 +1,73 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*.json$
+
+# Block AI training bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Bard
+Disallow: /
+
+User-agent: PaLM
+Disallow: /
+
+# Allow important crawlers full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Crawl delay for resource-intensive pages
+Crawl-delay: 1
+
+# Sitemap locations
+Sitemap: https://ar-compare.com/sitemap.xml
+Sitemap: https://ar-compare.com/api/sitemaps/index
+Sitemap: https://ar-compare.com/api/sitemaps/products
+Sitemap: https://ar-compare.com/api/sitemaps/blog
+Sitemap: https://ar-compare.com/api/sitemaps/images
+
+# Host declaration
+Host: https://ar-compare.com

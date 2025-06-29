@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main site structure sitemap -->
+  <sitemap>
+    <loc>https://ar-compare.com/api/sitemaps/index</loc>
+    <lastmod>2024-12-29</lastmod>
+  </sitemap>
+  
+  <!-- Product pages sitemap -->
+  <sitemap>
+    <loc>https://ar-compare.com/api/sitemaps/products</loc>
+    <lastmod>2024-12-29</lastmod>
+  </sitemap>
+  
+  <!-- Blog content sitemap -->
+  <sitemap>
+    <loc>https://ar-compare.com/api/sitemaps/blog</loc>
+    <lastmod>2024-12-29</lastmod>
+  </sitemap>
+  
+  <!-- Image content sitemap -->
+  <sitemap>
+    <loc>https://ar-compare.com/api/sitemaps/images</loc>
+    <lastmod>2024-12-29</lastmod>
+  </sitemap>
+  
+  <!-- Sitemap statistics and metadata -->
+  <sitemap>
+    <loc>https://ar-compare.com/api/sitemaps/stats</loc>
+    <lastmod>2024-12-29</lastmod>
+  </sitemap>
+
+</sitemapindex>
