@@ -104,10 +104,10 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
     "@type": "WebSite",
     "name": "AR Compare",
     "description": "Find your perfect AR glasses with our comprehensive comparison of 15+ models from top brands",
-    "url": "https://ar-compare.com",
+    "url": "https://arcompare.com",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://ar-compare.com/?search={search_term_string}",
+      "target": "https://arcompare.com/?search={search_term_string}",
       "query-input": "required name=search_term_string"
     },
     "publisher": {

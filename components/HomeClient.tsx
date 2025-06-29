@@ -135,27 +135,27 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://ar-compare.com/#website",
-        "url": "https://ar-compare.com",
+        "@id": "https://arcompare.com/#website",
+        "url": "https://arcompare.com",
         "name": "AR Compare",
         "description": "Compare AR glasses and smart glasses from top manufacturers. Expert reviews, real-time pricing, and comprehensive specifications.",
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://ar-compare.com/?search={search_term_string}"
+            "urlTemplate": "https://arcompare.com/?search={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
       },
       {
         "@type": "Organization",
-        "@id": "https://ar-compare.com/#organization",
+        "@id": "https://arcompare.com/#organization",
         "name": "AR Compare",
-        "url": "https://ar-compare.com",
+        "url": "https://arcompare.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://ar-compare.com/logo.png"
+          "url": "https://arcompare.com/logo.png"
         },
         "description": "Leading platform for comparing AR glasses and smart glasses with expert analysis and real-time market data.",
         "address": {
@@ -165,15 +165,15 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
       },
       {
         "@type": "WebPage",
-        "@id": "https://ar-compare.com/#webpage",
-        "url": "https://ar-compare.com",
+        "@id": "https://arcompare.com/#webpage",
+        "url": "https://arcompare.com",
         "name": pageTitle,
         "description": pageDescription,
         "isPartOf": {
-          "@id": "https://ar-compare.com/#website"
+          "@id": "https://arcompare.com/#website"
         },
         "about": {
-          "@id": "https://ar-compare.com/#organization"
+          "@id": "https://arcompare.com/#organization"
         },
         "mainEntity": {
           "@type": "ItemList",

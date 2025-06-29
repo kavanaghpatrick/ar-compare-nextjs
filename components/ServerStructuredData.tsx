@@ -2,7 +2,7 @@ import arGlassesData from '@/data/products';
 
 export function ServerStructuredData() {
   const siteUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://ar-compare.com' 
+    ? 'https://arcompare.com' 
     : 'http://localhost:3000';
 
   // Organization structured data
@@ -16,7 +16,7 @@ export function ServerStructuredData() {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "email": "contact@ar-compare.com"
+      "email": "contact@arcompare.com"
     }
   };
 

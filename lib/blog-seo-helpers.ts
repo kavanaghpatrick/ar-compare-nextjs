@@ -235,7 +235,7 @@ export function generateSocialMetadata(post: BlogPost) {
       title: `${post.title} | AR Compare`,
       description: post.excerpt,
       image: post.image,
-      url: `https://ar-compare.com/blog/${post.slug}`
+      url: `https://arcompare.com/blog/${post.slug}`
     },
     twitter: {
       title: post.title.length > 60 ? `${post.title.substring(0, 57)}...` : post.title,

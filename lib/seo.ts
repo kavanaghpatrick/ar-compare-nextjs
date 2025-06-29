@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Product, EnhancedProduct } from '@/types';
 
 const siteUrl = process.env.NODE_ENV === 'production' 
-  ? 'https://ar-compare.com' 
+  ? 'https://arcompare.com' 
   : 'http://localhost:3000';
 
 export const defaultMetadata: Metadata = {

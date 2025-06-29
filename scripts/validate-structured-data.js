@@ -192,7 +192,7 @@ function validateBreadcrumbSchema(schema) {
 
 // Mock the SEO component to test schema generation
 function generateTestSchemas() {
-  const siteUrl = 'https://ar-compare.com';
+  const siteUrl = 'https://arcompare.com';
   
   // Organization schema
   const organizationSchema = {
@@ -210,7 +210,7 @@ function generateTestSchemas() {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "email": "support@ar-compare.com"
+      "email": "support@arcompare.com"
     },
     "logo": {
       "@type": "ImageObject",

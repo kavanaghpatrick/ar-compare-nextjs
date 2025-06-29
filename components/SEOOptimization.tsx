@@ -25,7 +25,7 @@ export function SEOOptimization({
   category, 
   brand, 
   breadcrumbs = [],
-  baseUrl = 'https://ar-compare.com'
+  baseUrl = 'https://arcompare.com'
 }: SEOOptimizationProps) {
   
   const structuredData = useMemo(() => {

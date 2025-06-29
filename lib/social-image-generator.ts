@@ -13,7 +13,7 @@ export interface SocialImageConfig {
 }
 
 export class SocialImageGenerator {
-  private static readonly BASE_URL = 'https://ar-compare.com';
+  private static readonly BASE_URL = 'https://arcompare.com';
   private static readonly IMAGE_BASE_PATH = '/images/blog/social';
   
   // Optimal dimensions for different platforms

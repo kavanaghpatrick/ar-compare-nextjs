@@ -16,7 +16,7 @@ interface SEOConfig {
 
 export class SEOMetaGenerator {
   private static readonly SITE_NAME = 'AR Compare';
-  private static readonly SITE_URL = 'https://ar-compare.com';
+  private static readonly SITE_URL = 'https://arcompare.com';
   private static readonly TWITTER_HANDLE = '@ARCompare';
   private static readonly FACEBOOK_URL = 'https://www.facebook.com/ARCompare';
   private static readonly DEFAULT_IMAGE = '/images/og-default.jpg';

@@ -74,7 +74,7 @@ lib/
 ### Environment Variables
 ```env
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_SITE_URL=https://ar-compare.com
+NEXT_PUBLIC_SITE_URL=https://arcompare.com
 NEXT_PUBLIC_GOOGLE_VERIFICATION=your-verification-code
 ```
 

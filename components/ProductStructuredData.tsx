@@ -8,7 +8,7 @@ interface ProductStructuredDataProps {
   baseUrl?: string;
 }
 
-export function ProductStructuredData({ product, baseUrl = 'https://ar-compare.com' }: ProductStructuredDataProps) {
+export function ProductStructuredData({ product, baseUrl = 'https://arcompare.com' }: ProductStructuredDataProps) {
   const structuredData = useMemo(() => {
     // Main Product Schema
     const productSchema = {

@@ -11,7 +11,7 @@ export function CanonicalURL() {
     if (typeof window === 'undefined') return;
 
     const siteUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://ar-compare.com' 
+      ? 'https://arcompare.com' 
       : 'http://localhost:3000';
 
     try {
