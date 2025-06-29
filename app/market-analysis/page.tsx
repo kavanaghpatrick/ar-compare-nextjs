@@ -143,50 +143,53 @@ export default function MarketAnalysisPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-8">
+      <div className="max-w-6xl mx-auto px-6 pb-8">
 
       <Tabs defaultValue="insights" className="space-y-8">
         {/* Enhanced Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="w-full max-w-4xl">
-            <TabsList className="grid w-full grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2">
+        <div className="mb-8">
+          <TabsList className="grid w-full grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2 max-w-5xl mx-auto">
             <TabsTrigger 
               value="insights" 
-              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 hover:bg-white/5"
+              className="flex items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 hover:bg-white/5"
             >
-              <BarChart3 className="h-4 w-4" />
-              Insights
+              <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Insights</span>
+              <span className="sm:hidden">Info</span>
             </TabsTrigger>
             <TabsTrigger 
               value="explorer" 
-              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/25 hover:bg-white/5"
+              className="flex items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/25 hover:bg-white/5"
             >
-              <Filter className="h-4 w-4" />
-              Explorer
+              <Filter className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Explorer</span>
+              <span className="sm:hidden">Explore</span>
             </TabsTrigger>
             <TabsTrigger 
               value="visualizer" 
-              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-pink-500/25 hover:bg-white/5"
+              className="flex items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-pink-500/25 hover:bg-white/5"
             >
-              <PieChart className="h-4 w-4" />
-              Analytics
+              <PieChart className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Analytics</span>
+              <span className="sm:hidden">Charts</span>
             </TabsTrigger>
             <TabsTrigger 
               value="search" 
-              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/25 hover:bg-white/5"
+              className="flex items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/25 hover:bg-white/5"
             >
-              <Search className="h-4 w-4" />
-              Search
+              <Search className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Search</span>
+              <span className="sm:hidden">Find</span>
             </TabsTrigger>
             <TabsTrigger 
               value="compare" 
-              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/25 hover:bg-white/5"
+              className="flex items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/25 hover:bg-white/5"
             >
-              <GitCompare className="h-4 w-4" />
-              Compare
+              <GitCompare className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Compare</span>
+              <span className="sm:hidden">Vs</span>
             </TabsTrigger>
           </TabsList>
-          </div>
         </div>
 
         <TabsContent value="insights" className="space-y-8">
