@@ -6,7 +6,7 @@ import logger from '@/lib/logger';
 export async function GET() {
   try {
     const siteUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://ar-compare.com' 
+      ? 'https://arcompare.com' 
       : 'http://localhost:3000';
 
     const productSitemap = new ProductSitemap(arGlassesData, siteUrl);

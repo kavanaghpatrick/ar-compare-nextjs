@@ -19,9 +19,9 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Error generating image sitemap:', error);
+    console.error('Error generating images sitemap:', error);
     return NextResponse.json(
-      { error: 'Failed to generate image sitemap' },
+      { error: 'Failed to generate images sitemap' },
       { status: 500 }
     );
   }

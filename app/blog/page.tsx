@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AR Glasses Blog 2024 - Expert Reviews & Buying Guides',
     description: 'Compare the best AR glasses with expert reviews, detailed buying guides, and cutting-edge technology insights. Your trusted source for smart glasses advice.',
-    url: 'https://ar-compare.com/blog',
+    url: 'https://arcompare.com/blog',
     siteName: 'AR Compare',
     images: [
       {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     site: '@ARCompare',
   },
   alternates: {
-    canonical: 'https://ar-compare.com/blog',
+    canonical: 'https://arcompare.com/blog',
   },
   robots: {
     index: true,

@@ -36,7 +36,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: 'https://ar-compare.com',
+      url: 'https://arcompare.com',
       siteName: 'AR Compare',
       images: [
         {
@@ -56,7 +56,7 @@ export async function generateMetadata({
       images: ['/api/placeholder/1200/630'],
     },
     alternates: {
-      canonical: 'https://ar-compare.com',
+      canonical: 'https://arcompare.com',
     },
     robots: {
       index: true,

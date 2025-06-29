@@ -63,11 +63,11 @@ Allow: /
 Crawl-delay: 1
 
 # Sitemap locations
-Sitemap: https://ar-compare.com/sitemap.xml
-Sitemap: https://ar-compare.com/api/sitemaps/index
-Sitemap: https://ar-compare.com/api/sitemaps/products
-Sitemap: https://ar-compare.com/api/sitemaps/blog
-Sitemap: https://ar-compare.com/api/sitemaps/images
+Sitemap: https://arcompare.com/sitemap.xml
+Sitemap: https://arcompare.com/api/sitemaps/index
+Sitemap: https://arcompare.com/api/sitemaps/products
+Sitemap: https://arcompare.com/api/sitemaps/blog
+Sitemap: https://arcompare.com/api/sitemaps/images
 
 # Host declaration
-Host: https://ar-compare.com
+Host: https://arcompare.com

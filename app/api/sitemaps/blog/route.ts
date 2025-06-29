@@ -4,7 +4,7 @@ import { BlogSitemap } from '@/lib/blog-sitemap';
 export async function GET() {
   try {
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://ar-compare.com' 
+      ? 'https://arcompare.com' 
       : 'http://localhost:3000';
 
     const blogSitemap = BlogSitemap.generateEnhancedBlogSitemap(baseUrl);

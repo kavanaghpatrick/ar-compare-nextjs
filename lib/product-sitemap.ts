@@ -22,7 +22,7 @@ export class ProductSitemap {
   private baseUrl: string;
   private products: EnhancedProduct[];
 
-  constructor(products: EnhancedProduct[], baseUrl = 'https://ar-compare.com') {
+  constructor(products: EnhancedProduct[], baseUrl = 'https://arcompare.com') {
     this.products = products;
     this.baseUrl = baseUrl;
   }

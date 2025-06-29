@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Compare AR Glasses - Side by Side Comparison',
     description: 'Compare AR glasses and smart glasses side by side with detailed specifications and reviews.',
     type: 'website',
-    url: process.env.NODE_ENV === 'production' ? 'https://ar-compare.com/compare' : 'http://localhost:3000/compare',
+    url: process.env.NODE_ENV === 'production' ? 'https://arcompare.com/compare' : 'http://localhost:3000/compare',
     images: [
       {
         url: '/og-compare.jpg',

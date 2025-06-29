@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://ar-compare.com' 
+    ? 'https://arcompare.com' 
     : 'http://localhost:3000';
 
   return {

@@ -5,7 +5,7 @@ import { BlogSitemap } from '@/lib/blog-sitemap';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://ar-compare.com' 
+    ? 'https://arcompare.com' 
     : 'http://localhost:3000';
 
   // Initialize the ProductSitemap utility

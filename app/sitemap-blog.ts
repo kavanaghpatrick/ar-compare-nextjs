@@ -3,7 +3,7 @@ import { blogPosts } from '@/data/blog/posts';
 import { blogCategories } from '@/data/blog/categories';
 
 export default function sitemapBlog(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ar-compare.com';
+  const baseUrl = 'https://arcompare.com';
   
   // Blog main page
   const blogMainPage = {

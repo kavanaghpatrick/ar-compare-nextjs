@@ -3,31 +3,25 @@
   
   <!-- Main site structure sitemap -->
   <sitemap>
-    <loc>https://ar-compare.com/api/sitemaps/index</loc>
+    <loc>https://arcompare.com/sitemap-main.xml</loc>
     <lastmod>2024-12-29</lastmod>
   </sitemap>
   
   <!-- Product pages sitemap -->
   <sitemap>
-    <loc>https://ar-compare.com/api/sitemaps/products</loc>
+    <loc>https://arcompare.com/sitemap-products.xml</loc>
     <lastmod>2024-12-29</lastmod>
   </sitemap>
   
   <!-- Blog content sitemap -->
   <sitemap>
-    <loc>https://ar-compare.com/api/sitemaps/blog</loc>
+    <loc>https://arcompare.com/sitemap-blog.xml</loc>
     <lastmod>2024-12-29</lastmod>
   </sitemap>
   
   <!-- Image content sitemap -->
   <sitemap>
-    <loc>https://ar-compare.com/api/sitemaps/images</loc>
-    <lastmod>2024-12-29</lastmod>
-  </sitemap>
-  
-  <!-- Sitemap statistics and metadata -->
-  <sitemap>
-    <loc>https://ar-compare.com/api/sitemaps/stats</loc>
+    <loc>https://arcompare.com/sitemap-images.xml</loc>
     <lastmod>2024-12-29</lastmod>
   </sitemap>
 

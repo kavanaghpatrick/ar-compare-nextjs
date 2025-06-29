@@ -79,7 +79,7 @@ export default function manifest(): MetadataRoute.Manifest {
     related_applications: [
       {
         platform: 'webapp',
-        url: 'https://ar-compare.com'
+        url: 'https://arcompare.com'
       }
     ],
     prefer_related_applications: false

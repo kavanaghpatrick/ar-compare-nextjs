@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://ar-compare.com/blog/${post.slug}`,
+      url: `https://arcompare.com/blog/${post.slug}`,
       siteName: 'AR Compare',
       images: [
         {
@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       site: '@ARCompare',
     },
     alternates: {
-      canonical: `https://ar-compare.com/blog/${post.slug}`,
+      canonical: `https://arcompare.com/blog/${post.slug}`,
     },
     robots: {
       index: true,

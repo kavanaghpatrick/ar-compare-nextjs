@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { blogPosts, getRecentPosts } from '@/data/blog/posts';
 
 export async function GET() {
-  const baseUrl = 'https://ar-compare.com';
+  const baseUrl = 'https://arcompare.com';
   const recentPosts = getRecentPosts(20); // Get last 20 posts for RSS
   
   const rssItems = recentPosts.map((post) => {
@@ -48,8 +48,8 @@ export async function GET() {
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <pubDate>${new Date().toUTCString()}</pubDate>
     <ttl>60</ttl>
-    <managingEditor>editorial@ar-compare.com (AR Compare Editorial Team)</managingEditor>
-    <webMaster>tech@ar-compare.com (AR Compare Technical Team)</webMaster>
+    <managingEditor>editorial@arcompare.com (AR Compare Editorial Team)</managingEditor>
+    <webMaster>tech@arcompare.com (AR Compare Technical Team)</webMaster>
     <copyright>© 2024 AR Compare. All rights reserved.</copyright>
     <category><![CDATA[Technology]]></category>
     <category><![CDATA[AR Glasses]]></category>
