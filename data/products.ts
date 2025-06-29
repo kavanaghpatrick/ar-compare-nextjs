@@ -1113,6 +1113,6 @@ const enhancedArGlassesData: EnhancedProduct[] = [
   }
 ];
 
-export const arGlassesData: Product[] = rawArGlassesData.map(transformProduct);
+export const arGlassesData: EnhancedProduct[] = rawArGlassesData.map(transformProduct) as EnhancedProduct[];
 
 export default arGlassesData;

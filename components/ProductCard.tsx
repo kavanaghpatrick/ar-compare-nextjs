@@ -1,18 +1,25 @@
-import { Eye, Zap, Volume2, Weight } from 'lucide-react';
+import { Eye, Zap, Volume2, Weight, ExternalLink, Search } from 'lucide-react';
+import Link from 'next/link';
 import { Product } from '@/types';
 
 interface ProductCardProps {
   product: Product;
   onCompare?: (productId: string) => void;
   onShowDetails?: (product: Product) => void;
+  onQuickView?: (product: Product) => void;
   isInComparison?: boolean;
+  showBreadcrumbs?: boolean;
+  context?: 'search' | 'category' | 'main' | 'related';
 }
 
 export function ProductCard({ 
   product, 
   onCompare, 
   onShowDetails, 
-  isInComparison = false 
+  onQuickView,
+  isInComparison = false,
+  showBreadcrumbs = false,
+  context = 'main'
 }: ProductCardProps) {
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -37,7 +44,7 @@ export function ProductCard({
   };
 
   return (
-    <div className="product-card">
+    <div className="product-card" role="article" aria-labelledby={`product-title-${product.id}`}>
       <div className="product-header">
         <div className="product-icon">
           {getCategoryIcon(product.category)}
@@ -104,23 +111,58 @@ export function ProductCard({
         </div>
       </div>
 
+      {showBreadcrumbs && (
+        <div className="product-breadcrumbs">
+          <span className="breadcrumb-context">
+            {context === 'search' && 'Search Results'}
+            {context === 'category' && `Category: ${product.category}`}
+            {context === 'related' && 'Related Products'}
+            {context === 'main' && 'All Products'}
+          </span>
+        </div>
+      )}
+
       <div className="product-actions">
         <button
           onClick={() => onCompare?.(product.id)}
           className={`action-btn action-btn-compare ${
             isInComparison ? 'selected' : ''
           }`}
+          aria-label={isInComparison ? 'Remove from comparison' : 'Add to comparison'}
         >
           {isInComparison ? '✓ Added' : '+Compare'}
         </button>
-        {onShowDetails && (
-          <button
-            onClick={() => onShowDetails(product)}
+        
+        <div className="action-btn-group">
+          {onQuickView && (
+            <button
+              onClick={() => onQuickView(product)}
+              className="action-btn action-btn-quick-view"
+              aria-label="Quick view product details"
+            >
+              <Search size={16} />
+              Quick View
+            </button>
+          )}
+          
+          <Link
+            href={`/products/${product.id}`}
             className="action-btn action-btn-details"
+            aria-label={`View full details for ${product.fullName}`}
           >
+            <ExternalLink size={16} />
             View Details
-          </button>
-        )}
+          </Link>
+          
+          {onShowDetails && (
+            <button
+              onClick={() => onShowDetails(product)}
+              className="action-btn action-btn-legacy"
+            >
+              Show Details
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

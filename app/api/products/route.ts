@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import arGlassesData from '@/data/products';
-import { Product } from '@/types';
+import { EnhancedProduct } from '@/types';
 
 // GET /api/products - Get all products
 export async function GET(request: Request) {
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     const limit = searchParams.get('limit');
     const offset = searchParams.get('offset');
 
-    let filteredProducts: Product[] = [...arGlassesData];
+    let filteredProducts: EnhancedProduct[] = [...arGlassesData];
 
     // Apply filters
     if (category) {

@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import arGlassesData from '@/data/products';
-import { Product } from '@/types';
+import { EnhancedProduct } from '@/types';
 
 interface CompareRequest {
   productIds: string[];
 }
 
 interface ComparisonResult {
-  products: Product[];
+  products: EnhancedProduct[];
   comparison: {
     specs: {
       [key: string]: {
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
     const products = productIds
       .map(id => arGlassesData.find(p => p.id === id))
-      .filter((product): product is Product => product !== undefined);
+      .filter((product): product is EnhancedProduct => product !== undefined);
 
     if (products.length !== productIds.length) {
       const foundIds = products.map(p => p.id);

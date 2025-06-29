@@ -6,6 +6,7 @@ import { ComparisonProvider } from "@/contexts/ComparisonContext";
 import { Analytics } from '@/components/Analytics';
 import { ServerStructuredData } from '@/components/ServerStructuredData';
 import { CanonicalURL } from '@/components/CanonicalURL';
+import { PerformanceOptimization } from '@/components/PerformanceOptimization';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -114,6 +115,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ServerStructuredData />
+        <PerformanceOptimization 
+          pageType="home"
+          enableLazyLoading={true}
+          enableCriticalCSS={true}
+          enableResourceHints={true}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

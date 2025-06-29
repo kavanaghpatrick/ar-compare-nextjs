@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import arGlassesData from '@/data/products';
+import { EnhancedProduct } from '@/types';
+import { generateEnhancedProductMetadata } from '@/lib/seo';
 
 interface ProductLayoutProps {
   params: Promise<{
@@ -8,81 +9,46 @@ interface ProductLayoutProps {
   children: React.ReactNode;
 }
 
+async function getProductForMetadata(id: string): Promise<EnhancedProduct | null> {
+  try {
+    // For metadata generation, we can import directly to avoid fetch issues during build
+    const arGlassesData = await import('@/data/products');
+    return arGlassesData.default.find((p: EnhancedProduct) => p.id === id) || null;
+  } catch (error) {
+    console.error('Error loading product for metadata:', error);
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const product = arGlassesData.find(p => p.id === id);
+  const product = await getProductForMetadata(id);
 
   if (!product) {
     return {
-      title: 'Product Not Found',
+      title: 'Product Not Found - AR Compare',
       description: 'The requested product could not be found.',
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
-  const siteUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://ar-compare.com' 
-    : 'http://localhost:3000';
-
-  const title = `${product.name} - ${product.brand} ${product.model}`;
-  const description = `${product.description} Price: $${product.price}. Compare specs, reviews, and features. ${product.keyFeatures?.slice(0, 3).join(', ')}.`;
-  const keywords = [
-    product.brand,
-    product.model,
-    product.name,
-    product.category,
-    'AR glasses',
-    'smart glasses',
-    'augmented reality',
-    'review',
-    'specs',
-    'price',
-    ...product.keyFeatures || []
-  ];
-
-  return {
-    title,
-    description,
-    keywords,
-    alternates: {
-      canonical: `/products/${id}`,
-    },
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      url: `${siteUrl}/products/${id}`,
-      images: [
-        {
-          url: product.imageUrl || '/og-product-default.jpg',
-          width: 1200,
-          height: 630,
-          alt: product.name,
-        },
-      ],
-      siteName: 'AR Compare',
-      locale: 'en_US',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [product.imageUrl || '/twitter-product-default.jpg'],
-    },
-    other: {
-      'product:price:amount': product.price.toString(),
-      'product:price:currency': product.currency,
-      'product:availability': product.availability,
-      'product:brand': product.brand,
-      'product:category': product.category,
-      'product:condition': 'new',
-    },
-  };
+  // Use the enhanced SEO metadata generator
+  return generateEnhancedProductMetadata(product, `/products/${id}`);
 }
 
 export async function generateStaticParams() {
-  return arGlassesData.map((product) => ({
-    id: product.id,
-  }));
+  try {
+    const arGlassesData = await import('@/data/products');
+    return arGlassesData.default.map((product: EnhancedProduct) => ({
+      id: product.id,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
 export default function ProductLayout({ children }: ProductLayoutProps) {

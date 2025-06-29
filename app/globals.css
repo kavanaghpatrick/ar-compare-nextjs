@@ -1162,4 +1162,1295 @@
   .company-description {
     @apply text-white/80 leading-relaxed bg-white/5 rounded-lg p-4;
   }
+
+  /* Product Comparison Component Styles */
+  .comparison-container {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8;
+  }
+
+  .comparison-header {
+    @apply mb-6;
+  }
+
+  .comparison-title {
+    @apply flex items-center gap-3 text-white font-bold text-xl mb-2;
+  }
+
+  .comparison-subtitle {
+    @apply text-white/80 mb-4;
+  }
+
+  .comparison-view-toggle {
+    @apply flex gap-2 bg-white/10 rounded-lg p-1;
+  }
+
+  .view-btn {
+    @apply px-4 py-2 rounded-md font-medium text-white/80 transition-all cursor-pointer border-none bg-transparent hover:bg-white/10;
+  }
+
+  .view-btn.active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .quick-comparison {
+    @apply mt-6;
+  }
+
+  .comparison-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+
+  .comparison-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10 transition-all hover:bg-white/10;
+  }
+
+  .comparison-card.current-product {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .product-header {
+    @apply flex items-center gap-3 mb-4;
+  }
+
+  .product-image {
+    @apply w-12 h-12 rounded-lg overflow-hidden bg-white/10;
+  }
+
+  .product-image img {
+    @apply w-full h-full object-cover;
+  }
+
+  .product-info {
+    @apply flex-1;
+  }
+
+  .product-name {
+    @apply text-white font-medium text-sm mb-1;
+  }
+
+  .product-price {
+    @apply text-blue-400 font-bold text-sm;
+  }
+
+  .product-rating {
+    @apply flex items-center gap-1 text-xs text-white/80;
+  }
+
+  .current-badge {
+    @apply px-2 py-1 bg-blue-600 text-white text-xs rounded-md font-medium;
+  }
+
+  .quick-specs {
+    @apply space-y-2 mb-4;
+  }
+
+  .spec-row {
+    @apply flex items-center justify-between;
+  }
+
+  .spec-info {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .spec-name {
+    @apply text-xs;
+  }
+
+  .spec-value {
+    @apply flex items-center gap-1 text-white font-medium text-sm;
+  }
+
+  .comparison-actions {
+    @apply mt-4;
+  }
+
+  .compare-btn {
+    @apply w-full px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-md transition-all border-none cursor-pointer;
+  }
+
+  .compare-btn.added {
+    @apply bg-green-700 cursor-default;
+  }
+
+  .detailed-comparison {
+    @apply mt-6;
+  }
+
+  .comparison-table-container {
+    @apply overflow-x-auto rounded-lg border border-white/20;
+  }
+
+  .comparison-table {
+    @apply w-full min-w-full border-collapse bg-white/5;
+  }
+
+  .comparison-table thead {
+    @apply bg-white/10;
+  }
+
+  .comparison-table th {
+    @apply px-4 py-3 text-left text-white font-semibold border-b border-white/20;
+  }
+
+  .spec-header {
+    @apply sticky left-0 bg-white/10 z-10;
+  }
+
+  .current-product-header {
+    @apply bg-blue-500/20 border-blue-500/50;
+  }
+
+  .product-header-cell {
+    @apply text-center;
+  }
+
+  .current-indicator {
+    @apply text-blue-400 text-xs font-medium;
+  }
+
+  .comparison-table td {
+    @apply px-4 py-3 text-white/90 border-b border-white/10;
+  }
+
+  .spec-name {
+    @apply flex items-center gap-2 font-medium text-white sticky left-0 bg-white/5 z-10;
+  }
+
+  .spec-value {
+    @apply text-center;
+  }
+
+  .spec-value.better {
+    @apply bg-green-500/20 text-green-400;
+  }
+
+  .spec-value.worse {
+    @apply bg-red-500/20 text-red-400;
+  }
+
+  .spec-value.equal {
+    @apply bg-yellow-500/20 text-yellow-400;
+  }
+
+  .value-container {
+    @apply flex items-center justify-center gap-2;
+  }
+
+  .features-comparison {
+    @apply mt-6;
+  }
+
+  .features-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .feature-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .feature-card.current-product {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .feature-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .feature-header h4 {
+    @apply text-white font-medium;
+  }
+
+  .pros-cons-section {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-4;
+  }
+
+  .pros-section, .cons-section {
+    @apply bg-white/5 rounded-lg p-3;
+  }
+
+  .pros-section h5 {
+    @apply flex items-center gap-2 text-green-400 font-medium text-sm mb-2;
+  }
+
+  .cons-section h5 {
+    @apply flex items-center gap-2 text-red-400 font-medium text-sm mb-2;
+  }
+
+  .pros-section ul, .cons-section ul {
+    @apply space-y-1;
+  }
+
+  .pros-section li, .cons-section li {
+    @apply text-white/80 text-xs;
+  }
+
+  .expand-btn {
+    @apply flex items-center gap-1 text-blue-400 hover:text-blue-300 text-xs font-medium mt-2 cursor-pointer border-none bg-transparent p-0;
+  }
+
+  .key-features {
+    @apply mb-4;
+  }
+
+  .key-features h5 {
+    @apply text-white font-medium text-sm mb-2;
+  }
+
+  .key-features ul {
+    @apply space-y-1;
+  }
+
+  .key-features li {
+    @apply flex items-center gap-2 text-white/80 text-xs;
+  }
+
+  .feature-actions {
+    @apply mt-4;
+  }
+
+  .price-comparison {
+    @apply mt-6;
+  }
+
+  .price-analysis h4 {
+    @apply text-white font-bold text-lg mb-4;
+  }
+
+  .price-cards {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .price-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .price-card.current-product {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .price-header {
+    @apply flex items-center justify-between mb-3;
+  }
+
+  .price-header h5 {
+    @apply text-white font-medium;
+  }
+
+  .price-info {
+    @apply mb-3;
+  }
+
+  .current-price {
+    @apply text-blue-400 font-bold text-lg;
+  }
+
+  .original-price {
+    @apply text-white/60 line-through text-sm;
+  }
+
+  .discount-badge {
+    @apply px-2 py-1 bg-green-600 text-white text-xs rounded-md font-medium;
+  }
+
+  .amazon-pricing {
+    @apply bg-white/5 rounded-md p-3 mb-3;
+  }
+
+  .amazon-label {
+    @apply text-orange-400 font-medium text-sm;
+  }
+
+  .amazon-price {
+    @apply text-white font-bold;
+  }
+
+  .amazon-availability {
+    @apply text-white/70 text-xs;
+  }
+
+  .shipping-info {
+    @apply text-green-400 text-xs;
+  }
+
+  .value-assessment {
+    @apply mb-3;
+  }
+
+  .value-rating {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .price-positioning {
+    @apply text-white/70 text-xs italic;
+  }
+
+  .alternatives-section {
+    @apply mt-8;
+  }
+
+  .alternatives-section h4 {
+    @apply text-white font-bold text-lg mb-4;
+  }
+
+  .alternatives-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .alternative-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .alternative-card h5 {
+    @apply text-white font-medium mb-2;
+  }
+
+  .better-at {
+    @apply mb-3;
+  }
+
+  .better-at span {
+    @apply text-green-400 font-medium text-sm;
+  }
+
+  .better-at ul {
+    @apply space-y-1 mt-2;
+  }
+
+  .better-at li {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .price-difference {
+    @apply text-sm font-medium;
+  }
+
+  .more-expensive {
+    @apply text-red-400;
+  }
+
+  .less-expensive {
+    @apply text-green-400;
+  }
+
+  /* Purchase Recommendations Component Styles */
+  .purchase-recommendations {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8;
+  }
+
+  .recommendations-header {
+    @apply mb-6;
+  }
+
+  .recommendations-title {
+    @apply flex items-center gap-3 text-white font-bold text-xl mb-2;
+  }
+
+  .recommendations-subtitle {
+    @apply text-white/80;
+  }
+
+  .best-for-section {
+    @apply mb-6;
+  }
+
+  .best-for-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .best-for-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4;
+  }
+
+  .best-for-card {
+    @apply flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-lg p-3 text-green-400 text-sm;
+  }
+
+  .avoid-if-section {
+    @apply mt-4;
+  }
+
+  .avoid-if-section h5 {
+    @apply text-red-400 font-medium mb-3;
+  }
+
+  .avoid-if-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-3;
+  }
+
+  .avoid-if-card {
+    @apply flex items-center gap-2 bg-red-500/20 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm;
+  }
+
+  .profile-matching-section {
+    @apply mb-6;
+  }
+
+  .profile-matching-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .profiles-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .profile-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10 cursor-pointer transition-all hover:bg-white/10;
+  }
+
+  .profile-card.selected {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .profile-card.high-match {
+    @apply border-green-500/50 bg-green-500/10;
+  }
+
+  .profile-card.medium-match {
+    @apply border-yellow-500/50 bg-yellow-500/10;
+  }
+
+  .profile-card.low-match {
+    @apply border-red-500/50 bg-red-500/10;
+  }
+
+  .profile-header {
+    @apply flex items-center gap-3;
+  }
+
+  .profile-icon {
+    @apply text-blue-400;
+  }
+
+  .profile-info {
+    @apply flex-1;
+  }
+
+  .profile-info h5 {
+    @apply text-white font-medium mb-1;
+  }
+
+  .profile-info p {
+    @apply text-white/70 text-sm;
+  }
+
+  .match-score {
+    @apply ml-auto;
+  }
+
+  .score-circle {
+    @apply w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border-2;
+  }
+
+  .high-match .score-circle {
+    @apply border-green-500 text-green-400;
+  }
+
+  .medium-match .score-circle {
+    @apply border-yellow-500 text-yellow-400;
+  }
+
+  .low-match .score-circle {
+    @apply border-red-500 text-red-400;
+  }
+
+  .score-circle span {
+    @apply font-bold text-sm;
+  }
+
+  .profile-reasoning {
+    @apply mt-4 pt-4 border-t border-white/20;
+  }
+
+  .profile-reasoning h6 {
+    @apply text-white font-medium mb-2;
+  }
+
+  .profile-reasoning ul {
+    @apply space-y-1;
+  }
+
+  .profile-reasoning li {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .budget-alternatives-section {
+    @apply mb-6;
+  }
+
+  .budget-alternatives-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .alternatives-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .alternative-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .alternative-card.upgrade {
+    @apply border-green-500/30 bg-green-500/10;
+  }
+
+  .alternative-card.downgrade {
+    @apply border-blue-500/30 bg-blue-500/10;
+  }
+
+  .alternative-card.similar {
+    @apply border-purple-500/30 bg-purple-500/10;
+  }
+
+  .alternative-header {
+    @apply flex items-center justify-between mb-3;
+  }
+
+  .alternative-type {
+    @apply flex items-center gap-2;
+  }
+
+  .type-label {
+    @apply text-sm font-medium text-white;
+  }
+
+  .price-difference {
+    @apply text-sm font-medium;
+  }
+
+  .savings {
+    @apply text-green-400;
+  }
+
+  .additional-cost {
+    @apply text-red-400;
+  }
+
+  .alternative-product h5 {
+    @apply text-white font-medium mb-1;
+  }
+
+  .product-details {
+    @apply flex items-center gap-3 mb-2;
+  }
+
+  .product-details .price {
+    @apply text-blue-400 font-bold;
+  }
+
+  .product-details .rating {
+    @apply flex items-center gap-1 text-white/80 text-sm;
+  }
+
+  .reasoning {
+    @apply text-white/70 text-sm mb-3;
+  }
+
+  .alternative-specs {
+    @apply flex gap-3;
+  }
+
+  .spec-highlight {
+    @apply flex items-center gap-1 text-white/80 text-xs;
+  }
+
+  .competitive-advantages-section {
+    @apply mb-6;
+  }
+
+  .competitive-advantages-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .advantages-content {
+    @apply space-y-4;
+  }
+
+  .main-advantage {
+    @apply flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-lg p-4 text-green-400;
+  }
+
+  .advantage-details {
+    @apply space-y-3;
+  }
+
+  .advantage-item {
+    @apply flex flex-col gap-1;
+  }
+
+  .advantage-item strong {
+    @apply text-white font-medium;
+  }
+
+  .advantage-item span {
+    @apply text-white/80 text-sm;
+  }
+
+  .use-cases strong {
+    @apply text-white font-medium;
+  }
+
+  .use-cases ul {
+    @apply space-y-1 mt-2;
+  }
+
+  .use-cases li {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .timing-advice-section {
+    @apply mb-6;
+  }
+
+  .timing-advice-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .timing-advice-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3;
+  }
+
+  .timing-card {
+    @apply flex items-center gap-2 rounded-lg p-3 text-sm;
+  }
+
+  .timing-card.positive {
+    @apply bg-green-500/20 border border-green-500/30 text-green-400;
+  }
+
+  .timing-card.warning {
+    @apply bg-yellow-500/20 border border-yellow-500/30 text-yellow-400;
+  }
+
+  .timing-card.info {
+    @apply bg-blue-500/20 border border-blue-500/30 text-blue-400;
+  }
+
+  .alternative-consideration {
+    @apply mb-6;
+  }
+
+  .alternative-consideration h4 {
+    @apply text-white font-bold text-lg mb-3;
+  }
+
+  .consideration-card {
+    @apply flex items-center gap-2 bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 text-blue-400;
+  }
+
+  /* Market Context Component Styles */
+  .market-context {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8;
+  }
+
+  .market-context-header {
+    @apply mb-6;
+  }
+
+  .market-context-title {
+    @apply flex items-center gap-3 text-white font-bold text-xl mb-2;
+  }
+
+  .market-context-subtitle {
+    @apply text-white/80;
+  }
+
+  .market-tabs {
+    @apply flex gap-2 bg-white/10 rounded-lg p-1 mb-6;
+  }
+
+  .tab-btn {
+    @apply flex items-center gap-2 px-4 py-2 rounded-md font-medium text-white/80 transition-all cursor-pointer border-none bg-transparent;
+  }
+
+  .tab-btn.active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .tab-btn:hover:not(.active) {
+    @apply bg-white/10 text-white;
+  }
+
+  .positioning-content {
+    @apply space-y-6;
+  }
+
+  .segments-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .segments-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  .segment-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .segment-card.current-segment {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .segment-header {
+    @apply mb-3;
+  }
+
+  .segment-header h5 {
+    @apply text-white font-medium mb-1;
+  }
+
+  .price-range {
+    @apply text-blue-400 font-bold text-sm;
+  }
+
+  .segment-stats {
+    @apply mb-3;
+  }
+
+  .market-share {
+    @apply flex justify-between text-sm;
+  }
+
+  .share-label {
+    @apply text-white/70;
+  }
+
+  .share-value {
+    @apply text-white font-medium;
+  }
+
+  .product-count {
+    @apply text-white/60 text-xs;
+  }
+
+  .characteristics {
+    @apply flex flex-wrap gap-1 mb-3;
+  }
+
+  .characteristic-tag {
+    @apply px-2 py-1 bg-white/10 text-white/80 text-xs rounded-md;
+  }
+
+  .current-product-indicator {
+    @apply flex items-center gap-2 text-blue-400 text-sm font-medium;
+  }
+
+  .price-positioning-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .price-analysis {
+    @apply space-y-4;
+  }
+
+  .price-context {
+    @apply bg-white/5 rounded-lg p-4 space-y-3;
+  }
+
+  .current-price {
+    @apply flex justify-between;
+  }
+
+  .segment-position {
+    @apply flex justify-between;
+  }
+
+  .positioning-description {
+    @apply flex items-center gap-2 text-blue-400 text-sm;
+  }
+
+  .price-comparison {
+    @apply bg-white/5 rounded-lg p-4;
+  }
+
+  .comparison-stats {
+    @apply space-y-2;
+  }
+
+  .stat-item {
+    @apply flex items-center gap-2 text-sm;
+  }
+
+  .target-audience-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .audience-analysis {
+    @apply space-y-4;
+  }
+
+  .primary-audience h5 {
+    @apply text-white font-medium mb-2;
+  }
+
+  .primary-audience p {
+    @apply text-white/80;
+  }
+
+  .use-cases h5 {
+    @apply text-white font-medium mb-2;
+  }
+
+  .use-cases ul {
+    @apply space-y-1;
+  }
+
+  .use-cases li {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  .competition-content {
+    @apply space-y-6;
+  }
+
+  .competitive-landscape h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .competitors-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .competitor-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .competitor-card.current-brand {
+    @apply border-blue-500 bg-blue-500/10;
+  }
+
+  .competitor-header {
+    @apply mb-3;
+  }
+
+  .competitor-header h5 {
+    @apply text-white font-medium mb-1;
+  }
+
+  .market-share-badge {
+    @apply px-2 py-1 bg-blue-600 text-white text-xs rounded-md font-medium;
+  }
+
+  .competitor-stats {
+    @apply space-y-1 mb-3;
+  }
+
+  .stat {
+    @apply flex justify-between text-sm;
+  }
+
+  .stat .label {
+    @apply text-white/70;
+  }
+
+  .stat .value {
+    @apply text-white font-medium;
+  }
+
+  .competitor-analysis {
+    @apply space-y-3;
+  }
+
+  .strengths h6 {
+    @apply text-green-400 font-medium text-sm mb-2;
+  }
+
+  .weaknesses h6 {
+    @apply text-yellow-400 font-medium text-sm mb-2;
+  }
+
+  .strengths ul, .weaknesses ul {
+    @apply space-y-1;
+  }
+
+  .strengths li, .weaknesses li {
+    @apply flex items-center gap-2 text-white/80 text-xs;
+  }
+
+  .current-brand-indicator {
+    @apply flex items-center gap-2 text-blue-400 text-sm font-medium mt-3;
+  }
+
+  .competitive-advantage h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .advantage-card {
+    @apply bg-green-500/20 border border-green-500/30 rounded-lg p-4;
+  }
+
+  .advantage-card p {
+    @apply text-green-400;
+  }
+
+  .trends-content {
+    @apply space-y-6;
+  }
+
+  .trends-content h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .trends-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .trend-card {
+    @apply bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .trend-card.positive {
+    @apply border-green-500/30 bg-green-500/10;
+  }
+
+  .trend-card.negative {
+    @apply border-red-500/30 bg-red-500/10;
+  }
+
+  .trend-card.neutral {
+    @apply border-yellow-500/30 bg-yellow-500/10;
+  }
+
+  .trend-header {
+    @apply flex items-center justify-between mb-3;
+  }
+
+  .trend-header h5 {
+    @apply text-white font-medium;
+  }
+
+  .trend-impact {
+    @apply flex items-center;
+  }
+
+  .trend-description {
+    @apply text-white/80 text-sm mb-4;
+  }
+
+  .relevance-bar {
+    @apply space-y-2;
+  }
+
+  .relevance-label {
+    @apply text-white/70 text-sm;
+  }
+
+  .relevance-score {
+    @apply relative bg-white/10 rounded-full h-2 overflow-hidden;
+  }
+
+  .relevance-fill {
+    @apply h-full bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-500;
+  }
+
+  .relevance-text {
+    @apply absolute right-2 top-0 text-white text-xs font-medium;
+  }
+
+  .reputation-content {
+    @apply space-y-6;
+  }
+
+  .reputation-content h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .company-info {
+    @apply space-y-4;
+  }
+
+  .company-stats {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  .stat-card {
+    @apply flex items-center gap-3 bg-white/5 rounded-lg p-4 border border-white/10;
+  }
+
+  .stat-card div {
+    @apply flex flex-col;
+  }
+
+  .stat-card .label {
+    @apply text-white/70 text-sm;
+  }
+
+  .stat-card .value {
+    @apply text-white font-medium;
+  }
+
+  .company-description p {
+    @apply text-white/80 bg-white/5 rounded-lg p-4;
+  }
+
+  .customer-insights h5 {
+    @apply text-white font-medium mb-3;
+  }
+
+  .sentiment-overview {
+    @apply space-y-4;
+  }
+
+  .overall-sentiment {
+    @apply text-white/80 mb-4;
+  }
+
+  .sentiment-breakdown {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .pros-insights, .cons-insights {
+    @apply bg-white/5 rounded-lg p-4;
+  }
+
+  .pros-insights h6 {
+    @apply text-green-400 font-medium mb-2;
+  }
+
+  .cons-insights h6 {
+    @apply text-red-400 font-medium mb-2;
+  }
+
+  .pros-insights ul, .cons-insights ul {
+    @apply space-y-1;
+  }
+
+  .pros-insights li, .cons-insights li {
+    @apply flex items-center gap-2 text-white/80 text-sm;
+  }
+
+  /* Similar Products Component Styles */
+  .similar-products {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8;
+  }
+
+  .similar-products-header {
+    @apply mb-6;
+  }
+
+  .similar-products-title {
+    @apply flex items-center gap-3 text-white font-bold text-xl mb-2;
+  }
+
+  .similar-products-subtitle {
+    @apply text-white/80;
+  }
+
+  .recommendation-section {
+    @apply mb-8;
+  }
+
+  .section-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .section-title {
+    @apply flex items-center gap-2;
+  }
+
+  .section-title h4 {
+    @apply text-white font-bold text-lg;
+  }
+
+  .section-subtitle {
+    @apply text-white/70 text-sm;
+  }
+
+  .carousel-controls {
+    @apply flex gap-2;
+  }
+
+  .carousel-btn {
+    @apply p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all border-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .products-carousel {
+    @apply overflow-hidden;
+  }
+
+  .products-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .recommendation-card {
+    @apply bg-white/5 rounded-lg border border-white/10 overflow-hidden hover:bg-white/10 transition-all;
+  }
+
+  .card-header {
+    @apply relative p-4 pb-0;
+  }
+
+  .card-header .product-image {
+    @apply w-full h-32 rounded-lg overflow-hidden bg-white/10 mb-3;
+  }
+
+  .card-header .product-image img {
+    @apply w-full h-full object-cover;
+  }
+
+  .recommendation-type {
+    @apply absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-sm rounded-full;
+  }
+
+  .card-content {
+    @apply p-4;
+  }
+
+  .card-content .product-name {
+    @apply text-white font-medium mb-1;
+  }
+
+  .product-brand {
+    @apply text-white/70 text-sm mb-3;
+  }
+
+  .product-stats {
+    @apply flex items-center justify-between mb-3;
+  }
+
+  .product-stats .price {
+    @apply text-blue-400 font-bold;
+  }
+
+  .product-stats .rating {
+    @apply flex items-center gap-1 text-white/80 text-sm;
+  }
+
+  .key-specs {
+    @apply flex gap-3 mb-3;
+  }
+
+  .key-specs .spec {
+    @apply flex items-center gap-1 text-white/70 text-xs;
+  }
+
+  .recommendation-reason {
+    @apply mb-3;
+  }
+
+  .reason-text {
+    @apply text-white/80 text-sm italic;
+  }
+
+  .highlights {
+    @apply flex flex-wrap gap-1 mb-4;
+  }
+
+  .highlight-tag {
+    @apply px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-md;
+  }
+
+  .card-actions {
+    @apply flex gap-2 mb-3;
+  }
+
+  .card-actions .compare-btn {
+    @apply flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-md transition-all border-none cursor-pointer;
+  }
+
+  .card-actions .compare-btn.added {
+    @apply bg-green-700 cursor-default;
+  }
+
+  .view-btn {
+    @apply px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-md transition-all text-decoration-none;
+  }
+
+  .similarity-indicator {
+    @apply px-4 pb-4;
+  }
+
+  .similarity-bar {
+    @apply relative bg-white/10 rounded-full h-2 overflow-hidden mb-1;
+  }
+
+  .similarity-fill {
+    @apply h-full bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-500;
+  }
+
+  .similarity-text {
+    @apply text-white/70 text-xs;
+  }
+
+  .also-viewed-section {
+    @apply mt-8;
+  }
+
+  .also-viewed-section h4 {
+    @apply flex items-center gap-2 text-white font-bold text-lg mb-4;
+  }
+
+  .also-viewed-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+  }
+
+  .also-viewed-item {
+    @apply bg-white/5 rounded-lg p-3 border border-white/10 hover:bg-white/10 transition-all;
+  }
+
+  .item-image {
+    @apply w-full h-20 rounded-lg overflow-hidden bg-white/10 mb-2;
+  }
+
+  .item-image img {
+    @apply w-full h-full object-cover;
+  }
+
+  .item-info h6 {
+    @apply text-white font-medium text-sm mb-1;
+  }
+
+  .item-price {
+    @apply text-blue-400 font-bold text-sm;
+  }
+
+  .item-rating {
+    @apply flex items-center gap-1 text-white/80 text-xs;
+  }
+
+  /* Responsive adjustments for all components */
+  @media (max-width: 768px) {
+    .comparison-grid {
+      @apply grid-cols-1 md:grid-cols-2;
+    }
+    
+    .features-grid {
+      @apply grid-cols-1;
+    }
+    
+    .price-cards {
+      @apply grid-cols-1;
+    }
+    
+    .profiles-grid {
+      @apply grid-cols-1;
+    }
+    
+    .alternatives-grid {
+      @apply grid-cols-1;
+    }
+    
+    .segments-grid {
+      @apply grid-cols-1 md:grid-cols-2;
+    }
+    
+    .competitors-grid {
+      @apply grid-cols-1;
+    }
+    
+    .trends-grid {
+      @apply grid-cols-1;
+    }
+    
+    .company-stats {
+      @apply grid-cols-1 md:grid-cols-2;
+    }
+    
+    .products-grid {
+      @apply grid-cols-1;
+    }
+    
+    .also-viewed-grid {
+      @apply grid-cols-2;
+    }
+  }
 }

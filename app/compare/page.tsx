@@ -8,7 +8,7 @@ import { ArrowLeft, X } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { ComparisonCart } from '@/components/ComparisonCart';
 import arGlassesData from '@/data/products';
-import { Product } from '@/types';
+import { EnhancedProduct } from '@/types';
 
 export default function ComparePage() {
   const { comparison, removeItem, clearComparison } = useComparison();
@@ -18,7 +18,7 @@ export default function ComparePage() {
   const comparisonProducts = useMemo(() => {
     return comparison.items
       .map(item => arGlassesData.find(product => product.id === item.productId))
-      .filter((product): product is Product => product !== undefined)
+      .filter((product): product is EnhancedProduct => product !== undefined)
       .sort((a, b) => {
         const aItem = comparison.items.find(item => item.productId === a.id);
         const bItem = comparison.items.find(item => item.productId === b.id);
