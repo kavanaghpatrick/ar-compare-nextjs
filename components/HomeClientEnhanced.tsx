@@ -131,7 +131,6 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
         </a>
         
         <NavigationSimple />
-        <QuickNav />
         <ComparisonCart onQuickView={handleQuickView} />
         <PageNavigation />
         
