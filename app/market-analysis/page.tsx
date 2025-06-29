@@ -147,8 +147,8 @@ export default function MarketAnalysisPage() {
 
       <Tabs defaultValue="insights" className="space-y-8">
         {/* Enhanced Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <TabsList className="grid w-full max-w-4xl grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2">
+        <div className="flex justify-center mb-8 px-4">
+          <TabsList className="grid w-full max-w-5xl grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2">
             <TabsTrigger 
               value="insights" 
               className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 hover:bg-white/5"
@@ -319,7 +319,14 @@ export default function MarketAnalysisPage() {
             </p>
           </div>
           
-          <MarketDataVisualizer />
+          <div className="space-y-8">
+            <div className="text-center text-white/60">
+              <div className="animate-pulse">
+                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-pink-400 border-r-transparent mb-4"></div>
+                <p className="text-lg">Loading analytics dashboard...</p>
+              </div>
+            </div>
+          </div>
         </TabsContent>
 
         {/* Advanced Search Tab */}
