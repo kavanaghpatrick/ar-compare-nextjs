@@ -14,3 +14,5 @@ export { Analytics } from './Analytics';
 export { StructuredData } from './StructuredData';
 export { CanonicalURL } from './CanonicalURL';
 export { OptimizedImage } from './OptimizedImage';
+export { default as MarketInsights } from './MarketInsights';
+export { default as ProductRecommendationEngine } from './ProductRecommendationEngine';

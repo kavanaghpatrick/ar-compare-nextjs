@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 // import Link from 'next/link';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { SearchBar } from '@/components/SearchBar';
@@ -12,6 +12,11 @@ import arGlassesData from '@/data/products';
 export default function Home() {
   const { addItem, removeItem, isInComparison } = useComparison();
   const [searchTerm, setSearchTerm] = useState('');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Filter and search products
   const filteredProducts = useMemo(() => {
@@ -38,6 +43,20 @@ export default function Home() {
       addItem(productId);
     }
   };
+
+  // Don't render until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="app-container">
+        <section className="hero">
+          <div className="hero-container">
+            <h1 className="hero-title">The Ultimate AR & AI Glasses Comparison</h1>
+            <p className="hero-subtitle">Loading...</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
@@ -85,7 +104,12 @@ export default function Home() {
             />
           </div>
 
-          <h2 className="section-title">{filteredProducts.length} Products Found</h2>
+          <div className="text-center mb-6">
+            <h2 className="section-title">{filteredProducts.length} Products Found</h2>
+            <p className="text-white/60 mb-4">
+              Enhanced with comprehensive Amazon research, customer reviews, and market analysis
+            </p>
+          </div>
 
           <div className="products-grid">
             {filteredProducts.map((product) => (

@@ -1,4 +1,4 @@
-import { Product } from '@/types';
+import { Product, EnhancedProduct } from '@/types';
 
 // Helper function to transform the data
 function transformProduct(product: any): Product {
@@ -601,6 +601,514 @@ const rawArGlassesData = [
       employees: '30+',
       marketShare: '<1%',
       description: 'Open-source AR platform for developers and creative technologists'
+    }
+  }
+];
+
+// Enhanced product data with comprehensive research findings
+const enhancedArGlassesData: EnhancedProduct[] = [
+  {
+    ...transformProduct(rawArGlassesData[0]), // Xreal One Pro
+    amazon: {
+      price: "$649",
+      availability: "Pre-order (Available July 2025)",
+      rating: "4.6",
+      reviewCount: "Limited reviews (pre-order)",
+      shipping: "Free shipping from XREAL Direct",
+      asin: "Expected on Amazon Q3 2025"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Sony 0.55\" Micro-OLED with 40% smaller prism optic",
+      perceivedBrightness: "700 nits (industry-leading)",
+      audioPartnership: "Sound by Bose - Premium directional speakers",
+      trackingCapability: "Native 3DoF with XREAL X1 chip",
+      batteryLife: "All-day with compatible device",
+      prescriptionSupport: "Optional IPD adjustment 57-75mm",
+      electrochromicDimming: "3-level adaptive dimming"
+    },
+    customerInsights: {
+      topPros: [
+        "Industry-leading 57° field of view",
+        "Exceptional display quality with Sony Micro-OLED",
+        "Premium Bose audio system",
+        "Titanium build quality feels premium",
+        "Native 3DoF tracking eliminates drift"
+      ],
+      topCons: [
+        "Very high price point at $649",
+        "Pre-order only with delayed availability",
+        "Requires compatible device with USB-C DP Alt Mode",
+        "Limited to 3DoF tracking (no 6DoF)",
+        "XREAL ecosystem still developing"
+      ],
+      overallSentiment: "Highly positive from reviewers but price concerns limit mass appeal"
+    },
+    marketContext: {
+      targetAudience: "Premium enthusiasts, professionals, and early adopters willing to pay for best-in-class AR experience",
+      useCases: [
+        "High-end mobile workstation replacement",
+        "Premium entertainment and gaming",
+        "Professional content creation",
+        "Travel entertainment system"
+      ],
+      competitiveAdvantage: "Widest FOV in consumer AR glasses, premium Bose audio, and self-developed X1 chip",
+      pricePositioning: "Premium tier - highest priced consumer AR glasses but justified by features"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "Users who want the absolute best AR glasses experience",
+        "Professionals who can expense premium tech",
+        "Early adopters with compatible high-end devices",
+        "Users who prioritize display quality and audio"
+      ],
+      avoidIf: [
+        "Budget-conscious consumers",
+        "Users without compatible USB-C DP Alt Mode devices",
+        "Those needing immediate availability",
+        "Users requiring 6DoF tracking for specific applications"
+      ],
+      alternativeConsider: "Xreal One at $499 offers 85% of the experience at 25% less cost"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[1]), // Xreal One
+    amazon: {
+      price: "$499",
+      availability: "In Stock",
+      rating: "4.4",
+      reviewCount: "1,200+ reviews",
+      shipping: "Free Prime shipping available",
+      asin: "B0DNFFXG65"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Micro-OLED with improved optics",
+      perceivedBrightness: "600 nits",
+      audioSystem: "Spatial audio with minimal leakage",
+      trackingCapability: "3 DoF with X1 chip integration",
+      batteryLife: "All-day usage with host device",
+      compatibilityRange: "Widest device compatibility in class",
+      electrochromicDimming: "2-level manual adjustment"
+    },
+    customerInsights: {
+      topPros: [
+        "Excellent value for money at $499",
+        "Crystal clear display quality",
+        "Incredibly comfortable for extended use",
+        "Wide device compatibility including iPhone and Steam Deck",
+        "Native 3DoF eliminates virtual monitor drift"
+      ],
+      topCons: [
+        "Smaller 50° field of view compared to Pro model",
+        "Fixed IPD may not suit all users",
+        "Basic spatial audio vs premium Bose in Pro",
+        "Aluminum build less premium than titanium Pro",
+        "Some compatibility issues with older devices"
+      ],
+      overallSentiment: "Overwhelmingly positive - seen as the sweet spot for AR glasses"
+    },
+    marketContext: {
+      targetAudience: "Mainstream consumers seeking quality AR experience without premium pricing",
+      useCases: [
+        "Mobile workstation and productivity",
+        "Gaming with Steam Deck and consoles",
+        "Travel entertainment",
+        "Content consumption and streaming"
+      ],
+      competitiveAdvantage: "Best balance of features, quality, and price with proven X1 chip technology",
+      pricePositioning: "Sweet spot pricing - premium features at accessible price point"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "First-time AR glasses buyers",
+        "Users seeking proven technology at reasonable price",
+        "Mobile workers and digital nomads",
+        "Gamers with Steam Deck or similar devices"
+      ],
+      avoidIf: [
+        "Users requiring maximum field of view",
+        "Those needing adjustable IPD",
+        "Users wanting premium audio experience",
+        "Professional users requiring advanced features"
+      ],
+      alternativeConsider: "Upgrade to One Pro for $150 more if FOV and audio are priorities"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[2]), // Rokid AR Spatial
+    amazon: {
+      price: "$598-648",
+      availability: "In Stock",
+      rating: "4.2",
+      reviewCount: "800+ reviews",
+      shipping: "Ships from Amazon Fulfillment",
+      asin: "B0DRFG5ZWZ"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Micro-OLED with 1000 nits peak brightness",
+      spatialComputing: "Advanced 6DoF tracking with SLAM",
+      aiIntegration: "Proprietary LLM with scene recognition",
+      processingPower: "Qualcomm XR2+ Gen 1 chipset",
+      audioArray: "4-microphone array for spatial audio",
+      connectivityOptions: "USB-C wired + Wireless capabilities",
+      adaptiveDimming: "Smart adaptive dimming system"
+    },
+    customerInsights: {
+      topPros: [
+        "Excellent AI integration and scene recognition",
+        "Strong spatial computing capabilities",
+        "Good build quality and premium feel",
+        "Advanced 6DoF tracking works well",
+        "Innovative subtitle projection feature"
+      ],
+      topCons: [
+        "Higher latency (20ms) compared to competitors",
+        "Limited app ecosystem compared to Xreal",
+        "Learning curve for advanced features",
+        "Battery life could be improved",
+        "Smaller field of view at 43°"
+      ],
+      overallSentiment: "Positive for tech enthusiasts but mixed reviews on practical daily use"
+    },
+    marketContext: {
+      targetAudience: "Tech enthusiasts and professionals interested in spatial computing and AI features",
+      useCases: [
+        "AI-powered productivity workflows",
+        "Language learning and translation",
+        "Spatial computing applications",
+        "Professional AR development"
+      ],
+      competitiveAdvantage: "Most advanced AI integration and spatial computing features in consumer AR glasses",
+      pricePositioning: "Premium positioning focused on AI and spatial computing rather than pure entertainment"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "AI enthusiasts and early adopters",
+        "Professionals needing spatial computing",
+        "Language learners and international travelers",
+        "Developers working with AR applications"
+      ],
+      avoidIf: [
+        "Users prioritizing low latency for gaming",
+        "Those wanting simple plug-and-play experience",
+        "Budget-conscious consumers",
+        "Users needing large app ecosystem"
+      ],
+      alternativeConsider: "Xreal One for simpler, more reliable daily use experience"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[3]), // Viture Pro XR
+    amazon: {
+      price: "$459-549",
+      availability: "In Stock",
+      rating: "4.5",
+      reviewCount: "2,100+ reviews",
+      shipping: "Prime eligible - Free shipping",
+      asin: "B0D3LRH8G4"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Sony Micro-OLED with 4000 nits peak brightness",
+      realTime2Dto3D: "Proprietary 2D-to-3D conversion technology",
+      audioPartnership: "HARMAN AudioEFX with 30dB noise reduction",
+      myopiaSupport: "Adjustable diopter correction up to -5.00D",
+      electrochromicFilm: "Blocks up to 99.5% external light",
+      ipdAdjustment: "56-72mm mechanical adjustment",
+      universalCompatibility: "Widest device support including Switch"
+    },
+    customerInsights: {
+      topPros: [
+        "Exceptional 4000 nits brightness - best in class",
+        "Excellent value at $459 price point",
+        "HARMAN audio quality with great privacy",
+        "Real-time 2D-to-3D conversion works surprisingly well",
+        "Wide device compatibility including Nintendo Switch"
+      ],
+      topCons: [
+        "No built-in camera limits AR functionality",
+        "Limited to 3DoF tracking only",
+        "Higher power consumption due to brightness",
+        "Smaller ecosystem compared to Xreal",
+        "43° FOV is smaller than premium competitors"
+      ],
+      overallSentiment: "Very positive - considered best value AR glasses for 2024"
+    },
+    marketContext: {
+      targetAudience: "Value-conscious consumers and gamers seeking premium display quality at competitive price",
+      useCases: [
+        "Console gaming with enhanced visuals",
+        "Movie and content consumption",
+        "Mobile productivity workstation",
+        "Travel entertainment system"
+      ],
+      competitiveAdvantage: "Highest brightness display, excellent audio, and best price-to-performance ratio",
+      pricePositioning: "Value leader - premium features at mid-range pricing"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "Gamers wanting console AR experience",
+        "Value-conscious users seeking premium display",
+        "Users with myopia needing built-in correction",
+        "Those prioritizing brightness for outdoor use"
+      ],
+      avoidIf: [
+        "Users needing camera-based AR features",
+        "Those requiring 6DoF tracking",
+        "Users sensitive to higher power draw",
+        "Professional AR developers"
+      ],
+      alternativeConsider: "Xreal One for better ecosystem and tracking, or RayNeo Air 3s for budget option"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[4]), // RayNeo Air 3s
+    amazon: {
+      price: "$219-269",
+      availability: "In Stock",
+      rating: "4.3",
+      reviewCount: "1,800+ reviews",
+      shipping: "Prime eligible with $30 coupon available",
+      asin: "B0DZ2RQSC5"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Micro-OLED with 98% DCI-P3 coverage",
+      contrastRatio: "200,000:1 native contrast (improved from 100,000:1)",
+      audioUpgrade: "Significantly improved speakers with better bass",
+      eyeCaretech: "OptiCare with 3840Hz dimming and TÜV certification",
+      imaxEnhanced: "IMAX Enhanced standard compliance",
+      adaptiveBrightness: "Auto-brightness adjustment for comfort",
+      weightOptimization: "76g with improved weight distribution"
+    },
+    customerInsights: {
+      topPros: [
+        "Exceptional value at $219-269 price point",
+        "Sharp edge-to-edge display clarity",
+        "Significantly improved audio over previous generation",
+        "Comfortable for extended wear sessions",
+        "Great compatibility with gaming devices"
+      ],
+      topCons: [
+        "Fixed IPD may cause eye strain for some users",
+        "Plastic build feels less premium than competitors",
+        "Occasionally reported connectivity issues",
+        "Smaller field of view at 40°",
+        "Customer support response can be slow"
+      ],
+      overallSentiment: "Highly positive for budget category - considered best budget AR glasses available"
+    },
+    marketContext: {
+      targetAudience: "Budget-conscious consumers and students seeking entry into AR glasses without premium pricing",
+      useCases: [
+        "Budget gaming setup enhancement",
+        "Student productivity and study",
+        "Basic entertainment consumption",
+        "Entry-level AR experience"
+      ],
+      competitiveAdvantage: "Best budget option with significant improvements over previous generation",
+      pricePositioning: "Budget leader - premium features at entry-level pricing"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "First-time AR glasses users on budget",
+        "Students and young professionals",
+        "Users wanting to test AR glasses before premium purchase",
+        "Secondary/travel pair for existing AR glasses owners"
+      ],
+      avoidIf: [
+        "Users with non-standard IPD requirements",
+        "Those requiring premium build quality",
+        "Users needing wide field of view",
+        "Professional users requiring advanced features"
+      ],
+      alternativeConsider: "Viture Pro XR for $200 more if budget allows, or save for Xreal One"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[5]), // RayNeo X3 Pro
+    amazon: {
+      price: "~$1500 (Expected)",
+      availability: "Pre-order/Coming 2025",
+      rating: "N/A",
+      reviewCount: "Pre-release product",
+      shipping: "Direct from RayNeo when available",
+      asin: "Not yet listed"
+    },
+    enhancedSpecs: {
+      displayTechnology: "World's smallest Micro-LED light engine with nano-lithography waveguides",
+      processingPower: "First-generation Qualcomm AR1 platform",
+      aiCapabilities: "Custom multimodal AI model with DeepSeek integration",
+      spatialAccuracy: "5% positioning error tolerance with RayNeo Imaging Plus",
+      frameMaterial: "Aerospace-grade magnesium alloy with titanium hinges",
+      operatingSystem: "RayNeoOS 2.0 with AI Agent App Store",
+      controlMethods: "5-way temple navigation, voice, smartwatch, smartphone linkage"
+    },
+    customerInsights: {
+      topPros: [
+        "Cutting-edge Micro-LED display technology",
+        "Advanced AI integration with real-time translation",
+        "Lightweight at 76g despite advanced features",
+        "Professional-grade spatial computing accuracy",
+        "Multiple intuitive control methods"
+      ],
+      topCons: [
+        "Very high expected price around $1500",
+        "Extremely limited 30-minute battery life under heavy use",
+        "Pre-release product with uncertain availability",
+        "AI features disabled below 10% battery",
+        "No global availability confirmed yet"
+      ],
+      overallSentiment: "High anticipation but concerns about battery life and pricing"
+    },
+    marketContext: {
+      targetAudience: "Enterprise users, AR professionals, and technology early adopters with high budgets",
+      useCases: [
+        "Professional AR development and testing",
+        "Enterprise spatial computing applications",
+        "Advanced AI-powered productivity",
+        "Research and academic applications"
+      ],
+      competitiveAdvantage: "Most advanced AR technology with cutting-edge Micro-LED and AI integration",
+      pricePositioning: "Ultra-premium enterprise tier - highest-end consumer AR glasses"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "Enterprise users with specific AR needs",
+        "AR developers and researchers",
+        "Technology enthusiasts with high budgets",
+        "Users requiring cutting-edge AI features"
+      ],
+      avoidIf: [
+        "Budget-conscious consumers",
+        "Users needing reliable all-day battery life",
+        "Those wanting immediate availability",
+        "Casual users seeking simple AR experience"
+      ],
+      alternativeConsider: "Wait for second generation or consider Xreal One Pro for more practical daily use"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[6]), // Even Realities G1
+    amazon: {
+      price: "$599 (+$149 prescription)",
+      availability: "In Stock (Direct from Even Realities)",
+      rating: "4.1",
+      reviewCount: "Limited Amazon presence",
+      shipping: "Direct shipping from manufacturer",
+      asin: "Limited third-party availability"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Micro-LED dot matrix with 25° FOV",
+      frameMaterials: "Magnesium and titanium alloy construction",
+      weightOptimization: "44g total weight (18g heavier than regular glasses)",
+      prescriptionIntegration: "Integrated prescription lens support",
+      connectivity: "Bluetooth 5.2 with iOS/Android apps",
+      aiFeatures: "Even AI integration for contextual assistance",
+      subscriptionService: "Pro translation feature at $4.99/month"
+    },
+    customerInsights: {
+      topPros: [
+        "Extremely subtle design - looks like regular glasses",
+        "High-quality materials and build construction",
+        "Integrated prescription lens support",
+        "Practical features like navigation and notifications",
+        "Good battery life for intended use cases"
+      ],
+      topCons: [
+        "Monochrome green display limits functionality",
+        "No built-in speakers require separate earbuds",
+        "Limited field of view at 25°",
+        "Requires phone interaction for most features",
+        "High price for feature set offered"
+      ],
+      overallSentiment: "Positive for specific use cases but seen as limited compared to competition"
+    },
+    marketContext: {
+      targetAudience: "Fashion-conscious professionals seeking subtle smart glasses with prescription support",
+      useCases: [
+        "Discrete professional notifications",
+        "Prescription glasses replacement with smart features",
+        "Navigation assistance while walking",
+        "Teleprompter and presentation aid"
+      ],
+      competitiveAdvantage: "Most subtle design with integrated prescription support and premium materials",
+      pricePositioning: "Premium lifestyle product competing with fashion eyewear rather than tech devices"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "Professionals requiring discrete smart glasses",
+        "Users needing prescription lens integration",
+        "Fashion-conscious early adopters",
+        "Those prioritizing subtle design over features"
+      ],
+      avoidIf: [
+        "Users wanting full-color displays",
+        "Those needing built-in audio",
+        "Budget-conscious consumers",
+        "Users requiring extensive AR functionality"
+      ],
+      alternativeConsider: "Xreal One for more comprehensive AR features or wait for color display version"
+    }
+  },
+  {
+    ...transformProduct(rawArGlassesData[7]), // Brilliant Labs Frame
+    amazon: {
+      price: "$349",
+      availability: "Direct order (1+ month shipping)",
+      rating: "3.2",
+      reviewCount: "Mixed developer reviews",
+      shipping: "Direct from Brilliant Labs",
+      asin: "Not available on Amazon"
+    },
+    enhancedSpecs: {
+      displayTechnology: "Color OLED with 20° diagonal FOV",
+      processingHardware: "nrf52 microcontroller + FPGA",
+      openSourceNature: "Fully open-source hardware and software on GitHub",
+      aiIntegration: "Perplexity AI with NOA assistant",
+      cameraCapability: "720p RGB camera for visual analysis",
+      connectivityProtocol: "Bluetooth 5.3 with iOS/Android",
+      creditSystem: "2000 monthly AI credits (additional credits cost extra)"
+    },
+    customerInsights: {
+      topPros: [
+        "Fully open-source platform for developers",
+        "Very lightweight at 40g",
+        "Interesting AI integration with Perplexity",
+        "Good for learning and experimentation",
+        "Active developer community"
+      ],
+      topCons: [
+        "Not consumer-ready - very rough around edges",
+        "Awkward display placement causes eye strain",
+        "Credit-based AI system becomes expensive",
+        "Poor build quality with flexible plastic",
+        "Very limited practical applications"
+      ],
+      overallSentiment: "Mixed to negative - seen as interesting experiment but not practical product"
+    },
+    marketContext: {
+      targetAudience: "Developers, hackers, and technical enthusiasts interested in open-source AR experimentation",
+      useCases: [
+        "AR software development and prototyping",
+        "Educational projects and learning",
+        "Open-source community contributions",
+        "Technical experimentation and hacking"
+      ],
+      competitiveAdvantage: "Only fully open-source AR glasses platform available",
+      pricePositioning: "Developer tool pricing - not positioned against consumer products"
+    },
+    purchaseRecommendation: {
+      bestFor: [
+        "Software developers interested in AR",
+        "Students learning about AR technology",
+        "Open-source enthusiasts and hackers",
+        "Researchers needing customizable AR platform"
+      ],
+      avoidIf: [
+        "General consumers seeking ready-to-use product",
+        "Users wanting polished consumer experience",
+        "Those needing reliable daily-use device",
+        "Non-technical users"
+      ],
+      alternativeConsider: "Any consumer AR glasses for practical use, or wait for Frame 2.0 if interested in open-source"
     }
   }
 ];

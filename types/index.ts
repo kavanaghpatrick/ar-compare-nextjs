@@ -90,3 +90,40 @@ export type SortOrder = 'asc' | 'desc';
 export type ViewType = 'main' | 'comparison' | 'details';
 export type ComparisonViewType = 'grid' | 'table';
 export type TabType = 'specs' | 'features' | 'pros-cons' | 'company';
+
+// Enhanced Product interfaces for research-based data
+export interface AmazonData {
+  price: string;
+  availability: string;
+  rating?: string;
+  reviewCount?: string;
+  shipping: string;
+  asin?: string;
+}
+
+export interface CustomerInsights {
+  topPros: string[];
+  topCons: string[];
+  overallSentiment: string;
+}
+
+export interface MarketContext {
+  targetAudience: string;
+  useCases: string[];
+  competitiveAdvantage: string;
+  pricePositioning: string;
+}
+
+export interface PurchaseRecommendation {
+  bestFor: string[];
+  avoidIf: string[];
+  alternativeConsider: string;
+}
+
+export interface EnhancedProduct extends Product {
+  amazon: AmazonData;
+  enhancedSpecs: Record<string, any>;
+  customerInsights: CustomerInsights;
+  marketContext: MarketContext;
+  purchaseRecommendation: PurchaseRecommendation;
+}

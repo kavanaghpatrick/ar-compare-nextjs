@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Plus, Minus, X, BarChart3 } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
@@ -9,6 +9,14 @@ import arGlassesData from '@/data/products';
 export function ComparisonCart() {
   const { comparison, removeItem, clearComparison } = useComparison();
   const [showCart, setShowCart] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render anything until client-side hydration is complete
+  if (!isClient) return null;
 
   if (comparison.items.length === 0) return null;
 

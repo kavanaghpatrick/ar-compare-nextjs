@@ -24,6 +24,14 @@ export function Navigation() {
           >
             Products
           </Link>
+          <Link 
+            href="/market-analysis" 
+            className={`text-white/80 hover:text-white transition-colors ${
+              pathname === '/market-analysis' ? 'text-white' : ''
+            }`}
+          >
+            Market Analysis
+          </Link>
           <a href="#brands" className="text-white/80 hover:text-white transition-colors">Brands</a>
           <a href="#reviews" className="text-white/80 hover:text-white transition-colors">Reviews</a>
           <a href="#news" className="text-white/80 hover:text-white transition-colors">News</a>
