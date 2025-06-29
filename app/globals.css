@@ -3248,6 +3248,11 @@ html, body {
 
 .results-header {
   margin-bottom: 3rem;
+  text-align: center;
+}
+
+.results-header-content {
+  margin-bottom: 2rem;
 }
 
 .results-info {
@@ -3258,8 +3263,40 @@ html, body {
 .results-title {
   font-size: 1.875rem;
   font-weight: 700;
-  color: white;
+  color: #1f2937; /* Dark gray for good contrast on white background */
   margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.results-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280; /* Gray-500 for subtitle */
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.category-filter-indicator,
+.search-filter-indicator {
+  color: #3b82f6; /* Blue-500 for filter indicators */
+  font-weight: 600;
+}
+
+.clear-filters-btn {
+  background: #f3f4f6; /* Light gray background */
+  color: #374151; /* Dark gray text */
+  border: 1px solid #d1d5db; /* Gray border */
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+  background: #e5e7eb; /* Darker gray on hover */
+  border-color: #9ca3af;
 }
 
 @media (min-width: 768px) {
