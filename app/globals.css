@@ -315,8 +315,8 @@
   }
 
   .product-card {
-    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 hover:-translate-y-1;
-    transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+    @apply bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1;
+    transition: background-color 0.2s, transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
 
   .product-header {
@@ -328,11 +328,11 @@
   }
 
   .product-title {
-    @apply text-xl font-bold text-white mb-2;
+    @apply text-xl font-bold text-gray-900 mb-2;
   }
 
   .product-description {
-    @apply text-white/90 mb-3 text-sm;
+    @apply text-gray-600 mb-3 text-sm;
   }
 
   .product-price {
@@ -360,11 +360,11 @@
   }
 
   .rating-text {
-    @apply text-white font-semibold;
+    @apply text-gray-900 font-semibold;
   }
 
   .rating-reviews {
-    @apply text-white/80;
+    @apply text-gray-500;
   }
 
   .specs-grid {
@@ -372,7 +372,7 @@
   }
 
   .spec-item {
-    @apply text-white/90 flex items-center gap-1;
+    @apply text-gray-700 flex items-center gap-1;
   }
 
   .product-actions {
@@ -388,7 +388,7 @@
   }
 
   .action-btn-details {
-    @apply bg-transparent text-white border border-white/20 hover:bg-white/10;
+    @apply bg-transparent text-gray-700 border border-gray-300 hover:bg-gray-50;
   }
 
   .comparison-section {
@@ -504,7 +504,7 @@
   }
 
   .product-category-badge {
-    @apply px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium;
+    @apply px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium;
   }
 
   /* Focus styles for better keyboard navigation */

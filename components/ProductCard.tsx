@@ -56,7 +56,7 @@ export const ProductCard = React.memo(({
         <div className="product-icon">
           {getCategoryIcon(product.category)}
         </div>
-        <span style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+        <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>
           {product.category}
         </span>
       </div>
@@ -69,7 +69,7 @@ export const ProductCard = React.memo(({
             style={{
               textDecoration: 'line-through',
               fontSize: '1rem',
-              color: 'rgba(255, 255, 255, 0.5)',
+              color: '#9ca3af',
               marginLeft: '0.5rem'
             }}
           >
