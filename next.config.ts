@@ -33,12 +33,60 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
   
+  // SEO optimizations
+  generateBuildId: async () => {
+    // Use current timestamp for build ID to ensure fresh deployments
+    return `build-${Date.now()}`;
+  },
+  
   // Compression
   compress: true,
   
   // Headers for performance and security
   async headers() {
     return [
+      // Blog-specific optimizations
+      {
+        source: '/blog/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'Link',
+            value: '</blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="AR Compare Blog RSS Feed"',
+          },
+        ],
+      },
+      // RSS Feed caching
+      {
+        source: '/blog/feed.xml',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'Content-Type',
+            value: 'application/rss+xml; charset=utf-8',
+          },
+        ],
+      },
+      // Sitemap caching
+      {
+        source: '/sitemap-blog.xml',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+          {
+            key: 'Content-Type',
+            value: 'application/xml; charset=utf-8',
+          },
+        ],
+      },
       {
         source: '/(.*)',
         headers: [

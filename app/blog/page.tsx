@@ -6,12 +6,12 @@ import { blogCategories } from '@/data/blog/categories';
 import { SimpleLoading } from '@/components/SimpleLoading';
 
 export const metadata: Metadata = {
-  title: 'AR Glasses Blog - Expert Reviews, Guides & Industry Insights',
-  description: 'Stay informed with our comprehensive AR glasses blog. Expert reviews, buying guides, technology analysis, and industry insights to help you navigate the world of augmented reality.',
-  keywords: 'AR glasses blog, smart glasses reviews, AR technology guides, augmented reality insights, AR glasses news',
+  title: 'AR Glasses Blog 2024 - Best Smart Glasses Reviews & Guides',
+  description: 'Discover the best AR glasses with expert reviews, buying guides & tech insights. Compare smart glasses features, prices & find your perfect AR solution.',
+  keywords: 'AR glasses blog, smart glasses reviews 2024, AR technology guides, augmented reality insights, best AR glasses, AR glasses comparison, smart glasses buying guide',
   openGraph: {
-    title: 'AR Glasses Blog - Expert Reviews & Guides | AR Compare',
-    description: 'Expert AR glasses content including reviews, buying guides, and technology insights. Your source for trusted augmented reality information.',
+    title: 'AR Glasses Blog 2024 - Expert Reviews & Buying Guides',
+    description: 'Compare the best AR glasses with expert reviews, detailed buying guides, and cutting-edge technology insights. Your trusted source for smart glasses advice.',
     url: 'https://ar-compare.com/blog',
     siteName: 'AR Compare',
     images: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: '/api/placeholder/1200/630',
         width: 1200,
         height: 630,
-        alt: 'AR Compare Blog - Expert AR Glasses Content'
+        alt: 'AR Compare Blog - Expert Smart Glasses Reviews and Guides 2024'
       }
     ],
     locale: 'en_US',
@@ -27,9 +27,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AR Glasses Blog - Expert Reviews & Guides',
-    description: 'Expert AR glasses content including reviews, buying guides, and technology insights.',
+    title: 'AR Glasses Blog 2024 - Expert Smart Glasses Reviews',
+    description: 'Compare the best AR glasses with expert reviews & buying guides. Find your perfect smart glasses solution.',
     images: ['/api/placeholder/1200/630'],
+    creator: '@ARCompare',
+    site: '@ARCompare',
   },
   alternates: {
     canonical: 'https://ar-compare.com/blog',
@@ -44,6 +46,12 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  other: {
+    'article:publisher': 'https://www.facebook.com/ARCompare',
+    'article:author': 'AR Compare Editorial Team',
+    'article:section': 'Technology',
+    'article:tag': 'AR glasses, smart glasses, augmented reality, technology reviews',
   },
 };
 

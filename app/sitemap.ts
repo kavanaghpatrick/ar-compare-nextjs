@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import arGlassesData from '@/data/products';
 import { ProductSitemap } from '@/lib/product-sitemap';
+import { BlogSitemap } from '@/lib/blog-sitemap';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NODE_ENV === 'production' 
@@ -12,6 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Generate enhanced sitemap entries with intelligent priority scoring
   const sitemapEntries = productSitemap.generateProductSitemap();
+
+  // Generate blog sitemap entries
+  const blogSitemapEntries = BlogSitemap.generateEnhancedBlogSitemap(siteUrl);
 
   // Static pages with enhanced priorities
   const staticPages = [
@@ -43,8 +47,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: entry.priority,
   }));
 
+  // Convert BlogSitemap entries to MetadataRoute.Sitemap format
+  const blogEntries = blogSitemapEntries.map(entry => ({
+    url: entry.url,
+    lastModified: entry.lastModified,
+    changeFrequency: entry.changeFrequency as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
+    priority: entry.priority,
+  }));
+
   return [
     ...staticPages,
     ...enhancedEntries,
+    ...blogEntries,
   ];
 }

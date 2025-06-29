@@ -75,9 +75,9 @@ The AR glasses market is rapidly evolving, so consider future-proofing your purc
     image: '/api/placeholder/800/400',
     imageAlt: 'Person wearing AR glasses in modern office setting',
     seo: {
-      metaTitle: 'Ultimate AR Glasses Buying Guide 2024 - Choose the Best Smart Glasses',
-      metaDescription: 'Complete guide to choosing AR glasses in 2024. Compare features, prices, and find the perfect smart glasses for your needs.',
-      keywords: ['AR glasses buying guide', 'best AR glasses 2024', 'smart glasses comparison', 'augmented reality glasses']
+      metaTitle: 'Ultimate AR Glasses Buying Guide 2024 - Save Money & Choose Right',
+      metaDescription: 'Complete guide to choosing AR glasses in 2024. Compare features, prices, avoid costly mistakes & find the perfect smart glasses for your needs. Expert recommendations included.',
+      keywords: ['AR glasses buying guide', 'best AR glasses 2024', 'smart glasses comparison', 'augmented reality glasses', 'AR glasses worth buying', 'smart glasses recommendations', 'AR technology guide']
     }
   },
   {
@@ -172,9 +172,9 @@ The Xreal One Pro represents a significant step forward for consumer AR glasses.
     image: '/api/placeholder/800/400',
     imageAlt: 'Xreal One Pro AR glasses on modern desk setup',
     seo: {
-      metaTitle: 'Xreal One Pro Review 2024 - Complete Analysis of Premium AR Glasses',
-      metaDescription: 'In-depth review of Xreal One Pro AR glasses. Performance, comfort, features, and value analysis after 2 weeks of testing.',
-      keywords: ['Xreal One Pro review', 'AR glasses review', 'Xreal One Pro test', 'smart glasses review 2024']
+      metaTitle: 'Xreal One Pro Review 2024 - Worth $599? Honest Analysis After Testing',
+      metaDescription: 'In-depth Xreal One Pro review after 2 weeks of real-world testing. Performance, comfort, features, pros & cons. Is it worth $599? Get the honest verdict from our experts.',
+      keywords: ['Xreal One Pro review', 'AR glasses review', 'Xreal One Pro test', 'smart glasses review 2024', 'Xreal One Pro worth it', 'premium AR glasses review', 'Xreal One Pro performance']
     }
   },
   {
@@ -260,9 +260,9 @@ The future likely belongs to devices that seamlessly blend both capabilities, bu
     image: '/api/placeholder/800/400',
     imageAlt: 'Side by side comparison of AR glasses and VR headset',
     seo: {
-      metaTitle: 'AR Glasses vs VR Headsets 2024 - Complete Comparison Guide',
-      metaDescription: 'Detailed comparison of AR glasses vs VR headsets in 2024. Features, use cases, and which technology is right for you.',
-      keywords: ['AR vs VR', 'AR glasses vs VR headsets', 'augmented reality vs virtual reality', 'AR VR comparison 2024']
+      metaTitle: 'AR Glasses vs VR Headsets 2024 - Which Should You Buy?',
+      metaDescription: 'AR glasses vs VR headsets 2024: Complete comparison of features, use cases, pros & cons. Which technology is right for your needs and budget? Expert analysis included.',
+      keywords: ['AR vs VR', 'AR glasses vs VR headsets', 'augmented reality vs virtual reality', 'AR VR comparison 2024', 'should I buy AR or VR', 'AR glasses or VR headset', 'mixed reality comparison']
     }
   },
   {
@@ -348,9 +348,9 @@ The budget AR market has matured significantly in 2024, making it easier than ev
     image: '/api/placeholder/800/400',
     imageAlt: 'Collection of budget AR glasses on white background',
     seo: {
-      metaTitle: 'Best Budget AR Glasses Under $300 in 2024 - Affordable Smart Glasses',
-      metaDescription: 'Find the best budget AR glasses under $300. Compare affordable smart glasses with great features and value in 2024.',
-      keywords: ['budget AR glasses', 'cheap AR glasses', 'affordable smart glasses', 'AR glasses under 300']
+      metaTitle: 'Best Budget AR Glasses Under $300 in 2024 - Great Value Smart Glasses',
+      metaDescription: 'Top budget AR glasses under $300 that deliver excellent value. Compare affordable smart glasses with premium features without the premium price. Expert tested recommendations.',
+      keywords: ['budget AR glasses', 'cheap AR glasses', 'affordable smart glasses', 'AR glasses under 300', 'best value AR glasses', 'budget smart glasses 2024', 'AR glasses good value']
     }
   },
   {
@@ -463,9 +463,9 @@ As AR glasses become more prevalent, privacy awareness and responsible usage wil
     image: '/api/placeholder/800/400',
     imageAlt: 'Person wearing AR glasses with privacy-focused overlay graphics',
     seo: {
-      metaTitle: 'AR Glasses Privacy Concerns 2024 - Protect Your Digital Rights',
-      metaDescription: 'Complete guide to AR glasses privacy concerns, data collection, and how to protect yourself while using smart glasses.',
-      keywords: ['AR glasses privacy', 'smart glasses security', 'AR privacy concerns', 'digital privacy protection']
+      metaTitle: 'AR Glasses Privacy Concerns 2024 - How to Stay Protected',
+      metaDescription: 'Complete AR glasses privacy guide: What data they collect, security risks, and proven protection strategies. Stay safe while using smart glasses with our expert tips.',
+      keywords: ['AR glasses privacy', 'smart glasses security', 'AR privacy concerns', 'digital privacy protection', 'AR glasses data collection', 'smart glasses privacy risks', 'AR security guide']
     }
   }
 ];

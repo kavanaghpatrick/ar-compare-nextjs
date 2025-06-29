@@ -21,15 +21,31 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: 'Post Not Found',
-      description: 'The requested blog post could not be found.',
+      title: 'Post Not Found | AR Compare Blog',
+      description: 'The requested blog post could not be found. Browse our latest AR glasses reviews and guides.',
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
+  // Ensure optimal title length (under 60 characters)
+  const optimizedTitle = post.seo.metaTitle.length > 60 
+    ? post.seo.metaTitle.substring(0, 57) + '...'
+    : post.seo.metaTitle;
+
+  // Ensure optimal description length (150-160 characters)
+  const optimizedDescription = post.seo.metaDescription.length > 160
+    ? post.seo.metaDescription.substring(0, 157) + '...'
+    : post.seo.metaDescription;
+
   return {
-    title: post.seo.metaTitle,
-    description: post.seo.metaDescription,
+    title: optimizedTitle,
+    description: optimizedDescription,
     keywords: post.seo.keywords.join(', '),
+    authors: [{ name: post.author.name }],
+    category: post.category,
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -38,8 +54,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       images: [
         {
           url: post.image,
-          width: 800,
-          height: 400,
+          width: 1200,
+          height: 630,
           alt: post.imageAlt,
         }
       ],
@@ -49,12 +65,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
+      section: post.category,
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
-      description: post.excerpt,
+      title: post.title.length > 70 ? post.title.substring(0, 67) + '...' : post.title,
+      description: post.excerpt.length > 200 ? post.excerpt.substring(0, 197) + '...' : post.excerpt,
       images: [post.image],
+      creator: '@ARCompare',
+      site: '@ARCompare',
     },
     alternates: {
       canonical: `https://ar-compare.com/blog/${post.slug}`,
@@ -69,6 +88,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+    other: {
+      'article:publisher': 'https://www.facebook.com/ARCompare',
+      'article:author': post.author.name,
+      'article:section': post.category,
+      'article:tag': post.tags.join(', '),
+      'article:published_time': post.publishedAt,
+      'article:modified_time': post.updatedAt || post.publishedAt,
     },
   };
 }
