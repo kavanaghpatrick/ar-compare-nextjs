@@ -165,8 +165,8 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
 
               {/* Simplified CTAs */}
               <div className="hero-actions">
-                <a href="#buying-guide" className="cta-primary">
-                  <span>Get My Recommendation</span>
+                <a href="#find-your-glasses" className="cta-primary">
+                  <span>Find My Perfect Glasses</span>
                   <Zap className="cta-icon" />
                 </a>
                 <a href="#products-section" className="cta-secondary">
@@ -191,19 +191,52 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
           {/* Market Summary Section */}
           <div id="market-insights"><MarketSummary className="py-16 bg-gray-50" /></div>
 
-          {/* Buying Guide Section */}
-          <BuyingGuide id="buying-guide" className="py-16 bg-white" />
-
-          {/* Enhanced Search & Filter Section */}
-          <section id="search-section" className="search-section-enhanced py-16 bg-gray-50">
+          {/* Consolidated Find Your Perfect AR Glasses Section */}
+          <section id="find-your-glasses" className="py-20 bg-white">
             <div className="search-container">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                  Explore All {initialProducts.length} AR Glasses Models
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                  Find Your Perfect AR Glasses
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Use our smart filters to find exactly what you're looking for, or browse by category
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  Browse all {initialProducts.length} models with smart filters, or get personalized recommendations based on your needs
                 </p>
+              </div>
+
+              {/* Quick Recommendation Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="recommendation-card group cursor-pointer" onClick={() => setSearchTerm('gaming')}>
+                  <div className="recommendation-icon">
+                    <Zap className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Gaming & Entertainment</h3>
+                  <p className="text-gray-600 text-sm mb-3">Low latency, high refresh rates, immersive displays</p>
+                  <div className="text-blue-600 text-sm font-medium group-hover:underline">
+                    See gaming glasses →
+                  </div>
+                </div>
+                
+                <div className="recommendation-card group cursor-pointer" onClick={() => setSelectedCategory('Budget')}>
+                  <div className="recommendation-icon">
+                    <Award className="h-6 w-6 text-green-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Best Value</h3>
+                  <p className="text-gray-600 text-sm mb-3">Great features without breaking the bank</p>
+                  <div className="text-green-600 text-sm font-medium group-hover:underline">
+                    See budget options →
+                  </div>
+                </div>
+                
+                <div className="recommendation-card group cursor-pointer" onClick={() => setSearchTerm('lightweight')}>
+                  <div className="recommendation-icon">
+                    <Eye className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Everyday Comfort</h3>
+                  <p className="text-gray-600 text-sm mb-3">Lightweight, comfortable for all-day wear</p>
+                  <div className="text-purple-600 text-sm font-medium group-hover:underline">
+                    See comfortable glasses →
+                  </div>
+                </div>
               </div>
               
               <div className="search-bar-enhanced">
@@ -367,7 +400,7 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                 </div>
                 <div className="faq-item">
                   <h3>How do I choose the right AR glasses?</h3>
-                  <p>Start with our buying guide above! Consider your primary use case (gaming, productivity, entertainment), budget range, device compatibility, and comfort requirements. Our recommendation engine matches you with ideal models.</p>
+                  <p>Use our personalized recommendations above! Consider your primary use case (gaming, productivity, entertainment), budget range, device compatibility, and comfort requirements. Our smart filters help you find ideal models.</p>
                 </div>
                 <div className="faq-item">
                   <h3>Are these real Amazon prices?</h3>
@@ -391,8 +424,8 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
               <div className="text-center mt-12">
                 <p className="text-gray-600 mb-4">Still have questions?</p>
                 <div className="flex justify-center gap-4">
-                  <a href="#buying-guide" className="text-blue-600 hover:text-blue-800 underline">
-                    Check our Buying Guide
+                  <a href="#find-your-glasses" className="text-blue-600 hover:text-blue-800 underline">
+                    Get Personalized Recommendations
                   </a>
                   <span className="text-gray-400">•</span>
                   <a href="#market-insights" className="text-blue-600 hover:text-blue-800 underline">
