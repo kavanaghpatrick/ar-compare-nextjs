@@ -71,9 +71,9 @@ export function BlogListingClient({
     <div className="app-container">
       <NavigationSimple />
       
-      {/* Hero Section */}
-      <div className="hero-enhanced">
-        <div className="hero-container">
+      {/* Blog Hero Section */}
+      <div className="blog-hero">
+        <div className="blog-hero-container">
           <div className="trust-badges mb-6">
             <div className="trust-badge">
               <BookOpen className="trust-icon" />
@@ -89,17 +89,17 @@ export function BlogListingClient({
             </div>
           </div>
 
-          <h1 className="hero-title-enhanced">
+          <h1 className="blog-hero-title">
             AR Glasses <span className="text-blue-400">Insights</span>
           </h1>
           
-          <p className="hero-subtitle-enhanced">
+          <p className="blog-hero-subtitle">
             Expert reviews, comprehensive guides, and the latest insights in AR glasses technology. 
             Make informed decisions with our trusted analysis and hands-on testing.
           </p>
 
           {/* Search Bar */}
-          <div className="search-bar-enhanced">
+          <div className="blog-search-bar">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/50" size={20} />
               <input
@@ -110,6 +110,12 @@ export function BlogListingClient({
                 className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:border-blue-400 focus:bg-white/15 transition-all"
               />
             </div>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="scroll-indicator">
+            <div className="scroll-text">More articles below</div>
+            <div className="scroll-arrow">↓</div>
           </div>
         </div>
       </div>
