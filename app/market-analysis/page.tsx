@@ -143,48 +143,50 @@ export default function MarketAnalysisPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 pb-8">
+      <div className="max-w-7xl mx-auto px-4 pb-8">
 
       <Tabs defaultValue="insights" className="space-y-8">
         {/* Enhanced Tab Navigation */}
-        <div className="flex justify-center mb-8 px-4">
-          <TabsList className="grid w-full max-w-5xl grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2">
+        <div className="flex justify-center mb-8">
+          <div className="w-full max-w-4xl">
+            <TabsList className="grid w-full grid-cols-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2">
             <TabsTrigger 
               value="insights" 
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 hover:bg-white/5"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 hover:bg-white/5"
             >
               <BarChart3 className="h-4 w-4" />
               Insights
             </TabsTrigger>
             <TabsTrigger 
               value="explorer" 
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/25 hover:bg-white/5"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/25 hover:bg-white/5"
             >
               <Filter className="h-4 w-4" />
               Explorer
             </TabsTrigger>
             <TabsTrigger 
               value="visualizer" 
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-pink-500/25 hover:bg-white/5"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-pink-500/25 hover:bg-white/5"
             >
               <PieChart className="h-4 w-4" />
               Analytics
             </TabsTrigger>
             <TabsTrigger 
               value="search" 
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/25 hover:bg-white/5"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/25 hover:bg-white/5"
             >
               <Search className="h-4 w-4" />
               Search
             </TabsTrigger>
             <TabsTrigger 
               value="compare" 
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/25 hover:bg-white/5"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/25 hover:bg-white/5"
             >
               <GitCompare className="h-4 w-4" />
               Compare
             </TabsTrigger>
           </TabsList>
+          </div>
         </div>
 
         <TabsContent value="insights" className="space-y-8">
