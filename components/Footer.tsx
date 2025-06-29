@@ -161,12 +161,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#news"
+                <Link 
+                  href="/blog"
                   className="text-white/60 hover:text-white text-sm transition-colors"
                 >
-                  AR News
-                </a>
+                  Blog & Insights
+                </Link>
               </li>
               <li>
                 <a 

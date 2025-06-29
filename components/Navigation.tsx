@@ -200,7 +200,7 @@ export function Navigation() {
           
           <Link href="/brand" className="nav-link">Brands</Link>
           <Link href="/reviews" className="nav-link">Reviews</Link>
-          <Link href="/news" className="nav-link">News</Link>
+          <Link href="/blog" className="nav-link">Blog</Link>
         </nav>
 
         {/* Header Actions */}

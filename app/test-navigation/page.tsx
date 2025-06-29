@@ -71,7 +71,7 @@ export default function TestNavigation() {
         <div style={{ border: '1px solid #fff', padding: '20px' }}>
           <h2>Test 5: Link with Transitions</h2>
           <Link 
-            href="/news"
+            href="/blog"
             style={{ 
               padding: '10px 20px', 
               background: '#333', 
@@ -83,7 +83,7 @@ export default function TestNavigation() {
             onMouseEnter={(e) => e.currentTarget.style.background = '#555'}
             onMouseLeave={(e) => e.currentTarget.style.background = '#333'}
           >
-            News (With Transition)
+            Blog (With Transition)
           </Link>
         </div>
 
@@ -94,7 +94,7 @@ export default function TestNavigation() {
             <Link href="/" style={{ padding: '5px 10px', background: '#222', color: '#fff' }}>Home</Link>
             <Link href="/brand" style={{ padding: '5px 10px', background: '#222', color: '#fff' }}>Brand</Link>
             <Link href="/reviews" style={{ padding: '5px 10px', background: '#222', color: '#fff' }}>Reviews</Link>
-            <Link href="/news" style={{ padding: '5px 10px', background: '#222', color: '#fff' }}>News</Link>
+            <Link href="/blog" style={{ padding: '5px 10px', background: '#222', color: '#fff' }}>Blog</Link>
           </div>
         </div>
       </div>

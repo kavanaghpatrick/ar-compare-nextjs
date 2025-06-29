@@ -11,7 +11,7 @@ export function NavigationSimple() {
     { href: '/market-analysis', label: 'Market Analysis' },
     { href: '/brand', label: 'Brands' },
     { href: '/reviews', label: 'Reviews' },
-    { href: '/news', label: 'News' },
+    { href: '/blog', label: 'Blog' },
     { href: '/compare', label: 'Compare' },
   ];
 
