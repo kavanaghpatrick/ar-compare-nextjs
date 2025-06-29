@@ -21,9 +21,12 @@ export function ComparisonView({ products }: ComparisonViewProps) {
   const getSpecValue = (product: Product, category: string, key: string) => {
     const spec = product.specifications[category as keyof typeof product.specifications];
     if (spec && typeof spec === 'object') {
-      return (spec as Record<string, unknown>)[key];
+      const value = (spec as Record<string, unknown>)[key];
+      if (value === null || value === undefined) return null;
+      if (typeof value === 'object') return JSON.stringify(value);
+      return String(value);
     }
-    return spec;
+    return spec ? String(spec) : null;
   };
 
   return (

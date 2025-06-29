@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
   interface Window {
-    gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void;
+    gtag?: (command: string, targetId: string, config?: Record<string, unknown>) => void;
+    dataLayer?: any[];
   }
 }
 
@@ -13,18 +14,30 @@ export function Analytics() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const scriptsRef = useRef<HTMLScriptElement[]>([]);
 
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID) return;
+    if (!GA_MEASUREMENT_ID || typeof window === 'undefined') return;
+
+    // Clean up any existing scripts first
+    scriptsRef.current.forEach(script => {
+      try {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      } catch (error) {
+        // Ignore cleanup errors
+      }
+    });
+    scriptsRef.current = [];
 
     // Load Google Analytics script
     const script1 = document.createElement('script');
     script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     script1.async = true;
-    document.head.appendChild(script1);
-
+    
     const script2 = document.createElement('script');
-    script2.innerHTML = `
+    script2.textContent = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -34,11 +47,27 @@ export function Analytics() {
         send_page_view: false
       });
     `;
-    document.head.appendChild(script2);
+
+    try {
+      document.head.appendChild(script1);
+      document.head.appendChild(script2);
+      scriptsRef.current = [script1, script2];
+    } catch (error) {
+      console.error('Failed to load analytics scripts:', error);
+    }
 
     return () => {
-      document.head.removeChild(script1);
-      document.head.removeChild(script2);
+      // Safe cleanup
+      scriptsRef.current.forEach(script => {
+        try {
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+        } catch (error) {
+          // Ignore cleanup errors during React unmount
+        }
+      });
+      scriptsRef.current = [];
     };
   }, [GA_MEASUREMENT_ID]);
 

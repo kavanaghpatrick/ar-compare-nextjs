@@ -55,11 +55,12 @@
   border-radius: 0.5rem;
   color: white;
   font-size: 0.875rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .search-input:focus {
-  outline: none;
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
   border-color: #3b82f6;
   background: rgba(255, 255, 255, 0.15);
 }
@@ -108,13 +109,19 @@
   font-weight: 500;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .nav-link:hover,
+.nav-link:focus,
 .nav-link.active {
   color: white;
   background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 /* Navigation Dropdown */
@@ -134,16 +141,23 @@
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
-.nav-dropdown-trigger:hover {
+.nav-dropdown-trigger:hover,
+.nav-dropdown-trigger:focus {
   color: white;
   background: rgba(255, 255, 255, 0.1);
 }
 
+.nav-dropdown-trigger:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
 .dropdown-icon {
   transition: transform 0.2s;
+  pointer-events: none;
 }
 
 .dropdown-icon.open {
@@ -162,7 +176,19 @@
   padding: 0.5rem;
   margin-top: 0.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 50;
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dropdown-item {
@@ -173,16 +199,22 @@
   text-decoration: none;
   font-size: 0.875rem;
   border-radius: 0.375rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,
+.dropdown-item:focus {
   color: white;
   background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
 }
 
 /* Header Actions */
@@ -231,12 +263,18 @@
   padding: 0.5rem;
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
-.user-menu-trigger:hover {
+.user-menu-trigger:hover,
+.user-menu-trigger:focus {
   color: white;
   background: rgba(255, 255, 255, 0.1);
+}
+
+.user-menu-trigger:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 .user-dropdown-menu {
@@ -251,7 +289,7 @@
   padding: 0.5rem;
   margin-top: 0.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 50;
 }
 
 /* Mobile Menu */
@@ -292,7 +330,7 @@
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   border-radius: 0.375rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .mobile-nav-link:hover,
@@ -331,7 +369,7 @@
   text-decoration: none;
   font-size: 0.875rem;
   border-radius: 0.375rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .mobile-nav-sublink:hover {
@@ -454,7 +492,7 @@
   text-decoration: none;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .back-to-list-btn:hover {
@@ -486,7 +524,7 @@
   color: white;
   text-decoration: none;
   border-radius: 0.5rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
   max-width: 300px;
 }
 
@@ -542,7 +580,7 @@
   text-decoration: none;
   border-radius: 0.375rem;
   font-size: 0.875rem;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .quick-nav-btn:hover {
@@ -604,11 +642,17 @@
   border-radius: 0.375rem;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
-.action-btn-quick-view:hover {
+.action-btn-quick-view:hover,
+.action-btn-quick-view:focus {
   background: rgba(255, 255, 255, 0.15);
+}
+
+.action-btn-quick-view:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 .action-btn-details {
@@ -625,8 +669,14 @@
   transition: background 0.2s;
 }
 
-.action-btn-details:hover {
+.action-btn-details:hover,
+.action-btn-details:focus {
   background: #2563eb;
+}
+
+.action-btn-details:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .product-breadcrumbs {
@@ -665,7 +715,7 @@
   border-radius: 0.375rem;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .category-filter-btn:hover,
@@ -682,7 +732,7 @@
   border-radius: 0.375rem;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .category-filter-clear:hover {

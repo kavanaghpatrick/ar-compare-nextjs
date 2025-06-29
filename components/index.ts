@@ -6,7 +6,7 @@ export { SortControls } from './SortControls';
 export { ProductListing } from './ProductListing';
 export { ComparisonTable } from './ComparisonTable';
 export { ProductDetails } from './ProductDetails';
-export { ComparisonCart } from './ComparisonCart';
+export { ComparisonCart, useComparisonCartState } from './ComparisonCart';
 export { Navigation } from './Navigation';
 export { Loading, ProductCardSkeleton, ProductDetailSkeleton } from './Loading';
 export { default as ErrorBoundary, ErrorFallback } from './ErrorBoundary';
@@ -33,3 +33,12 @@ export { PurchaseRecommendations } from './PurchaseRecommendations';
 export { MarketContext } from './MarketContext';
 export { SimilarProducts } from './SimilarProducts';
 export { ProductDetailsEnhanced } from './ProductDetailsEnhanced';
+
+// New Navigation Components
+export { ProductBreadcrumbs, useBreadcrumbContext } from './ProductBreadcrumbs';
+export { ProductBreadcrumbsSuspense } from './ProductBreadcrumbsSuspense';
+export { ProductNavigation } from './ProductNavigation';
+export { QuickView } from './QuickView';
+
+// Home page components
+export { HomeClient } from './HomeClient';

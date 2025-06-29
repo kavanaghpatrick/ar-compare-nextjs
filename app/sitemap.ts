@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const enhancedEntries = sitemapEntries.map(entry => ({
     url: entry.url,
     lastModified: entry.lastModified,
-    changeFrequency: entry.changeFrequency as any,
+    changeFrequency: entry.changeFrequency as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
     priority: entry.priority,
   }));
 

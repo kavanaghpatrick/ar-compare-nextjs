@@ -1,4 +1,26 @@
 // Product types for AR Compare application
+
+// Raw product data as it exists in the data file before transformation
+export interface RawProductData {
+  id: string;
+  brand: string;
+  model: string;
+  fullName: string;
+  price: number;
+  originalPrice: number;
+  currency: string;
+  availability: string;
+  image: string;
+  category: string;
+  releaseDate: string;
+  description: string;
+  keyFeatures: string[];
+  specifications: ExtendedProductSpecifications;
+  rating: number;
+  pros: string[];
+  cons: string[];
+  companyInfo: CompanyInfo;
+}
 export interface DisplaySpecs {
   type: string;
   resolution: string;
@@ -42,6 +64,11 @@ export interface ProductSpecifications {
   reviews?: string;
 }
 
+// Type for additional specification categories that may exist in the data
+export interface ExtendedProductSpecifications extends ProductSpecifications {
+  [key: string]: DisplaySpecs | DesignSpecs | AudioSpecs | ConnectivitySpecs | FeatureSpecs | string | undefined;
+}
+
 export interface CompanyInfo {
   founded: string;
   headquarters: string;
@@ -68,7 +95,7 @@ export interface Product {
   description: string;
   keyFeatures: string[];
   features: string[]; // Add for backward compatibility
-  specifications: ProductSpecifications & { [key: string]: any }; // Add index signature
+  specifications: ExtendedProductSpecifications;
   rating: number;
   pros: string[];
   cons: string[];
@@ -90,6 +117,34 @@ export type SortOrder = 'asc' | 'desc';
 export type ViewType = 'main' | 'comparison' | 'details';
 export type ComparisonViewType = 'grid' | 'table';
 export type TabType = 'specs' | 'features' | 'pros-cons' | 'company';
+
+// API Response types
+export interface ApiSuccessResponse<T = unknown> {
+  success: true;
+  data: T;
+}
+
+export interface ApiErrorResponse {
+  success: false;
+  error: string;
+}
+
+export type ApiResponse<T = unknown> = ApiSuccessResponse<T> | ApiErrorResponse;
+
+// API Response type definitions
+export interface ProductsApiResponse {
+  products: Product[];
+  total: number;
+  count: number;
+  filters: {
+    category: string | null;
+    brand: string | null;
+    minPrice: string | null;
+    maxPrice: string | null;
+    sortBy: string;
+    sortOrder: string;
+  };
+}
 
 // Enhanced Product interfaces for research-based data
 export interface AmazonData {
@@ -120,9 +175,54 @@ export interface PurchaseRecommendation {
   alternativeConsider: string;
 }
 
+// Type for enhanced specifications with specific known properties
+export interface EnhancedSpecs {
+  displayTechnology?: string;
+  perceivedBrightness?: string;
+  audioPartnership?: string;
+  audioSystem?: string;
+  trackingCapability?: string;
+  batteryLife?: string;
+  prescriptionSupport?: string;
+  electrochromicDimming?: string;
+  spatialComputing?: string;
+  aiIntegration?: string;
+  processingPower?: string;
+  audioArray?: string;
+  connectivityOptions?: string;
+  adaptiveDimming?: string;
+  realTime2Dto3D?: string;
+  myopiaSupport?: string;
+  electrochromicFilm?: string;
+  ipdAdjustment?: string;
+  universalCompatibility?: string;
+  contrastRatio?: string;
+  audioUpgrade?: string;
+  eyeCaretech?: string;
+  imaxEnhanced?: string;
+  adaptiveBrightness?: string;
+  weightOptimization?: string;
+  aiCapabilities?: string;
+  spatialAccuracy?: string;
+  frameMaterial?: string;
+  operatingSystem?: string;
+  controlMethods?: string;
+  frameMaterials?: string;
+  prescriptionIntegration?: string;
+  connectivity?: string;
+  aiFeatures?: string;
+  subscriptionService?: string;
+  processingHardware?: string;
+  openSourceNature?: string;
+  cameraCapability?: string;
+  connectivityProtocol?: string;
+  creditSystem?: string;
+  [key: string]: string | undefined;
+}
+
 export interface EnhancedProduct extends Product {
   amazon: AmazonData;
-  enhancedSpecs: Record<string, any>;
+  enhancedSpecs: EnhancedSpecs;
   customerInsights: CustomerInsights;
   marketContext: MarketContext;
   purchaseRecommendation: PurchaseRecommendation;

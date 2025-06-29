@@ -1,7 +1,7 @@
-import { Product, EnhancedProduct } from '@/types';
+import { Product, EnhancedProduct, RawProductData } from '@/types';
 
 // Helper function to transform the data
-function transformProduct(product: any): Product {
+function transformProduct(product: RawProductData): Product {
   return {
     ...product,
     name: product.fullName,
@@ -10,7 +10,7 @@ function transformProduct(product: any): Product {
   };
 }
 
-const rawArGlassesData = [
+const rawArGlassesData: RawProductData[] = [
   // Xreal Products
   {
     id: 'xreal-one-pro',
@@ -1113,6 +1113,11 @@ const enhancedArGlassesData: EnhancedProduct[] = [
   }
 ];
 
-export const arGlassesData: EnhancedProduct[] = rawArGlassesData.map(transformProduct) as EnhancedProduct[];
+// Basic product data without enhanced information
+export const arGlassesData: Product[] = rawArGlassesData.map(transformProduct);
 
-export default arGlassesData;
+// Export enhanced data for product pages that need it
+export { enhancedArGlassesData };
+
+// Default export is the enhanced data for backward compatibility
+export default enhancedArGlassesData;

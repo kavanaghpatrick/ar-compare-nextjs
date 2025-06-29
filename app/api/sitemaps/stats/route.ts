@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import arGlassesData from '@/data/products';
 import { ProductSitemap } from '@/lib/product-sitemap';
+import logger from '@/lib/logger';
 
 export async function GET() {
   try {
@@ -18,7 +19,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Error generating sitemap stats:', error);
+    logger.error('Error generating sitemap stats:', error);
     return NextResponse.json(
       { error: 'Failed to generate sitemap stats' },
       { status: 500 }

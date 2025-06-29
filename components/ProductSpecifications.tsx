@@ -14,6 +14,9 @@ interface ProductSpecificationsProps {
 
 export function ProductSpecifications({ product }: ProductSpecificationsProps) {
   const [activeCategory, setActiveCategory] = useState<string>('display');
+  
+  // Ensure enhancedSpecs exists to prevent undefined errors
+  const enhancedSpecs = product.enhancedSpecs || {};
 
   const getSpecIcon = (category: string) => {
     switch (category) {
@@ -80,10 +83,10 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       label: 'Performance',
       icon: Gauge,
       specs: {
-        'Processing Power': product.enhancedSpecs.processingPower || product.specifications.features?.chip || 'Standard',
+        'Processing Power': enhancedSpecs.processingPower || product.specifications.features?.chip || 'Standard',
         'Latency': product.specifications.features?.latency || 'Not specified',
         'Refresh Rate': product.specifications.display.refreshRate,
-        'Tracking Capability': product.enhancedSpecs.trackingCapability || product.specifications.features?.tracking || 'Basic',
+        'Tracking Capability': enhancedSpecs.trackingCapability || product.specifications.features?.tracking || 'Basic',
       }
     },
     {
@@ -91,10 +94,10 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       label: 'Display',
       icon: Monitor,
       specs: {
-        'Display Technology': product.enhancedSpecs.displayTechnology || product.specifications.display.type,
+        'Display Technology': enhancedSpecs.displayTechnology || product.specifications.display.type,
         'Resolution': product.specifications.display.resolution,
         'Field of View': product.specifications.display.fov,
-        'Brightness': product.enhancedSpecs.perceivedBrightness || product.specifications.display.brightness,
+        'Brightness': enhancedSpecs.perceivedBrightness || product.specifications.display.brightness,
         'Color Accuracy': product.specifications.display.colorAccuracy || 'Standard',
       }
     },
@@ -103,10 +106,10 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       label: 'Audio',
       icon: Headphones,
       specs: {
-        'Audio System': product.enhancedSpecs.audioPartnership || product.enhancedSpecs.audioSystem || product.specifications.audio.speakers,
+        'Audio System': enhancedSpecs.audioPartnership || enhancedSpecs.audioSystem || product.specifications.audio.speakers,
         'Microphones': product.specifications.audio.microphones,
         'Sound Leakage': product.specifications.audio.soundLeakage || 'Standard',
-        'Audio Features': product.enhancedSpecs.audioArray || 'Standard speakers',
+        'Audio Features': enhancedSpecs.audioArray || 'Standard speakers',
       }
     },
     {
@@ -115,9 +118,9 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       icon: Weight,
       specs: {
         'Weight': product.specifications.design.weight,
-        'Material': product.enhancedSpecs.frameMaterial || product.specifications.design.material,
-        'IPD Adjustment': product.enhancedSpecs.prescriptionSupport || product.specifications.design.ipdAdjustment,
-        'Dimming': product.enhancedSpecs.electrochromicDimming || product.specifications.design.dimming || 'Manual',
+        'Material': enhancedSpecs.frameMaterial || product.specifications.design.material,
+        'IPD Adjustment': enhancedSpecs.prescriptionSupport || product.specifications.design.ipdAdjustment,
+        'Dimming': enhancedSpecs.electrochromicDimming || product.specifications.design.dimming || 'Manual',
       }
     },
     {
@@ -126,9 +129,9 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       icon: Wifi,
       specs: {
         'Connection Type': product.specifications.connectivity.connection,
-        'Compatibility Range': product.enhancedSpecs.compatibilityRange || 'Standard',
+        'Compatibility Range': enhancedSpecs.compatibilityRange || 'Standard',
         'Supported Devices': product.specifications.connectivity.compatibility.join(', '),
-        'Connectivity Options': product.enhancedSpecs.connectivityOptions || 'USB-C',
+        'Connectivity Options': enhancedSpecs.connectivityOptions || 'USB-C',
       }
     },
     {
@@ -136,11 +139,11 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       label: 'Advanced',
       icon: Zap,
       specs: {
-        'AI Integration': product.enhancedSpecs.aiIntegration || product.enhancedSpecs.aiCapabilities || 'None',
-        'Spatial Computing': product.enhancedSpecs.spatialComputing || 'Basic',
+        'AI Integration': enhancedSpecs.aiIntegration || enhancedSpecs.aiCapabilities || 'None',
+        'Spatial Computing': enhancedSpecs.spatialComputing || 'Basic',
         'Camera System': product.specifications.features?.camera || 'None',
-        'Battery Life': product.enhancedSpecs.batteryLife || 'Device dependent',
-        'Special Features': product.enhancedSpecs.realTime2Dto3D || product.enhancedSpecs.electrochromicFilm || 'Standard',
+        'Battery Life': enhancedSpecs.batteryLife || 'Device dependent',
+        'Special Features': enhancedSpecs.realTime2Dto3D || enhancedSpecs.electrochromicFilm || 'Standard',
       }
     }
   ];
@@ -235,7 +238,7 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
       </Card>
 
       {/* Enhanced Specifications from Research */}
-      {Object.keys(product.enhancedSpecs).length > 0 && (
+      {Object.keys(enhancedSpecs).length > 0 && (
         <Card className="bg-white/5 backdrop-blur-lg border-white/10">
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-white">
@@ -247,7 +250,7 @@ export function ProductSpecifications({ product }: ProductSpecificationsProps) {
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              {Object.entries(product.enhancedSpecs).map(([key, value]) => (
+              {Object.entries(enhancedSpecs).map(([key, value]) => (
                 <div key={key} className="flex items-start justify-between p-3 bg-white/5 rounded-lg border border-white/10">
                   <span className="text-white/80 capitalize font-medium">
                     {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}

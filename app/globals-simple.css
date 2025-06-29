@@ -7,10 +7,12 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+  min-height: 100vh;
 }
 
 /* AR Compare Custom Styles */
@@ -227,7 +229,7 @@ body {
   border-radius: 1rem;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 1000;
+  z-index: 50;
 }
 
 /* Utility classes */

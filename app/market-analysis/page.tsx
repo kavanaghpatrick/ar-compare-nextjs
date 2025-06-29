@@ -1,37 +1,34 @@
-import { Metadata } from 'next';
-import MarketInsights from '@/components/MarketInsights';
-import ProductRecommendationEngine from '@/components/ProductRecommendationEngine';
+'use client';
+
+import dynamic from 'next/dynamic';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TrendingUp, Target, BarChart3, Search } from 'lucide-react';
+import { NavigationSimple } from '@/components/NavigationSimple';
+import { Footer } from '@/components/Footer';
 
-export const metadata: Metadata = {
-  title: 'AR Glasses Market Analysis - Comprehensive Industry Insights',
-  description: 'In-depth market analysis of AR glasses industry including competitive landscape, market segments, trends, and personalized product recommendations.',
-  keywords: [
-    'AR glasses market analysis',
-    'AR glasses comparison',
-    'AR market trends',
-    'AR glasses competitive analysis',
-    'AR market segments',
-    'AR glasses recommendations'
-  ],
-  openGraph: {
-    title: 'AR Glasses Market Analysis - Industry Insights & Trends',
-    description: 'Comprehensive market analysis and competitive intelligence for the AR glasses industry',
-    type: 'website',
-  },
-};
+// Lazy load heavy components for better performance
+const MarketInsights = dynamic(() => import('@/components/MarketInsights'), {
+  loading: () => <div className="text-white/60 p-8 text-center">Loading market insights...</div>,
+  ssr: false
+});
+
+const ProductRecommendationEngine = dynamic(() => import('@/components/ProductRecommendationEngine'), {
+  loading: () => <div className="text-white/60 p-8 text-center">Loading recommendation engine...</div>,
+  ssr: false
+});
 
 export default function MarketAnalysisPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">AR Glasses Market Analysis</h1>
-        <p className="text-xl text-gray-600 mb-6">
-          Comprehensive market intelligence, competitive analysis, and personalized recommendations 
-          for the AR glasses industry
-        </p>
-      </div>
+    <div className="app-container">
+      <NavigationSimple />
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-4 text-white">AR Glasses Market Analysis</h1>
+          <p className="text-xl text-white/80 mb-6">
+            Comprehensive market intelligence, competitive analysis, and personalized recommendations 
+            for the AR glasses industry
+          </p>
+        </div>
 
       <Tabs defaultValue="insights" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2">
@@ -89,8 +86,8 @@ export default function MarketAnalysisPage() {
 
         <TabsContent value="recommendation" className="space-y-6">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">Find Your Perfect AR Glasses</h2>
-            <p className="text-gray-600">
+            <h2 className="text-2xl font-bold mb-2 text-white">Find Your Perfect AR Glasses</h2>
+            <p className="text-white/80">
               Our AI-powered recommendation engine analyzes market data and your preferences 
               to suggest the best AR glasses for your specific needs and budget.
             </p>
@@ -102,30 +99,30 @@ export default function MarketAnalysisPage() {
 
       {/* Market Overview Section */}
       <div className="mt-12 space-y-8">
-        <div className="border-t pt-8">
-          <h2 className="text-2xl font-bold mb-4">Market Overview</h2>
+        <div className="border-t border-white/20 pt-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">Market Overview</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-6 bg-blue-50 rounded-lg">
-              <h3 className="font-semibold mb-2 text-blue-900">Competitive Landscape</h3>
-              <p className="text-sm text-blue-800">
+            <div className="p-6 bg-blue-500/10 backdrop-blur-md rounded-lg border border-blue-500/20">
+              <h3 className="font-semibold mb-2 text-blue-400">Competitive Landscape</h3>
+              <p className="text-sm text-white/80">
                 The AR glasses market is rapidly evolving with clear segmentation emerging. 
                 Xreal dominates with mature ecosystem and Google partnership, while newer 
                 players focus on AI innovation and specialized features.
               </p>
             </div>
             
-            <div className="p-6 bg-green-50 rounded-lg">
-              <h3 className="font-semibold mb-2 text-green-900">Key Trends</h3>
-              <p className="text-sm text-green-800">
+            <div className="p-6 bg-green-500/10 backdrop-blur-md rounded-lg border border-green-500/20">
+              <h3 className="font-semibold mb-2 text-green-400">Key Trends</h3>
+              <p className="text-sm text-white/80">
                 Major trends include Micro-OLED display adoption, AI integration, 
                 expanding field of view capabilities, and focus on everyday wearability 
                 for mainstream consumer adoption.
               </p>
             </div>
             
-            <div className="p-6 bg-purple-50 rounded-lg">
-              <h3 className="font-semibold mb-2 text-purple-900">Market Opportunities</h3>
-              <p className="text-sm text-purple-800">
+            <div className="p-6 bg-purple-500/10 backdrop-blur-md rounded-lg border border-purple-500/20">
+              <h3 className="font-semibold mb-2 text-purple-400">Market Opportunities</h3>
+              <p className="text-sm text-white/80">
                 Significant opportunities exist in AI-first AR experiences, social AR 
                 applications, specialized industry solutions, and AR glasses as primary 
                 computing devices replacing smartphones.
@@ -134,10 +131,10 @@ export default function MarketAnalysisPage() {
           </div>
         </div>
 
-        <div className="border-t pt-8">
-          <h2 className="text-2xl font-bold mb-4">Methodology</h2>
+        <div className="border-t border-white/20 pt-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">Methodology</h2>
           <div className="prose max-w-none">
-            <p className="text-gray-700 mb-4">
+            <p className="text-white/80 mb-4">
               Our market analysis is based on comprehensive evaluation of 8 leading AR glasses products 
               across multiple dimensions including display quality, value proposition, build quality, 
               software ecosystem, innovation, and user experience.
@@ -145,8 +142,8 @@ export default function MarketAnalysisPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
               <div>
-                <h3 className="font-semibold mb-3">Analysis Framework</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
+                <h3 className="font-semibold mb-3 text-white">Analysis Framework</h3>
+                <ul className="space-y-2 text-sm text-white/70">
                   <li>• Competitive matrix scoring (0-100 scale)</li>
                   <li>• Market segmentation analysis</li>
                   <li>• Use case mapping and optimization</li>
@@ -157,8 +154,8 @@ export default function MarketAnalysisPage() {
               </div>
               
               <div>
-                <h3 className="font-semibold mb-3">Data Sources</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
+                <h3 className="font-semibold mb-3 text-white">Data Sources</h3>
+                <ul className="space-y-2 text-sm text-white/70">
                   <li>• Product specifications and pricing</li>
                   <li>• Company financials and market position</li>
                   <li>• Industry reports and analyst insights</li>
@@ -171,6 +168,8 @@ export default function MarketAnalysisPage() {
           </div>
         </div>
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

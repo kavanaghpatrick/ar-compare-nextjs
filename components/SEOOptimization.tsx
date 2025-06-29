@@ -331,14 +331,7 @@ export function SEOOptimization({
       <link rel="dns-prefetch" href="https://amazon.com" />
       <link rel="dns-prefetch" href="https://google-analytics.com" />
       
-      {/* Preload critical resources */}
-      <link 
-        rel="preload" 
-        href="/fonts/geist-sans.woff2" 
-        as="font" 
-        type="font/woff2" 
-        crossOrigin="anonymous" 
-      />
+      {/* Inter font is already loaded via Google Fonts in CSS */}
     </>
   );
 }

@@ -14,7 +14,9 @@ import {
   Calendar,
   Lightbulb,
   ArrowRight,
-  ShoppingCart
+  ShoppingCart,
+  Eye,
+  Package
 } from 'lucide-react';
 import { EnhancedProduct } from '@/types';
 
@@ -431,7 +433,7 @@ export function PurchaseRecommendations({
                     <span>{alternative.product.specifications.display.fov}</span>
                   </div>
                   <div className="spec-highlight">
-                    <Weight size={12} />
+                    <Package size={12} />
                     <span>{alternative.product.specifications.design.weight}</span>
                   </div>
                 </div>

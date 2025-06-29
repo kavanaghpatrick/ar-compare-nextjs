@@ -1,0 +1,801 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables - Available globally */
+:root {
+  /* Keep existing CSS variables from globals.css */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+}
+
+/* Basic CSS Reset - Outside of layers to ensure it applies first */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles that should apply globally */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  html, body {
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+    min-height: 100vh;
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+/* 
+ * CRITICAL: Custom component styles 
+ * These are defined outside of @layer to ensure they always apply
+ * This solves the issue where main page classes weren't working
+ */
+
+/* AR Compare App Styles */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+  color: white;
+}
+
+/* Header Styles */
+.header {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+.nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+}
+
+.nav a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* Hero Section */
+.hero {
+  padding: 5rem 1rem;
+  text-align: center;
+}
+
+.hero-container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 3.75rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .hero-buttons {
+    flex-direction: row;
+  }
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Stats Section */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* Products Section */
+.products-section {
+  padding: 2rem 1rem;
+}
+
+.products-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input,
+.search-input {
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(12px);
+}
+
+.search-container input::placeholder,
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  ring: 2px;
+  ring-color: rgba(59, 130, 246, 0.2);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Product Card Styles */
+.product-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.product-icon {
+  font-size: 2rem;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.product-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 1rem;
+}
+
+/* Rating Styles */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  font-size: 1rem;
+}
+
+.star-filled {
+  color: #fbbf24;
+}
+
+.star-empty {
+  color: #4b5563;
+}
+
+.rating-text {
+  color: white;
+  font-weight: 600;
+}
+
+.rating-reviews {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Specs Grid */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.spec-item {
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Product Actions */
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+}
+
+.action-btn-compare {
+  background-color: #059669;
+  color: white;
+}
+
+.action-btn-compare:hover {
+  background-color: #047857;
+}
+
+.action-btn-compare.selected {
+  background-color: #047857;
+}
+
+.action-btn-compare.selected::before {
+  content: "✓ ";
+}
+
+.action-btn-details {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-btn-details:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Comparison Cart */
+.comparison-cart {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  min-width: 320px;
+  max-width: 400px;
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+/* Utility classes for compatibility */
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: white;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+/* 
+ * Enhanced component styles using @layer
+ * These will have proper cascading with Tailwind utilities
+ */
+@layer components {
+  /* Include all the component styles from globals.css */
+  /* Cart header and content styles */
+  .cart-header {
+    @apply flex items-center justify-between p-4 border-b border-white/10;
+  }
+
+  .cart-title {
+    @apply flex items-center gap-2 text-white font-semibold;
+  }
+
+  .cart-icon {
+    @apply w-5 h-5 text-blue-400;
+  }
+
+  .cart-toggle {
+    @apply p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200;
+  }
+
+  .cart-content {
+    @apply p-4;
+  }
+
+  .cart-products {
+    @apply space-y-3 mb-4;
+  }
+
+  .cart-product {
+    @apply flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10;
+  }
+
+  .cart-product-info {
+    @apply flex flex-col;
+  }
+
+  .cart-product-name {
+    @apply text-white font-medium text-sm;
+  }
+
+  .cart-product-price {
+    @apply text-blue-400 text-sm font-semibold;
+  }
+
+  .cart-remove {
+    @apply p-1 rounded-md bg-red-500/20 hover:bg-red-500/30 text-red-400 transition-all duration-200;
+  }
+
+  .cart-actions {
+    @apply space-y-2;
+  }
+
+  .cart-compare-btn {
+    @apply w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg;
+  }
+
+  .cart-clear-btn {
+    @apply w-full px-4 py-2 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white font-medium rounded-lg transition-all duration-200;
+  }
+
+  /* Comparison Section Styles */
+  .comparison-section {
+    @apply mt-12 p-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20;
+  }
+
+  .comparison-section h3 {
+    @apply text-white text-xl font-bold mb-6;
+  }
+
+  .comparison-table {
+    @apply overflow-x-auto;
+  }
+
+  .comparison-table table {
+    @apply w-full border-collapse bg-white/5 rounded-lg overflow-hidden;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    @apply px-4 py-4 text-left border-b border-white/10;
+  }
+
+  .comparison-table th {
+    @apply bg-white/10 text-white font-semibold;
+  }
+
+  .comparison-table td {
+    @apply text-white/90;
+  }
+
+  /* Product Details Page Styles */
+  .product-details {
+    @apply min-h-screen p-6;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+  }
+
+  .product-details-header {
+    @apply mb-8 text-white;
+  }
+
+  .back-button {
+    @apply inline-flex items-center gap-2 mb-6 text-white/80 hover:text-white transition-colors;
+  }
+
+  .product-tabs {
+    @apply flex gap-1 mb-8 bg-white/10 rounded-lg p-1;
+  }
+
+  .tab {
+    @apply px-4 py-2 rounded-md font-medium text-white/80 transition-all cursor-pointer border-none;
+  }
+
+  .tab.active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .tab:hover:not(.active) {
+    @apply bg-white/10 text-white;
+  }
+
+  .product-content {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20;
+  }
+
+  /* Quick View Modal Styles */
+  .quick-view-modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+
+  .quick-view-overlay {
+    @apply absolute inset-0 bg-black/70 backdrop-blur-sm;
+  }
+
+  .quick-view-content {
+    @apply relative bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 max-w-4xl max-h-[90vh] overflow-y-auto;
+  }
+
+  /* Filter Bar Styles */
+  .filter-container {
+    @apply mb-6 p-4 bg-white/5 backdrop-blur-md rounded-lg border border-white/10;
+  }
+
+  .filter-btn {
+    @apply px-3 py-2 text-sm bg-white/10 hover:bg-white/20 text-white/80 hover:text-white rounded-lg transition-all duration-200 border border-white/20;
+  }
+
+  .filter-btn.active {
+    @apply bg-blue-600 text-white border-blue-500;
+  }
+
+  /* Loading states */
+  .skeleton {
+    @apply bg-white/10 animate-pulse rounded;
+  }
+
+  .skeleton-text {
+    @apply h-4 bg-white/10 rounded animate-pulse;
+  }
+
+  .skeleton-title {
+    @apply h-6 bg-white/10 rounded animate-pulse;
+  }
+}
+
+/* Animations */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .comparison-cart {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-card {
+    padding: 1rem;
+  }
+  
+  .product-icon {
+    font-size: 1.5rem;
+  }
+  
+  .product-title {
+    font-size: 1.125rem;
+  }
+  
+  .product-price {
+    font-size: 1.25rem;
+  }
+}
+
+/* Ensure proper layering for animations and interactions */
+@media (prefers-reduced-motion: no-preference) {
+  .product-card,
+  .comparison-card,
+  .filter-container,
+  .search-container {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  .product-card:nth-child(even) {
+    animation-delay: 0.1s;
+  }
+
+  .product-card:nth-child(3n) {
+    animation-delay: 0.2s;
+  }
+}
+
+/* Focus states for accessibility */
+.search-input:focus,
+.filter-btn:focus,
+.tab:focus,
+.btn:focus,
+.action-btn:focus {
+  outline: 2px solid rgb(59, 130, 246);
+  outline-offset: 2px;
+}
+
+/* Ensure buttons are clickable */
+.btn:active,
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+/* Cart notification badge */
+.cart-title::after {
+  content: "";
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #ef4444;
+  border-radius: 50%;
+  display: none;
+}
+
+.cart-title.has-items::after {
+  display: block;
+}

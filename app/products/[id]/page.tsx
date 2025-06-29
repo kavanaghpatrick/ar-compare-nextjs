@@ -13,9 +13,17 @@ interface ProductPageProps {
 
 async function getProduct(id: string): Promise<EnhancedProduct | null> {
   try {
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://ar-compare.com' 
-      : 'http://localhost:3000';
+    // Use environment variable for API URL, or construct it based on VERCEL_URL
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    
+    // During build time, we need to handle the case where API might not be available
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL && !process.env.NEXT_PUBLIC_API_URL) {
+      // For static generation, return null or use static data
+      console.warn('API URL not configured during build. Using static data fallback.');
+      // You could import static data here as a fallback
+      return null;
+    }
     
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: 'force-cache',

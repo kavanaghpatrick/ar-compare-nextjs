@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useMemo } from 'react';
 import { 
   Grid3X3, 
   BarChart3, 
@@ -24,7 +25,8 @@ interface ComparisonTableProps {
   className?: string;
 }
 
-export function ComparisonTable({
+// Memoized ComparisonTable component for performance
+export const ComparisonTable = React.memo(({
   products,
   comparisonView,
   sortBy,
@@ -35,43 +37,45 @@ export function ComparisonTable({
   onRemoveProduct,
   onGoBack,
   className = ""
-}: ComparisonTableProps) {
-  // Sort products based on current sort criteria
-  const sortedProducts = [...products].sort((a, b) => {
-    let aValue, bValue;
-    
-    switch (sortBy) {
-      case 'price':
-        aValue = a.price;
-        bValue = b.price;
-        break;
-      case 'rating':
-        aValue = a.rating;
-        bValue = b.rating;
-        break;
-      case 'brand':
-        aValue = a.brand;
-        bValue = b.brand;
-        break;
-      case 'fov':
-        aValue = parseInt(a.specifications.display.fov) || 0;
-        bValue = parseInt(b.specifications.display.fov) || 0;
-        break;
-      case 'weight':
-        aValue = parseInt(a.specifications.design.weight) || 0;
-        bValue = parseInt(b.specifications.design.weight) || 0;
-        break;
-      default:
-        aValue = a.price;
-        bValue = b.price;
-    }
-    
-    if (sortOrder === 'asc') {
-      return aValue > bValue ? 1 : -1;
-    } else {
-      return aValue < bValue ? 1 : -1;
-    }
-  });
+}: ComparisonTableProps) => {
+  // Memoize sorted products calculation
+  const sortedProducts = useMemo(() => {
+    return [...products].sort((a, b) => {
+      let aValue, bValue;
+      
+      switch (sortBy) {
+        case 'price':
+          aValue = a.price;
+          bValue = b.price;
+          break;
+        case 'rating':
+          aValue = a.rating;
+          bValue = b.rating;
+          break;
+        case 'brand':
+          aValue = a.brand;
+          bValue = b.brand;
+          break;
+        case 'fov':
+          aValue = parseInt(a.specifications.display.fov) || 0;
+          bValue = parseInt(b.specifications.display.fov) || 0;
+          break;
+        case 'weight':
+          aValue = parseInt(a.specifications.design.weight) || 0;
+          bValue = parseInt(b.specifications.design.weight) || 0;
+          break;
+        default:
+          aValue = a.price;
+          bValue = b.price;
+      }
+      
+      if (sortOrder === 'asc') {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+  }, [products, sortBy, sortOrder]);
 
   return (
     <div className={`app-container ${className}`}>
@@ -380,4 +384,15 @@ export function ComparisonTable({
       </main>
     </div>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison function for performance
+  return (
+    prevProps.products === nextProps.products &&
+    prevProps.comparisonView === nextProps.comparisonView &&
+    prevProps.sortBy === nextProps.sortBy &&
+    prevProps.sortOrder === nextProps.sortOrder &&
+    prevProps.className === nextProps.className
+  );
+});
+
+ComparisonTable.displayName = 'ComparisonTable';

@@ -6,9 +6,9 @@ import { ArrowLeft } from 'lucide-react';
 import { EnhancedProduct, Product } from '@/types';
 import { ProductHero } from '@/components/ProductHero';
 import ProductTabsClient from '@/components/ProductTabsClient';
-import { ProductBreadcrumbs } from '@/components/ProductBreadcrumbs';
+import { ProductBreadcrumbsSuspense as ProductBreadcrumbs } from '@/components/ProductBreadcrumbsSuspense';
 import { ProductNavigation } from '@/components/ProductNavigation';
-import { Navigation } from '@/components/Navigation';
+import { NavigationSimple } from '@/components/NavigationSimple';
 import { ComparisonCart } from '@/components/ComparisonCart';
 import { QuickView } from '@/components/QuickView';
 import { useComparison } from '@/contexts/ComparisonContext';
@@ -50,13 +50,13 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
 
   return (
     <div className="app-container">
-      <Navigation />
+      <NavigationSimple />
       <ComparisonCart onQuickView={handleQuickView} />
       
       {/* Breadcrumbs */}
       <ProductBreadcrumbs product={product} />
       
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 py-8 space-y-12 relative z-10">
         {/* Back Navigation */}
         <Link 
           href="/" 

@@ -67,7 +67,7 @@ export default function ProductTabsClient({ product }: ProductTabsClientProps) {
     <div className="w-full">
       {/* Enhanced Tab Navigation */}
       <div className="border-b border-white/10 mb-8">
-        <nav className="flex space-x-8 overflow-x-auto">
+        <nav className="flex flex-wrap gap-4 lg:space-x-8 lg:gap-0 overflow-x-auto">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
@@ -76,20 +76,21 @@ export default function ProductTabsClient({ product }: ProductTabsClientProps) {
                 variant="ghost"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 text-sm font-medium border-b-2 border-transparent transition-all whitespace-nowrap",
-                  "hover:text-white hover:border-white/30",
+                  "flex items-center gap-2 px-3 py-2 text-sm font-medium border-b-2 border-transparent transition-all",
+                  "hover:text-white hover:border-white/30 min-w-fit",
                   activeTab === tab.id
                     ? "text-white border-blue-400 bg-white/5"
                     : "text-white/70"
                 )}
               >
                 <Icon className="w-4 h-4" />
-                <div className="text-left">
+                <div className="text-left hidden sm:block">
                   <div>{tab.label}</div>
-                  <div className="text-xs text-white/50 hidden sm:block">
+                  <div className="text-xs text-white/50 hidden lg:block">
                     {tab.description}
                   </div>
                 </div>
+                <span className="sm:hidden">{tab.label}</span>
               </Button>
             );
           })}
@@ -97,7 +98,7 @@ export default function ProductTabsClient({ product }: ProductTabsClientProps) {
       </div>
 
       {/* Tab Content */}
-      <div className="tab-content">
+      <div className="tab-content mt-8 clear-both">
         {activeTab === 'specs' && (
           <ProductSpecifications product={product} />
         )}

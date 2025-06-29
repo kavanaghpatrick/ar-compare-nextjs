@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import arGlassesData from '@/data/products';
+import arGlassesData from '@/data/products'; // This imports enhanced data by default
+import { ApiErrorResponse } from '@/types';
+import logger from '@/lib/logger';
 
 // GET /api/products/[id] - Get single product by ID
 export async function GET(
@@ -12,18 +14,20 @@ export async function GET(
     const product = arGlassesData.find(p => p.id === id);
 
     if (!product) {
-      return NextResponse.json(
-        { error: 'Product not found' },
-        { status: 404 }
-      );
+      const errorResponse: ApiErrorResponse = {
+        success: false,
+        error: 'Product not found'
+      };
+      return NextResponse.json(errorResponse, { status: 404 });
     }
 
     return NextResponse.json(product);
   } catch (error) {
-    console.error('Error fetching product:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch product' },
-      { status: 500 }
-    );
+    logger.error('Error fetching product:', error);
+    const errorResponse: ApiErrorResponse = {
+      success: false,
+      error: 'Failed to fetch product'
+    };
+    return NextResponse.json(errorResponse, { status: 500 });
   }
 }

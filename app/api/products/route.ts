@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import arGlassesData from '@/data/products';
-import { EnhancedProduct } from '@/types';
+import { arGlassesData } from '@/data/products'; // Import basic product data
+import { Product, ApiResponse, ProductsApiResponse, ApiErrorResponse } from '@/types';
+import logger from '@/lib/logger';
 
 // GET /api/products - Get all products
 export async function GET(request: Request) {
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
     const limit = searchParams.get('limit');
     const offset = searchParams.get('offset');
 
-    let filteredProducts: EnhancedProduct[] = [...arGlassesData];
+    let filteredProducts: Product[] = [...arGlassesData];
 
     // Apply filters
     if (category) {
@@ -81,7 +82,7 @@ export async function GET(request: Request) {
       paginatedProducts = filteredProducts.slice(offsetNum, offsetNum + limitNum);
     }
 
-    return NextResponse.json({
+    const response: ProductsApiResponse = {
       products: paginatedProducts,
       total: filteredProducts.length,
       count: paginatedProducts.length,
@@ -93,12 +94,16 @@ export async function GET(request: Request) {
         sortBy,
         sortOrder
       }
-    });
+    };
+    
+    return NextResponse.json(response);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch products' },
-      { status: 500 }
-    );
+    logger.error('Error fetching products:', error);
+    const errorResponse: ApiErrorResponse = {
+      success: false,
+      error: 'Failed to fetch products'
+    };
+    
+    return NextResponse.json(errorResponse, { status: 500 });
   }
 }

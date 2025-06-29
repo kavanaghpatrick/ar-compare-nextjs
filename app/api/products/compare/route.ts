@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import arGlassesData from '@/data/products';
 import { EnhancedProduct } from '@/types';
+import logger from '@/lib/logger';
 
 interface CompareRequest {
   productIds: string[];
@@ -104,7 +105,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error('Error comparing products:', error);
+    logger.error('Error comparing products:', error);
     return NextResponse.json(
       { error: 'Failed to compare products' },
       { status: 500 }

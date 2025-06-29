@@ -11,11 +11,14 @@ import { ProductCard } from '@/components/ProductCard';
 import { Product } from '@/types';
 import { Search, Zap, DollarSign, Star, Target } from 'lucide-react';
 
+type Priority = 'price' | 'display' | 'audio' | 'features' | 'build';
+type TechnicalExpertise = 'beginner' | 'intermediate' | 'advanced';
+
 interface UserRequirements {
   budget: number;
   primaryUseCase: string;
-  technicalExpertise: 'beginner' | 'intermediate' | 'advanced';
-  priorities: ('price' | 'display' | 'audio' | 'features' | 'build')[];
+  technicalExpertise: TechnicalExpertise;
+  priorities: Priority[];
 }
 
 interface RecommendationResult {
@@ -57,7 +60,7 @@ const ProductRecommendationEngine: React.FC = () => {
     setRequirements(prev => ({
       ...prev,
       priorities: checked
-        ? [...prev.priorities, priority as any]
+        ? [...prev.priorities, priority as Priority]
         : prev.priorities.filter(p => p !== priority)
     }));
   };
@@ -172,7 +175,7 @@ const ProductRecommendationEngine: React.FC = () => {
             <label className="block text-sm font-medium">Technical Expertise</label>
             <Select 
               value={requirements.technicalExpertise} 
-              onValueChange={(value: any) => setRequirements(prev => ({ ...prev, technicalExpertise: value }))}
+              onValueChange={(value) => setRequirements(prev => ({ ...prev, technicalExpertise: value as TechnicalExpertise }))}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -197,7 +200,7 @@ const ProductRecommendationEngine: React.FC = () => {
                   <div key={priority.value} className="flex items-center space-x-3">
                     <Checkbox
                       id={priority.value}
-                      checked={requirements.priorities.includes(priority.value as any)}
+                      checked={requirements.priorities.includes(priority.value as Priority)}
                       onCheckedChange={(checked) => 
                         handlePriorityChange(priority.value, checked as boolean)
                       }

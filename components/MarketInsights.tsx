@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { TrendingUp, TrendingDown, Award, DollarSign, Zap, Users, Target, BarChart3 } from 'lucide-react';
+import logger from '@/lib/logger';
 
 // Utility functions
 const formatProductName = (productId: string) => {
@@ -126,7 +127,7 @@ const MarketInsights: React.FC<MarketInsightsProps> = ({
         }
       } catch (err) {
         setError('Failed to load market insights');
-        console.error('Market insights error:', err);
+        logger.error('Market insights error:', err);
       } finally {
         setLoading(false);
       }

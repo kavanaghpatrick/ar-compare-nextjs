@@ -263,7 +263,7 @@ export function generateEnhancedProductMetadata(product: EnhancedProduct, path: 
     openGraph: {
       title,
       description,
-      type: 'product',
+      type: 'website',
       url: `${siteUrl}${path}`,
       images: [
         {

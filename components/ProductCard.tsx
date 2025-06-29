@@ -1,4 +1,5 @@
-import { Eye, Zap, Volume2, Weight, ExternalLink, Search } from 'lucide-react';
+import React from 'react';
+import { Eye, Zap, Volume2, Weight, ExternalLink, Search, Crown, Star, DollarSign, Gamepad2, Briefcase, Glasses, Wrench, Target } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '@/types';
 
@@ -12,7 +13,8 @@ interface ProductCardProps {
   context?: 'search' | 'category' | 'main' | 'related';
 }
 
-export function ProductCard({ 
+// Memoized ProductCard component for performance
+export const ProductCard = React.memo(({ 
   product, 
   onCompare, 
   onShowDetails, 
@@ -20,41 +22,44 @@ export function ProductCard({
   isInComparison = false,
   showBreadcrumbs = false,
   context = 'main'
-}: ProductCardProps) {
+}: ProductCardProps) => {
   const getCategoryIcon = (category: string) => {
+    const iconProps = { size: 16, className: "category-icon-style" };
+    
     switch (category) {
       case 'Premium':
+        return <Crown {...iconProps} style={{ color: '#fbbf24' }} />;
       case 'Mid-range':
-        return '⚡';
+        return <Star {...iconProps} style={{ color: '#3b82f6' }} />;
       case 'Budget':
-        return '💰';
+        return <DollarSign {...iconProps} style={{ color: '#10b981' }} />;
       case 'Gaming':
-        return '🎮';
+        return <Gamepad2 {...iconProps} style={{ color: '#8b5cf6' }} />;
       case 'Professional':
-        return '💼';
+        return <Briefcase {...iconProps} style={{ color: '#6b7280' }} />;
       case 'Everyday':
-        return '👓';
+        return <Glasses {...iconProps} style={{ color: '#06b6d4' }} />;
       case 'Developer':
-        return '🔧';
+        return <Wrench {...iconProps} style={{ color: '#f59e0b' }} />;
       case 'Specialized':
-        return '🎯';
+        return <Target {...iconProps} style={{ color: '#ef4444' }} />;
       default:
-        return '👓';
+        return <Glasses {...iconProps} style={{ color: '#06b6d4' }} />;
     }
   };
 
   return (
     <div className="product-card" role="article" aria-labelledby={`product-title-${product.id}`}>
-      <div className="product-header">
+      <h2 id={`product-title-${product.id}`} className="product-title">{product.fullName}</h2>
+      
+      <div className="product-category-indicator">
         <div className="product-icon">
           {getCategoryIcon(product.category)}
         </div>
-        <span style={{ fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+        <span style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.6)' }}>
           {product.category}
         </span>
       </div>
-      
-      <h3 className="product-title">{product.fullName}</h3>
       <p className="product-description">{product.description}</p>
       
       <div className="product-price">
@@ -73,8 +78,8 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="rating">
-        <div className="stars">
+      <div className="rating" aria-label={`Rating: ${product.rating} out of 5 stars`}>
+        <div className="stars" role="img" aria-hidden="true">
           {[...Array(5)].map((_, i) => (
             <span
               key={i}
@@ -93,20 +98,20 @@ export function ProductCard({
       </div>
 
       <div className="specs-grid">
-        <div className="spec-item">
-          <Eye size={14} />
+        <div className="spec-item" aria-label={`Field of view: ${product.specifications.display.fov}`}>
+          <Eye size={14} aria-hidden="true" />
           <span>{product.specifications.display.fov}</span>
         </div>
-        <div className="spec-item">
-          <Zap size={14} />
+        <div className="spec-item" aria-label={`Brightness: ${product.specifications.display.brightness}`}>
+          <Zap size={14} aria-hidden="true" />
           <span>{product.specifications.display.brightness}</span>
         </div>
-        <div className="spec-item">
-          <Volume2 size={14} />
+        <div className="spec-item" aria-label={`Audio: ${product.specifications.audio.speakers}`}>
+          <Volume2 size={14} aria-hidden="true" />
           <span>{product.specifications.audio.speakers}</span>
         </div>
-        <div className="spec-item">
-          <Weight size={14} />
+        <div className="spec-item" aria-label={`Weight: ${product.specifications.design.weight}`}>
+          <Weight size={14} aria-hidden="true" />
           <span>{product.specifications.design.weight}</span>
         </div>
       </div>
@@ -166,4 +171,14 @@ export function ProductCard({
       </div>
     </div>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison function for better performance
+  return (
+    prevProps.product.id === nextProps.product.id &&
+    prevProps.isInComparison === nextProps.isInComparison &&
+    prevProps.showBreadcrumbs === nextProps.showBreadcrumbs &&
+    prevProps.context === nextProps.context
+  );
+});
+
+ProductCard.displayName = 'ProductCard';

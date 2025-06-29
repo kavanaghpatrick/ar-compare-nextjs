@@ -3,6 +3,20 @@
 import { useEffect, useMemo } from 'react';
 import { EnhancedProduct } from '@/types';
 
+// Type declarations for Performance API - commented out as no longer needed
+// interface PerformanceEventTiming extends PerformanceEntry {
+//   processingStart: number;
+//   startTime: number;
+// }
+
+// interface LayoutShift extends PerformanceEntry {
+//   hadRecentInput: boolean;
+//   value: number;
+// }
+
+// Extend window to include gtag
+// Global declarations moved to Analytics.tsx
+
 interface PerformanceOptimizationProps {
   product?: EnhancedProduct;
   products?: EnhancedProduct[];
@@ -10,6 +24,7 @@ interface PerformanceOptimizationProps {
   enableLazyLoading?: boolean;
   enableCriticalCSS?: boolean;
   enableResourceHints?: boolean;
+  disableInDev?: boolean; // New flag to disable in development
 }
 
 export function PerformanceOptimization({
@@ -18,8 +33,16 @@ export function PerformanceOptimization({
   pageType,
   enableLazyLoading = true,
   enableCriticalCSS = true,
-  enableResourceHints = true
+  enableResourceHints = true,
+  disableInDev = true
 }: PerformanceOptimizationProps) {
+  // Check if we're in development mode
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
+  // Early return if disabled in development
+  if (isDevelopment && disableInDev) {
+    return null;
+  }
 
   // Critical CSS injection for above-the-fold content
   const criticalCSS = useMemo(() => {
@@ -62,264 +85,162 @@ export function PerformanceOptimization({
     return baseCriticalCSS + (pageSpecificCSS[pageType] || '');
   }, [pageType, enableCriticalCSS]);
 
-  // Resource hints and preload directives
+  // SIMPLIFIED: Resource hints - only critical preconnections
   const resourceHints = useMemo(() => {
     if (!enableResourceHints) return [];
 
-    const hints = [
-      // Preconnect to external domains
+    const hints: Array<{
+      rel: string;
+      href: string;
+      as?: string;
+      type?: string;
+      crossOrigin?: 'anonymous' | 'use-credentials';
+    }> = [
+      // Only critical preconnections
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-      { rel: 'preconnect', href: 'https://api.placeholder.com' },
-      
-      // DNS prefetch for likely destinations
-      { rel: 'dns-prefetch', href: 'https://amazon.com' },
-      { rel: 'dns-prefetch', href: 'https://www.google-analytics.com' },
-      { rel: 'dns-prefetch', href: 'https://cdnjs.cloudflare.com' },
-      
-      // Preload critical fonts
-      { 
-        rel: 'preload', 
-        href: '/fonts/geist-sans-400.woff2', 
-        as: 'font', 
-        type: 'font/woff2', 
-        crossOrigin: 'anonymous' 
-      },
-      { 
-        rel: 'preload', 
-        href: '/fonts/geist-sans-700.woff2', 
-        as: 'font', 
-        type: 'font/woff2', 
-        crossOrigin: 'anonymous' 
-      }
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' as const },
     ];
 
-    // Page-specific preloads
-    if (pageType === 'product' && product) {
-      hints.push({
-        rel: 'preload',
-        href: product.image,
-        as: 'image',
-        type: 'image/jpeg'
-      });
-    }
-
-    if (pageType === 'home' || pageType === 'category') {
-      // Preload first few product images
-      products.slice(0, 3).forEach(prod => {
-        hints.push({
-          rel: 'preload',
-          href: prod.image,
-          as: 'image',
-          type: 'image/jpeg'
-        });
-      });
-    }
+    // REMOVED: Heavy page-specific preloads and DNS prefetching
+    // These can be lazy-loaded when actually needed
 
     return hints;
-  }, [enableResourceHints, pageType, product, products]);
+  }, [enableResourceHints]);
 
-  // Lazy loading intersection observer setup
+  // COMMENTED OUT: Lazy loading intersection observer setup
+  // Heavy operations moved to lazy-loaded utilities
+  // useEffect(() => {
+  //   if (!enableLazyLoading || typeof window === 'undefined') return;
+
+  //   const imageObserver = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach(entry => {
+  //         if (entry.isIntersecting) {
+  //           const img = entry.target as HTMLImageElement;
+  //           const dataSrc = img.getAttribute('data-src');
+  //           if (dataSrc) {
+  //             img.src = dataSrc;
+  //             img.removeAttribute('data-src');
+  //             img.classList.remove('lazy-loading');
+  //             img.classList.add('lazy-loaded');
+  //             imageObserver.unobserve(img);
+  //           }
+  //         }
+  //       });
+  //     },
+  //     {
+  //       rootMargin: '50px 0px', // Start loading 50px before entering viewport
+  //       threshold: 0.1
+  //     }
+  //   );
+
+  //   // Observe all lazy images
+  //   const lazyImages = document.querySelectorAll('img[data-src]');
+  //   lazyImages.forEach(img => imageObserver.observe(img));
+
+  //   // Component/section lazy loading
+  //   const componentObserver = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach(entry => {
+  //         if (entry.isIntersecting) {
+  //           const element = entry.target as HTMLElement;
+  //           element.classList.add('component-loaded');
+  //           element.classList.remove('component-loading');
+  //           componentObserver.unobserve(element);
+  //         }
+  //       });
+  //     },
+  //     {
+  //       rootMargin: '100px 0px',
+  //       threshold: 0.1
+  //     }
+  //   );
+
+  //   // Observe lazy components
+  //   const lazyComponents = document.querySelectorAll('[data-lazy-component]');
+  //   lazyComponents.forEach(component => componentObserver.observe(component));
+
+  //   return () => {
+  //     imageObserver.disconnect();
+  //     componentObserver.disconnect();
+  //   };
+  // }, [enableLazyLoading]);
+
+  // SIMPLIFIED: Prefetch logic moved to lazy-loaded module
+  // Only critical prefetching remains
+  // useEffect(() => {
+  //   if (typeof window === 'undefined') return;
+  //   // Prefetching logic can be lazy-loaded when needed
+  // }, [pageType, product, products]);
+
+  // REMOVED: Performance monitoring and reporting
+  // This heavy monitoring code has been removed to reduce initialization overhead
+  // Can be lazy-loaded separately if needed for production monitoring
+
+  // Lazy load heavy operations on demand
   useEffect(() => {
-    if (!enableLazyLoading || typeof window === 'undefined') return;
+    // Only load heavy operations if not in development or if explicitly enabled
+    if (isDevelopment && disableInDev) return;
 
-    const imageObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target as HTMLImageElement;
-            const dataSrc = img.getAttribute('data-src');
-            if (dataSrc) {
-              img.src = dataSrc;
-              img.removeAttribute('data-src');
-              img.classList.remove('lazy-loading');
-              img.classList.add('lazy-loaded');
-              imageObserver.unobserve(img);
-            }
-          }
-        });
-      },
-      {
-        rootMargin: '50px 0px', // Start loading 50px before entering viewport
-        threshold: 0.1
-      }
-    );
+    // Track cleanup functions
+    const cleanupFunctions: Array<() => void> = [];
 
-    // Observe all lazy images
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    lazyImages.forEach(img => imageObserver.observe(img));
-
-    // Component/section lazy loading
-    const componentObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const element = entry.target as HTMLElement;
-            element.classList.add('component-loaded');
-            element.classList.remove('component-loading');
-            componentObserver.unobserve(element);
-          }
-        });
-      },
-      {
-        rootMargin: '100px 0px',
-        threshold: 0.1
-      }
-    );
-
-    // Observe lazy components
-    const lazyComponents = document.querySelectorAll('[data-lazy-component]');
-    lazyComponents.forEach(component => componentObserver.observe(component));
-
-    return () => {
-      imageObserver.disconnect();
-      componentObserver.disconnect();
-    };
-  }, [enableLazyLoading]);
-
-  // Prefetch next likely pages
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const prefetchUrls: string[] = [];
-
-    // Page-specific prefetching strategy
-    switch (pageType) {
-      case 'home':
-        // Prefetch top-rated products
-        const topProducts = products
-          .sort((a, b) => b.rating - a.rating)
-          .slice(0, 3);
-        topProducts.forEach(prod => {
-          prefetchUrls.push(`/products/${prod.id}`);
-        });
-        prefetchUrls.push('/compare');
-        break;
-
-      case 'product':
-        if (product) {
-          // Prefetch similar products
-          const similarProducts = products
-            .filter(p => p.id !== product.id && p.brand === product.brand)
-            .slice(0, 2);
-          similarProducts.forEach(prod => {
-            prefetchUrls.push(`/products/${prod.id}`);
-          });
-          
-          // Prefetch comparison page
-          prefetchUrls.push('/compare');
-          
-          // Prefetch brand page
-          prefetchUrls.push(`/brand/${product.brand.toLowerCase().replace(/\s+/g, '-')}`);
+    // Lazy load performance utilities after initial render
+    const loadPerformanceUtilities = async () => {
+      try {
+        const utilities = await import('./PerformanceOptimization.lazy');
+        
+        if (enableLazyLoading) {
+          const cleanup = utilities.initializeLazyImageLoading();
+          if (cleanup) cleanupFunctions.push(cleanup);
         }
-        break;
+        
+        // Only initialize heavy operations in production
+        if (!isDevelopment) {
+          // Delay prefetching to avoid initial load impact
+          setTimeout(() => {
+            const cleanup = utilities.initializePrefetching(pageType, product, products);
+            if (cleanup) cleanupFunctions.push(cleanup);
+          }, 3000);
+          
+          // Delay performance monitoring even more
+          setTimeout(() => {
+            utilities.initializePerformanceMonitoring();
+          }, 5000);
+          
+          // Advanced resource hints after everything else
+          setTimeout(() => {
+            const cleanup = utilities.initializeAdvancedResourceHints(pageType, product, products);
+            if (cleanup) cleanupFunctions.push(cleanup);
+          }, 2000);
+        }
+      } catch (error) {
+        console.warn('Failed to load performance utilities:', error);
+      }
+    };
 
-      case 'category':
-        // Prefetch individual products in category
-        products.slice(0, 5).forEach(prod => {
-          prefetchUrls.push(`/products/${prod.id}`);
-        });
-        break;
-
-      case 'comparison':
-        // Prefetch individual product pages from comparison
-        products.forEach(prod => {
-          prefetchUrls.push(`/products/${prod.id}`);
-        });
-        break;
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadPerformanceUtilities());
+    } else {
+      setTimeout(loadPerformanceUtilities, 1000);
     }
 
-    // Implement prefetching with requestIdleCallback
-    const prefetchLinks = () => {
-      prefetchUrls.forEach(url => {
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = url;
-        link.as = 'document';
-        document.head.appendChild(link);
+    // Return cleanup function
+    return () => {
+      cleanupFunctions.forEach(cleanup => {
+        try {
+          cleanup();
+        } catch (error) {
+          // Ignore cleanup errors
+        }
       });
     };
-
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(prefetchLinks);
-    } else {
-      setTimeout(prefetchLinks, 2000);
-    }
-  }, [pageType, product, products]);
-
-  // Performance monitoring and reporting
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    // Core Web Vitals monitoring
-    const reportWebVitals = () => {
-      // LCP (Largest Contentful Paint)
-      if ('PerformanceObserver' in window) {
-        const lcpObserver = new PerformanceObserver((entryList) => {
-          const entries = entryList.getEntries();
-          const lastEntry = entries[entries.length - 1];
-          console.log('LCP:', lastEntry.startTime);
-          
-          // Report to analytics (implementation depends on your analytics setup)
-          if (window.gtag) {
-            window.gtag('event', 'web_vitals', {
-              name: 'LCP',
-              value: Math.round(lastEntry.startTime),
-              event_category: 'performance'
-            });
-          }
-        });
-        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-
-        // FID (First Input Delay) 
-        const fidObserver = new PerformanceObserver((entryList) => {
-          entryList.getEntries().forEach((entry) => {
-            console.log('FID:', entry.processingStart - entry.startTime);
-            
-            if (window.gtag) {
-              window.gtag('event', 'web_vitals', {
-                name: 'FID',
-                value: Math.round(entry.processingStart - entry.startTime),
-                event_category: 'performance'
-              });
-            }
-          });
-        });
-        fidObserver.observe({ entryTypes: ['first-input'] });
-
-        // CLS (Cumulative Layout Shift)
-        let clsValue = 0;
-        const clsObserver = new PerformanceObserver(function(entryList) {
-          for (const entry of entryList.getEntries()) {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value;
-            }
-          }
-          console.log('CLS:', clsValue);
-          
-          if (window.gtag) {
-            window.gtag('event', 'web_vitals', {
-              name: 'CLS', 
-              value: Math.round(clsValue * 1000),
-              event_category: 'performance'
-            });
-          }
-        });
-        clsObserver.observe({ entryTypes: ['layout-shift'] });
-      }
-    };
-
-    // Report after page load
-    if (document.readyState === 'complete') {
-      reportWebVitals();
-    } else {
-      window.addEventListener('load', reportWebVitals);
-    }
-  }, []);
+  }, [isDevelopment, disableInDev, enableLazyLoading, pageType, product, products]);
 
   return (
     <>
-      {/* Critical CSS injection */}
+      {/* Critical CSS injection - always keep this for fast initial render */}
       {enableCriticalCSS && criticalCSS && (
         <style
           dangerouslySetInnerHTML={{
@@ -328,33 +249,14 @@ export function PerformanceOptimization({
         />
       )}
 
-      {/* Resource hints */}
+      {/* Minimal resource hints - only critical ones */}
       {resourceHints.map((hint, index) => (
         <link key={`resource-hint-${index}`} {...hint} />
       ))}
 
-      {/* Cache optimization headers via meta tags */}
-      <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-      <meta httpEquiv="Expires" content={new Date(Date.now() + 31536000 * 1000).toUTCString()} />
+      {/* REMOVED: Cache optimization headers - can interfere with development */}
       
-      {/* Service Worker registration for caching */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            if ('serviceWorker' in navigator) {
-              window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  console.log('SW registered: ', registration);
-                }).catch(function(registrationError) {
-                  console.log('SW registration failed: ', registrationError);
-                });
-              });
-            }
-          `
-        }}
-      />
-
-      {/* Image lazy loading CSS */}
+      {/* Minimal lazy loading CSS - keep for visual smoothness */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -381,7 +283,8 @@ export function PerformanceOptimization({
   );
 }
 
-// Utility function for lazy loading images
+// Simplified utility function for lazy loading images
+// Now uses native browser lazy loading instead of intersection observer
 export const LazyImage = ({ 
   src, 
   alt, 
@@ -397,58 +300,32 @@ export const LazyImage = ({
   height?: number;
   priority?: boolean;
 }) => {
-  if (priority) {
-    // Load immediately for critical images
-    return (
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        width={width}
-        height={height}
-        loading="eager"
-      />
-    );
-  }
-
+  // Use native lazy loading - much simpler and performant
   return (
     <img
-      data-src={src}
+      src={src}
       alt={alt}
-      className={`${className} lazy-loading`}
+      className={className}
       width={width}
       height={height}
-      loading="lazy"
-      // Placeholder while loading
-      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23f0f0f0'/%3E%3C/svg%3E"
+      loading={priority ? "eager" : "lazy"}
     />
   );
 };
 
-// Utility component for lazy loading sections
+// Simplified utility component for lazy loading sections
+// Removed intersection observer dependency
 export const LazySection = ({ 
   children, 
-  className = '',
-  threshold = 0.1 
+  className = ''
 }: {
   children: React.ReactNode;
   className?: string;
-  threshold?: number;
 }) => {
+  // Simple div wrapper - intersection observer can be added via lazy module if needed
   return (
-    <div 
-      className={`${className} component-loading`}
-      data-lazy-component
-      data-threshold={threshold}
-    >
+    <div className={className}>
       {children}
     </div>
   );
 };
-
-// Global performance optimization utilities
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}

@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Filter } from 'lucide-react';
 
 interface FilterBarProps {
@@ -21,12 +22,13 @@ const defaultCategories = [
   'Specialized'
 ];
 
-export function FilterBar({ 
+// Memoized FilterBar component for performance
+export const FilterBar = React.memo(({ 
   filterCategory, 
   onFilterChange, 
   categories = defaultCategories,
   className = ""
-}: FilterBarProps) {
+}: FilterBarProps) => {
   return (
     <div className={`filter-container ${className}`}>
       <div className="flex items-center gap-2">
@@ -48,4 +50,13 @@ export function FilterBar({
       </div>
     </div>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison function
+  return (
+    prevProps.filterCategory === nextProps.filterCategory &&
+    prevProps.categories === nextProps.categories &&
+    prevProps.className === nextProps.className
+  );
+});
+
+FilterBar.displayName = 'FilterBar';

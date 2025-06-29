@@ -17,18 +17,22 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     if (isOpen) {
       setIsVisible(true);
+      // Store original overflow value
+      const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+      
+      return () => {
+        // Restore original overflow value
+        document.body.style.overflow = originalOverflow;
+      };
     } else {
-      document.body.style.overflow = '';
       const timer = setTimeout(() => setIsVisible(false), 300);
       return () => clearTimeout(timer);
     }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, [isOpen]);
 
   const handleToggleComparison = () => {

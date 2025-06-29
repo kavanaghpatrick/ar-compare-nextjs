@@ -14,7 +14,7 @@ interface ComparisonCartProps {
   position?: 'fixed' | 'sticky';
 }
 
-export function ComparisonCart({ 
+function ComparisonCart({ 
   onQuickView, 
   isMinimized = false, 
   position = 'fixed' 
@@ -221,3 +221,5 @@ export function useComparisonCartState() {
     maxItems: 6
   };
 }
+export default ComparisonCart;
+export { ComparisonCart };

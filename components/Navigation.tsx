@@ -7,11 +7,12 @@ import { useComparison } from '@/contexts/ComparisonContext';
 import { usePathname } from 'next/navigation';
 import { Search, ChevronDown, Menu, X, BarChart3, Grid, Settings } from 'lucide-react';
 import arGlassesData from '@/data/products';
+import { useNavigationGuard } from '@/hooks/useNavigationGuard';
 
 export function Navigation() {
   const { comparison } = useComparison();
   const pathname = usePathname();
-  const router = useRouter();
+  const guardedRouter = useNavigationGuard();
   const [searchTerm, setSearchTerm] = useState('');
   const [showCategories, setShowCategories] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -23,45 +24,92 @@ export function Navigation() {
   // Get unique categories
   const categories = Array.from(new Set(arGlassesData.map(product => product.category)));
 
-  // Handle search
+  // Handle search with debouncing
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/?search=${encodeURIComponent(searchTerm.trim())}`);
-      setSearchTerm('');
+      try {
+        guardedRouter.push(`/?search=${encodeURIComponent(searchTerm.trim())}`);
+        setSearchTerm('');
+      } catch (error) {
+        console.error('Navigation error:', error);
+      }
     }
   };
 
   // Handle click outside to close dropdowns
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        // Handle search dropdown if needed
-      }
-      if (categoriesRef.current && !categoriesRef.current.contains(event.target as Node)) {
-        setShowCategories(false);
-      }
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setShowUserMenu(false);
+      if (!event.target || typeof document === 'undefined') return;
+      
+      try {
+        const target = event.target as HTMLElement;
+        
+        // Don't interfere with Next.js dev tools
+        if (target.closest('[data-nextjs-dialog-overlay]') || 
+            target.closest('[data-nextjs-error-overlay]') ||
+            target.closest('[data-nextjs-inspector]') ||
+            target.closest('#__next-dev-tools-indicator')) {
+          return;
+        }
+        
+        if (categoriesRef.current && !categoriesRef.current.contains(target)) {
+          setShowCategories(false);
+        }
+        if (userMenuRef.current && !userMenuRef.current.contains(target)) {
+          setShowUserMenu(false);
+        }
+      } catch (error) {
+        // Ignore DOM errors during cleanup
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    // Handle keyboard navigation
+    const handleKeyDown = (event: KeyboardEvent) => {
+      try {
+        if (event.key === 'Escape') {
+          setShowCategories(false);
+          setShowUserMenu(false);
+          setShowMobileMenu(false);
+        }
+      } catch (error) {
+        // Ignore keyboard errors during cleanup
+      }
+    };
+
+    // Add passive listeners for better performance
+    if (typeof document !== 'undefined') {
+      document.addEventListener('mousedown', handleClickOutside, { passive: true });
+      document.addEventListener('keydown', handleKeyDown, { passive: true });
+    }
+    
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleKeyDown);
+      }
+    };
   }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
-    setShowMobileMenu(false);
-    setShowCategories(false);
-    setShowUserMenu(false);
+    try {
+      setShowMobileMenu(false);
+      setShowCategories(false);
+      setShowUserMenu(false);
+    } catch (error) {
+      // Ignore state update errors during route changes
+    }
   }, [pathname]);
 
   return (
     <header className="header">
       <div className="header-container">
         {/* Logo */}
-        <Link href="/" className="header-title">
+        <Link 
+          href="/" 
+          className="header-title"
+        >
           AR Compare
         </Link>
 
@@ -109,15 +157,22 @@ export function Navigation() {
             <button
               className="nav-dropdown-trigger"
               onClick={() => setShowCategories(!showCategories)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setShowCategories(!showCategories);
+                }
+              }}
               aria-expanded={showCategories}
               aria-haspopup="true"
+              aria-controls="categories-menu"
             >
               Categories
               <ChevronDown size={16} className={`dropdown-icon ${showCategories ? 'open' : ''}`} />
             </button>
             {showCategories && (
-              <div className="nav-dropdown-menu">
-                <Link href="/" className="dropdown-item">
+              <div id="categories-menu" className="nav-dropdown-menu" role="menu">
+                <Link href="/" className="dropdown-item" role="menuitem">
                   All Products
                 </Link>
                 {categories.map(category => (
@@ -125,6 +180,7 @@ export function Navigation() {
                     key={category}
                     href={`/?category=${encodeURIComponent(category)}`}
                     className="dropdown-item"
+                    role="menuitem"
                   >
                     {category}
                   </Link>
@@ -142,9 +198,9 @@ export function Navigation() {
             Market Analysis
           </Link>
           
-          <a href="#brands" className="nav-link">Brands</a>
-          <a href="#reviews" className="nav-link">Reviews</a>
-          <a href="#news" className="nav-link">News</a>
+          <Link href="/brand" className="nav-link">Brands</Link>
+          <Link href="/reviews" className="nav-link">Reviews</Link>
+          <Link href="/news" className="nav-link">News</Link>
         </nav>
 
         {/* Header Actions */}
@@ -174,7 +230,7 @@ export function Navigation() {
               <Settings size={20} />
             </button>
             {showUserMenu && (
-              <div className="user-dropdown-menu">
+              <div className="user-dropdown-menu" role="menu">
                 <button className="dropdown-item">Dark Mode</button>
                 <button className="dropdown-item">Preferences</button>
                 <button className="dropdown-item">Help</button>

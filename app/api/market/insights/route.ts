@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { marketAnalysis } from '@/data/market-analysis';
 import { getTopProducts, compareProducts, analyzeMarketPosition } from '@/lib/market-utils';
+import logger from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
   try {
@@ -113,7 +114,7 @@ export async function GET(request: NextRequest) {
         }, { status: 400 });
     }
   } catch (error) {
-    console.error('Market insights API error:', error);
+    logger.error('Market insights API error:', error);
     return NextResponse.json({
       success: false,
       error: 'Internal server error'
@@ -150,7 +151,7 @@ export async function POST(request: NextRequest) {
         }, { status: 400 });
     }
   } catch (error) {
-    console.error('Market insights POST API error:', error);
+    logger.error('Market insights POST API error:', error);
     return NextResponse.json({
       success: false,
       error: 'Internal server error'
