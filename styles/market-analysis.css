@@ -1,0 +1,208 @@
+/* Market Analysis Enhanced Styles */
+
+/* Quick Navigation */
+.popular-searches {
+  @apply flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-gray-200;
+}
+
+.popular-label {
+  @apply text-sm text-gray-500 mr-2;
+}
+
+.popular-tag {
+  @apply px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors;
+}
+
+/* Enhanced Category Cards */
+.category-cards {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.category-card {
+  @apply flex flex-col items-center p-4 border-2 border-gray-200 rounded-xl bg-white hover:border-blue-300 hover:shadow-lg transition-all duration-200 text-left;
+}
+
+.category-card.active {
+  @apply border-blue-500 bg-blue-50 shadow-lg;
+}
+
+.category-card .category-icon {
+  @apply h-6 w-6 text-gray-600 mb-2;
+}
+
+.category-card.active .category-icon {
+  @apply text-blue-600;
+}
+
+.category-name {
+  @apply font-semibold text-gray-900 block;
+}
+
+.category-description {
+  @apply text-sm text-gray-500 block;
+}
+
+.category-count {
+  @apply mt-2 px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium;
+}
+
+.category-card.active .category-count {
+  @apply bg-blue-200 text-blue-800;
+}
+
+/* Results Header */
+.results-header {
+  @apply flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl;
+}
+
+.results-header-content {
+  @apply flex-1;
+}
+
+.results-title {
+  @apply text-2xl lg:text-3xl font-bold text-gray-900 mb-2;
+}
+
+.results-subtitle {
+  @apply text-gray-600 max-w-2xl;
+}
+
+.category-filter-indicator {
+  @apply ml-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium;
+}
+
+.search-filter-indicator {
+  @apply ml-2 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium;
+}
+
+.clear-filters-btn {
+  @apply mt-4 lg:mt-0 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm font-medium;
+}
+
+/* Market Summary Specific Styles */
+.market-summary-section {
+  @apply relative;
+}
+
+.market-summary-section::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50;
+}
+
+.market-summary-section > .container {
+  @apply relative z-10;
+}
+
+/* Buying Guide Styles */
+.buying-guide-section .category-card {
+  @apply p-6 border-2 border-gray-200 rounded-xl hover:border-green-300 hover:shadow-lg transition-all duration-200;
+}
+
+.buying-guide-section .category-card:hover {
+  @apply transform -translate-y-1;
+}
+
+/* Enhanced Hero Actions */
+.hero-actions a {
+  @apply no-underline;
+}
+
+.cta-primary {
+  @apply inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg;
+}
+
+.cta-secondary {
+  @apply inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl border-2 border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200;
+}
+
+/* FAQ Enhancements */
+.faq-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.faq-item {
+  @apply bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow;
+}
+
+.faq-item h3 {
+  @apply text-lg font-semibold text-gray-900 mb-3;
+}
+
+.faq-item p {
+  @apply text-gray-700 leading-relaxed;
+}
+
+/* Section Improvements */
+section {
+  @apply scroll-mt-20;
+}
+
+/* Container Improvements */
+.container {
+  @apply max-w-7xl;
+}
+
+.search-container,
+.products-container,
+.faq-container {
+  @apply max-w-7xl mx-auto px-4;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+  .category-cards {
+    @apply grid-cols-1;
+  }
+  
+  .results-header {
+    @apply flex-col;
+  }
+  
+  .hero-actions {
+    @apply flex-col sm:flex-row gap-4;
+  }
+  
+  .cta-primary,
+  .cta-secondary {
+    @apply w-full sm:w-auto justify-center;
+  }
+}
+
+/* Animation Enhancements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.products-grid-enhanced > .product-card-wrapper {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Accessibility Improvements */
+.skip-to-content:focus {
+  @apply fixed top-4 left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded transform -translate-y-16 focus:translate-y-0 transition-transform;
+}
+
+/* Focus States */
+.category-card:focus,
+.popular-tag:focus,
+.clear-filters-btn:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Loading States */
+.loading-skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Error States */
+.error-state {
+  @apply p-6 bg-red-50 border border-red-200 rounded-lg text-red-700;
+}

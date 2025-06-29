@@ -7,6 +7,9 @@ import { SearchBar } from '@/components/SearchBar';
 import { ProductCard } from '@/components/ProductCard';
 import { NavigationSimple } from '@/components/NavigationSimple';
 import { Footer } from '@/components/Footer';
+import { MarketSummary } from '@/components/MarketSummary';
+import { BuyingGuide } from '@/components/BuyingGuide';
+import { PageNavigation, QuickNav } from '@/components/PageNavigation';
 import { Product } from '@/types';
 import { Star, CheckCircle, Users, Shield, TrendingUp, Eye, Zap, Award } from 'lucide-react';
 import ComparisonCart from '@/components/ComparisonCart';
@@ -128,10 +131,12 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
         </a>
         
         <NavigationSimple />
+        <QuickNav />
         <ComparisonCart onQuickView={handleQuickView} />
+        <PageNavigation />
         
         <main id="main-content">
-          {/* Enhanced Hero Section */}
+          {/* Streamlined Hero Section */}
           <section className="hero-enhanced">
             <div className="hero-container">
               {/* Trust Badges Row */}
@@ -155,49 +160,23 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
               </h1>
               
               <p className="hero-subtitle-enhanced">
-                Stop wasting time on confusing specs. Our AI-powered comparison engine analyzes 50+ data points 
-                to match you with the ideal AR glasses for your needs and budget.
+                Stop wasting time on confusing specs. Our expert analysis helps you find the ideal AR glasses 
+                for your needs and budget from 15+ top-rated models.
               </p>
 
-              {/* Value Propositions */}
-              <div className="value-props">
-                <div className="value-prop">
-                  <Eye className="value-icon" />
-                  <div>
-                    <h3>Expert Analysis</h3>
-                    <p>Professional reviews from AR specialists</p>
-                  </div>
-                </div>
-                <div className="value-prop">
-                  <TrendingUp className="value-icon" />
-                  <div>
-                    <h3>Real-time Pricing</h3>
-                    <p>Live Amazon pricing updated hourly</p>
-                  </div>
-                </div>
-                <div className="value-prop">
-                  <Users className="value-icon" />
-                  <div>
-                    <h3>User Reviews</h3>
-                    <p>Verified buyer experiences and ratings</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Enhanced CTAs */}
+              {/* Simplified CTAs */}
               <div className="hero-actions">
-                <button className="cta-primary">
-                  <span>Find My Perfect AR Glasses</span>
+                <a href="#buying-guide" className="cta-primary">
+                  <span>Get My Recommendation</span>
                   <Zap className="cta-icon" />
-                </button>
-                <button className="cta-secondary">
-                  <span>Compare All Models</span>
-                </button>
+                </a>
+                <a href="#products-section" className="cta-secondary">
+                  <span>Browse All Models</span>
+                </a>
               </div>
 
-              {/* Social Proof */}
+              {/* Condensed Social Proof */}
               <div className="social-proof">
-                <p className="social-proof-text">Join 50,000+ smart shoppers who found their perfect AR glasses</p>
                 <div className="rating-display">
                   <div className="stars">
                     {[...Array(5)].map((_, i) => (
@@ -210,10 +189,23 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
             </div>
           </section>
 
+          {/* Market Summary Section */}
+          <div id="market-insights"><MarketSummary className="py-16 bg-gray-50" /></div>
+
+          {/* Buying Guide Section */}
+          <BuyingGuide id="buying-guide" className="py-16 bg-white" />
+
           {/* Enhanced Search & Filter Section */}
-          <section className="search-section-enhanced">
+          <section id="search-section" className="search-section-enhanced py-16 bg-gray-50">
             <div className="search-container">
-              <h2 className="search-title">Compare {initialProducts.length} Top-Rated AR Glasses</h2>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">
+                  Explore All {initialProducts.length} AR Glasses Models
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Use our smart filters to find exactly what you're looking for, or browse by category
+                </p>
+              </div>
               
               <div className="search-bar-enhanced">
                 <SearchBar
@@ -224,28 +216,39 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                 
                 {/* Popular Searches */}
                 <div className="popular-searches">
-                  <span className="popular-label">Popular:</span>
-                  <button onClick={() => setSearchTerm('Xreal')}>Xreal</button>
-                  <button onClick={() => setSearchTerm('gaming')}>Gaming</button>
-                  <button onClick={() => setSearchTerm('lightweight')}>Lightweight</button>
+                  <span className="popular-label">Popular searches:</span>
+                  <button onClick={() => setSearchTerm('Xreal')} className="popular-tag">Xreal</button>
+                  <button onClick={() => setSearchTerm('gaming')} className="popular-tag">Gaming</button>
+                  <button onClick={() => setSearchTerm('lightweight')} className="popular-tag">Lightweight</button>
+                  <button onClick={() => setSearchTerm('budget')} className="popular-tag">Budget</button>
                 </div>
               </div>
 
-              {/* Category Filter Cards */}
+              {/* Enhanced Category Filter Cards */}
               <div className="category-filter-enhanced">
-                <h3>Shop by Category</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Browse by Price Category</h3>
                 <div className="category-cards">
                   <button
                     onClick={() => setSelectedCategory('')}
                     className={`category-card ${!selectedCategory ? 'active' : ''}`}
                   >
                     <Award className="category-icon" />
-                    <span>All AR Glasses</span>
+                    <div>
+                      <span className="category-name">All Models</span>
+                      <span className="category-description">Complete collection</span>
+                    </div>
                     <span className="category-count">{initialProducts.length}</span>
                   </button>
                   
                   {categories.map(category => {
                     const categoryCount = initialProducts.filter(p => p.category === category).length;
+                    const categoryDescription = {
+                      'Budget': 'Under $350',
+                      'Mid-Range': '$350-550',
+                      'Premium': '$550-700',
+                      'Enterprise': '$700+'
+                    }[category] || 'Various prices';
+                    
                     return (
                       <button
                         key={category}
@@ -253,7 +256,10 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                         className={`category-card ${selectedCategory === category ? 'active' : ''}`}
                       >
                         <Eye className="category-icon" />
-                        <span>{category}</span>
+                        <div>
+                          <span className="category-name">{category}</span>
+                          <span className="category-description">{categoryDescription}</span>
+                        </div>
                         <span className="category-count">{categoryCount}</span>
                       </button>
                     );
@@ -264,23 +270,31 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
           </section>
 
           {/* Enhanced Products Section */}
-          <section className="products-section-enhanced">
+          <section id="products-section" className="products-section-enhanced py-16 bg-white">
             <div className="products-container">
               {/* Results Header */}
               <div className="results-header">
-                <h2 className="results-title">
-                  {filteredProducts.length} AR Glasses Found
-                  {(urlCategory || selectedCategory) && (
-                    <span className="category-filter-indicator">
-                      in {selectedCategory || urlCategory}
-                    </span>
+                <div className="results-header-content">
+                  <h2 className="results-title">
+                    {filteredProducts.length} AR Glasses Found
+                    {(urlCategory || selectedCategory) && (
+                      <span className="category-filter-indicator">
+                        in {selectedCategory || urlCategory}
+                      </span>
+                    )}
+                    {(urlSearch || searchTerm) && (
+                      <span className="search-filter-indicator">
+                        for "{searchTerm || urlSearch}"
+                      </span>
+                    )}
+                  </h2>
+                  
+                  {!selectedCategory && !searchTerm && (
+                    <p className="results-subtitle">
+                      Compare specs, prices, and reviews across all models. Each product includes expert analysis and user ratings.
+                    </p>
                   )}
-                  {(urlSearch || searchTerm) && (
-                    <span className="search-filter-indicator">
-                      for "{searchTerm || urlSearch}"
-                    </span>
-                  )}
-                </h2>
+                </div>
                 
                 {(selectedCategory || searchTerm) && (
                   <button 
@@ -336,25 +350,55 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
           </section>
 
           {/* FAQ Section */}
-          <section className="faq-section">
+          <section id="faq-section" className="faq-section py-16 bg-gray-50">
             <div className="faq-container">
-              <h2>Frequently Asked Questions</h2>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Get answers to the most common questions about AR glasses and our comparison process
+                </p>
+              </div>
+
               <div className="faq-grid">
                 <div className="faq-item">
                   <h3>What are the best AR glasses for 2024?</h3>
-                  <p>The top AR glasses include the Xreal One Pro for premium experience, RayNeo X3 Pro for gaming, and Viture One for best value.</p>
+                  <p>Based on our comprehensive analysis, the Xreal One Pro leads overall performance, while the Xreal One offers the best value. For innovation, the Rokid AR Spatial stands out with advanced AI features.</p>
                 </div>
                 <div className="faq-item">
                   <h3>How do I choose the right AR glasses?</h3>
-                  <p>Consider your primary use case (gaming, productivity, entertainment), budget, device compatibility, and comfort preferences.</p>
+                  <p>Start with our buying guide above! Consider your primary use case (gaming, productivity, entertainment), budget range, device compatibility, and comfort requirements. Our recommendation engine matches you with ideal models.</p>
                 </div>
                 <div className="faq-item">
                   <h3>Are these real Amazon prices?</h3>
-                  <p>Yes! We update pricing hourly directly from Amazon's API and highlight any available discounts or deals.</p>
+                  <p>Yes! We update pricing every hour directly from Amazon's API and highlight any available discounts or deals. Prices may vary slightly due to real-time changes.</p>
                 </div>
                 <div className="faq-item">
                   <h3>Do AR glasses work with iPhones?</h3>
-                  <p>Most modern AR glasses are compatible with iPhones via USB-C or Lightning adapters. We clearly mark compatibility for each model.</p>
+                  <p>Most modern AR glasses are compatible with iPhones via USB-C or Lightning adapters. We clearly mark compatibility for each model, including any required accessories.</p>
+                </div>
+                <div className="faq-item">
+                  <h3>What's the difference between price categories?</h3>
+                  <p>Budget models ($200-350) offer basic AR functionality. Mid-range ($400-550) provides quality displays and features. Premium ($550+) includes advanced tech and superior build quality.</p>
+                </div>
+                <div className="faq-item">
+                  <h3>How accurate are your reviews?</h3>
+                  <p>Our analysis combines expert testing, user reviews, and technical specifications. We maintain strict editorial independence and never accept payment for positive reviews.</p>
+                </div>
+              </div>
+
+              {/* Additional CTA */}
+              <div className="text-center mt-12">
+                <p className="text-gray-600 mb-4">Still have questions?</p>
+                <div className="flex justify-center gap-4">
+                  <a href="#buying-guide" className="text-blue-600 hover:text-blue-800 underline">
+                    Check our Buying Guide
+                  </a>
+                  <span className="text-gray-400">•</span>
+                  <a href="#market-insights" className="text-blue-600 hover:text-blue-800 underline">
+                    View Market Analysis
+                  </a>
                 </div>
               </div>
             </div>

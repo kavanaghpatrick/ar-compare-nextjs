@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Enhanced Market Analysis Styles */
+@import '../styles/market-analysis.css';
+
 /* Basic CSS Reset */
 * {
   margin: 0;
