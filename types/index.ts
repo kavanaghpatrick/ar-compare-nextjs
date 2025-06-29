@@ -227,3 +227,52 @@ export interface EnhancedProduct extends Product {
   marketContext: MarketContext;
   purchaseRecommendation: PurchaseRecommendation;
 }
+
+// Blog types
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: {
+    name: string;
+    avatar: string;
+    bio: string;
+  };
+  publishedAt: string;
+  updatedAt?: string;
+  category: string;
+  tags: string[];
+  readTime: number;
+  featured: boolean;
+  image: string;
+  imageAlt: string;
+  seo: {
+    metaTitle: string;
+    metaDescription: string;
+    keywords: string[];
+  };
+}
+
+export interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  postCount: number;
+}
+
+export interface BlogAuthor {
+  id: string;
+  name: string;
+  slug: string;
+  avatar: string;
+  bio: string;
+  social: {
+    twitter?: string;
+    linkedin?: string;
+    website?: string;
+  };
+  postCount: number;
+}
