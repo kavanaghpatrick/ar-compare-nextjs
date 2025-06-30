@@ -4,6 +4,7 @@ import Link from 'next/link';
 import arGlassesData from '@/data/products';
 import { Product } from '@/types';
 import { PageLayout } from '@/components/PageLayout';
+import { ProductCardClean } from '@/components/ProductCardClean';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -133,75 +134,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         
         {/* Products Grid */}
         {categoryProducts.length > 0 ? (
-          <div className="products-grid">
+          <div className="products-grid-clean">
             {categoryProducts.map((product) => (
-              <div key={product.id} className="product-card">
-                {/* Product Header */}
-                <div className="product-header">
-                  <span className="product-icon">👓</span>
-                  <span className="text-sm text-white/60 bg-white/10 px-2 py-1 rounded">
-                    {product.category}
-                  </span>
-                </div>
-                
-                {/* Product Details */}
-                <h2 className="product-title">{product.name}</h2>
-                <p className="product-description">{product.description}</p>
-                
-                {/* Rating */}
-                <div className="rating">
-                  <div className="stars">
-                    {[...Array(5)].map((_, i) => (
-                      <span
-                        key={i}
-                        className={`star ${i < Math.round(product.rating) ? 'star-filled' : 'star-empty'}`}
-                      >
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <span className="rating-text">{product.rating}</span>
-                </div>
-                
-                {/* Price */}
-                <div className="product-price">
-                  ${product.price}
-                  {product.originalPrice > product.price && (
-                    <span className="text-white/60 text-lg line-through ml-2">
-                      ${product.originalPrice}
-                    </span>
-                  )}
-                </div>
-                
-                {/* Key Features */}
-                <div className="mb-4">
-                  <div className="text-white/60 text-sm mb-2">Key Features:</div>
-                  <ul className="space-y-1">
-                    {product.features.slice(0, 3).map((feature, index) => (
-                      <li key={index} className="text-white/80 text-sm flex items-start">
-                        <span className="text-blue-400 mr-2">•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Actions */}
-                <div className="product-actions">
-                  <Link 
-                    href={`/products/${product.id}`}
-                    className="action-btn action-btn-details"
-                  >
-                    View Details
-                  </Link>
-                  <button 
-                    className="action-btn action-btn-compare"
-                    aria-label={`Add ${product.name} to comparison`}
-                  >
-                    Compare
-                  </button>
-                </div>
-              </div>
+              <ProductCardClean
+                key={product.id}
+                product={product}
+              />
             ))}
           </div>
         ) : (

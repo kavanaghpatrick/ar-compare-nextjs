@@ -4,6 +4,7 @@ import Link from 'next/link';
 import arGlassesData from '@/data/products';
 import { Product } from '@/types';
 import { PageLayout } from '@/components/PageLayout';
+import { ProductCardClean } from '@/components/ProductCardClean';
 
 interface SearchPageClientProps {
   searchParams: {
@@ -238,59 +239,12 @@ export function SearchPageClient({ searchParams }: SearchPageClientProps) {
 
           {/* Product Results */}
           {results.length > 0 ? (
-            <div className="products-grid">
+            <div className="products-grid-clean">
               {results.map((product) => (
-                <div key={product.id} className="product-card">
-                  <div className="product-header">
-                    <div className="product-icon">🥽</div>
-                  </div>
-                  
-                  <h3 className="product-title">{product.name}</h3>
-                  <p className="product-description">{product.description}</p>
-                  
-                  <div className="product-price">${product.price}</div>
-                  
-                  <div className="rating">
-                    <div className="stars">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className={`star ${i < product.rating ? 'star-filled' : 'star-empty'}`}>
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                    <span className="rating-text">{product.rating}</span>
-                  </div>
-                  
-                  <div className="specs-grid">
-                    <div className="spec-item">
-                      <span>📐</span>
-                      <span>{product.specifications.display.fov}</span>
-                    </div>
-                    <div className="spec-item">
-                      <span>⚖️</span>
-                      <span>{product.specifications.design.weight}</span>
-                    </div>
-                    <div className="spec-item">
-                      <span>💰</span>
-                      <span>${product.price}</span>
-                    </div>
-                    <div className="spec-item">
-                      <span>📱</span>
-                      <span>{product.brand}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="product-actions">
-                    <div className="action-btn-group">
-                      <Link 
-                        href={`/products/${product.id}`}
-                        className="action-btn action-btn-details"
-                      >
-                        View Details
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <ProductCardClean
+                  key={product.id}
+                  product={product}
+                />
               ))}
             </div>
           ) : (
