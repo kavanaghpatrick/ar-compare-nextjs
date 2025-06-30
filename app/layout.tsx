@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "../styles/navigation.css";
 import "../styles/quickview.css";
-import "../styles/product-cards-clean.css";
 import { ComparisonProvider } from "@/contexts/ComparisonContext";
 
 const inter = Inter({ 

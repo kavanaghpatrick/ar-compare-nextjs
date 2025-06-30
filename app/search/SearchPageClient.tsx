@@ -239,7 +239,12 @@ export function SearchPageClient({ searchParams }: SearchPageClientProps) {
 
           {/* Product Results */}
           {results.length > 0 ? (
-            <div className="products-grid-clean">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(1, 1fr)',
+              gap: '1.5rem',
+            }}
+            className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {results.map((product) => (
                 <ProductCardClean
                   key={product.id}

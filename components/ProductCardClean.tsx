@@ -131,28 +131,28 @@ export const ProductCardClean = React.memo(({
   };
 
   return (
-    <div style={styles.card}>
-      <h3 style={styles.title}>{product.fullName}</h3>
+    <div style={{...styles.card, color: '#111827'}}>
+      <h3 style={{...styles.title, color: '#111827'}}>{product.fullName}</h3>
       
-      <div style={styles.category}>
+      <div style={{...styles.category, color: '#1e40af'}}>
         {product.category}
       </div>
       
-      <p style={styles.description}>{product.description}</p>
+      <p style={{...styles.description, color: '#6b7280'}}>{product.description}</p>
       
-      <div style={styles.price}>
+      <div style={{...styles.price, color: '#1e40af'}}>
         ${product.price}
         {product.originalPrice && product.originalPrice !== product.price && (
-          <span style={styles.originalPrice}>
+          <span style={{...styles.originalPrice, color: '#9ca3af'}}>
             ${product.originalPrice}
           </span>
         )}
       </div>
 
-      <div style={styles.rating}>
-        <span style={styles.stars}>
+      <div style={{...styles.rating, color: '#374151'}}>
+        <span style={{...styles.stars, color: '#fbbf24'}}>
           {[...Array(5)].map((_, i) => (
-            <span key={i} style={{ opacity: i < Math.floor(product.rating) ? 1 : 0.3 }}>
+            <span key={i} style={{ opacity: i < Math.floor(product.rating) ? 1 : 0.3, color: '#fbbf24' }}>
               ★
             </span>
           ))}
@@ -165,29 +165,29 @@ export const ProductCardClean = React.memo(({
         </span>
       </div>
 
-      <div style={styles.specsGrid}>
-        <div style={styles.specItem}>
-          <Eye size={14} />
-          <span>{product.specifications.display.fov}</span>
+      <div style={{...styles.specsGrid, color: '#4b5563'}}>
+        <div style={{...styles.specItem, color: '#4b5563'}}>
+          <Eye size={14} style={{color: '#4b5563'}} />
+          <span style={{color: '#4b5563'}}>{product.specifications.display.fov}</span>
         </div>
-        <div style={styles.specItem}>
-          <Zap size={14} />
-          <span>{product.specifications.display.brightness}</span>
+        <div style={{...styles.specItem, color: '#4b5563'}}>
+          <Zap size={14} style={{color: '#4b5563'}} />
+          <span style={{color: '#4b5563'}}>{product.specifications.display.brightness}</span>
         </div>
-        <div style={styles.specItem}>
-          <Volume2 size={14} />
-          <span>{product.specifications.audio.speakers}</span>
+        <div style={{...styles.specItem, color: '#4b5563'}}>
+          <Volume2 size={14} style={{color: '#4b5563'}} />
+          <span style={{color: '#4b5563'}}>{product.specifications.audio.speakers}</span>
         </div>
-        <div style={styles.specItem}>
-          <Weight size={14} />
-          <span>{product.specifications.design.weight}</span>
+        <div style={{...styles.specItem, color: '#4b5563'}}>
+          <Weight size={14} style={{color: '#4b5563'}} />
+          <span style={{color: '#4b5563'}}>{product.specifications.design.weight}</span>
         </div>
       </div>
 
       <div style={styles.actions}>
         <button
           onClick={() => onCompare?.(product.id)}
-          style={styles.compareBtn}
+          style={{...styles.compareBtn, color: '#ffffff'}}
         >
           {isInComparison ? '✓ Added' : '+ Compare'}
         </button>
@@ -195,17 +195,17 @@ export const ProductCardClean = React.memo(({
         {onQuickView && (
           <button
             onClick={() => onQuickView(product)}
-            style={styles.actionBtn}
+            style={{...styles.actionBtn, color: '#374151'}}
           >
-            <Search size={16} />
+            <Search size={16} style={{color: '#374151'}} />
           </button>
         )}
         
         <Link
           href={`/products/${product.id}`}
-          style={styles.actionBtn}
+          style={{...styles.actionBtn, color: '#374151'}}
         >
-          <ExternalLink size={16} />
+          <ExternalLink size={16} style={{color: '#374151'}} />
         </Link>
       </div>
     </div>
