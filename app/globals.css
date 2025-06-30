@@ -2756,38 +2756,7 @@ html, body {
   text-align: center;
 }
 
-/* Product Card Legacy Button Styles */
-.action-btn-legacy {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.action-btn-legacy:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-.action-btn-quick-view {
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.9);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.action-btn-quick-view:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-}
+/* Removed duplicate Product Card Legacy Button Styles - see correct styles at line 3858 */
 
 .action-btn-group {
   display: flex;
@@ -2805,9 +2774,9 @@ html, body {
 
 .category-filter-btn {
   padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #f3f4f6;
+  color: #374151; /* Changed from white to dark gray */
+  border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -2816,15 +2785,16 @@ html, body {
 
 .category-filter-btn:hover,
 .category-filter-btn.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+  color: #111827; /* Dark text color */
 }
 
 .category-filter-clear {
   padding: 0.5rem 1rem;
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #6b7280; /* Changed from white to gray */
+  border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -2832,8 +2802,9 @@ html, body {
 }
 
 .category-filter-clear:hover {
-  color: white;
-  border-color: rgba(255, 255, 255, 0.4);
+  color: #374151; /* Changed from white to dark gray */
+  border-color: #9ca3af;
+  background-color: #f9fafb;
 }
 
 .filter-label {
@@ -3470,13 +3441,13 @@ html, body {
 }
 
 .category-name {
-  color: white;
+  color: #1f2937; /* Changed from white to dark gray */
   font-weight: 600;
   font-size: 1rem;
 }
 
 .category-count {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6b7280; /* Changed from white to gray */
   font-size: 0.75rem;
 }
 
