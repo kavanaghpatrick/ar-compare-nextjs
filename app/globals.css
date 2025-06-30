@@ -193,7 +193,7 @@
   .app-container {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
-    color: white;
+    color: #f3f4f6; /* Light gray for dark backgrounds */
   }
 
   .header {
@@ -957,11 +957,11 @@
   }
 
   .product-details-page .spec-item span:first-child {
-    @apply text-white/70 font-medium;
+    @apply text-gray-600 font-medium;
   }
 
   .product-details-page .spec-item span:last-child {
-    @apply text-white font-semibold;
+    @apply text-gray-900 font-semibold;
   }
 
   .features-list {
@@ -977,11 +977,11 @@
   }
 
   .features-list li {
-    @apply text-white/80 flex items-start gap-2 before:content-['✓'] before:text-green-400 before:font-bold before:mt-0.5;
+    @apply text-gray-700 flex items-start gap-2 before:content-['✓'] before:text-green-600 before:font-bold before:mt-0.5;
   }
 
   .product-details-page .product-description {
-    @apply text-white/80 leading-relaxed;
+    @apply text-gray-700 leading-relaxed;
   }
 
   .pros-cons {
@@ -1218,15 +1218,15 @@
   }
 
   .product-details-page .spec-item span:first-child {
-    @apply text-white/70;
+    @apply text-gray-600;
   }
 
   .product-details-page .spec-item span:last-child {
-    @apply text-white font-medium;
+    @apply text-gray-900 font-medium;
   }
 
   .features-list {
-    @apply text-white;
+    @apply text-gray-800;
   }
 
   .features-list h3 {
@@ -1247,7 +1247,7 @@
   }
 
   .product-details-page .product-description {
-    @apply text-white/80 leading-relaxed;
+    @apply text-gray-700 leading-relaxed;
   }
 
   .pros-cons {
@@ -2614,7 +2614,7 @@ html, body {
 .app-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0b1e 0%, #1e3a8a 35%, #3b82f6 65%, #1e40af 100%);
-  color: white;
+  /* color: white; -- Removed to fix white text on white background issue */
   position: relative;
 }
 
