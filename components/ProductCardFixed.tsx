@@ -2,6 +2,7 @@ import React from 'react';
 import { Eye, Zap, Volume2, Weight, ExternalLink, Search, Crown, Star, DollarSign, Gamepad2, Briefcase, Glasses, Wrench, Target } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '@/types';
+import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   product: Product;
@@ -13,8 +14,7 @@ interface ProductCardProps {
   context?: 'search' | 'category' | 'main' | 'related';
 }
 
-// Memoized ProductCard component for performance
-export const ProductCard = React.memo(({ 
+export const ProductCardFixed = React.memo(({ 
   product, 
   onCompare, 
   onShowDetails, 
@@ -24,48 +24,49 @@ export const ProductCard = React.memo(({
   context = 'main'
 }: ProductCardProps) => {
   const getCategoryIcon = (category: string) => {
-    const iconProps = { size: 16, className: "category-icon-style" };
+    const iconProps = { size: 16 };
     
     switch (category) {
       case 'Premium':
-        return <Crown {...iconProps} className="category-icon-style category-icon-premium" />;
+        return <Crown {...iconProps} style={{ color: '#fbbf24' }} />;
       case 'Mid-range':
-        return <Star {...iconProps} className="category-icon-style category-icon-midrange" />;
+        return <Star {...iconProps} style={{ color: '#3b82f6' }} />;
       case 'Budget':
-        return <DollarSign {...iconProps} className="category-icon-style category-icon-budget" />;
+        return <DollarSign {...iconProps} style={{ color: '#10b981' }} />;
       case 'Gaming':
-        return <Gamepad2 {...iconProps} className="category-icon-style category-icon-gaming" />;
+        return <Gamepad2 {...iconProps} style={{ color: '#8b5cf6' }} />;
       case 'Professional':
-        return <Briefcase {...iconProps} className="category-icon-style category-icon-professional" />;
+        return <Briefcase {...iconProps} style={{ color: '#6b7280' }} />;
       case 'Everyday':
-        return <Glasses {...iconProps} className="category-icon-style category-icon-everyday" />;
+        return <Glasses {...iconProps} style={{ color: '#06b6d4' }} />;
       case 'Developer':
-        return <Wrench {...iconProps} className="category-icon-style category-icon-developer" />;
+        return <Wrench {...iconProps} style={{ color: '#f59e0b' }} />;
       case 'Specialized':
-        return <Target {...iconProps} className="category-icon-style category-icon-specialized" />;
+        return <Target {...iconProps} style={{ color: '#ef4444' }} />;
       default:
-        return <Glasses {...iconProps} className="category-icon-style category-icon-default" />;
+        return <Glasses {...iconProps} style={{ color: '#06b6d4' }} />;
     }
   };
 
   return (
-    <div className="product-card" role="article" aria-labelledby={`product-title-${product.id}`}>
-      <h2 id={`product-title-${product.id}`} className="product-title">{product.fullName}</h2>
+    <div className={styles.productCard} role="article" aria-labelledby={`product-title-${product.id}`}>
+      <h2 id={`product-title-${product.id}`} className={styles.productTitle}>{product.fullName}</h2>
       
-      <div className="product-category-indicator">
-        <div className="product-icon">
+      <div className={styles.categoryIndicator}>
+        <div className={styles.productIcon}>
           {getCategoryIcon(product.category)}
         </div>
-        <span className="product-category-text">
+        <span className={styles.categoryText}>
           {product.category}
         </span>
       </div>
-      <p className="product-description">{product.description}</p>
       
-      <div className="product-price">
+      <p className={styles.productDescription}>{product.description}</p>
+      
+      <div className={styles.productPrice}>
         ${product.price}
         {product.originalPrice && product.originalPrice !== product.price && (
-          <span className="product-original-price">
+          <span className={styles.originalPrice}>
             ${product.originalPrice}
           </span>
         )}
@@ -164,14 +165,6 @@ export const ProductCard = React.memo(({
       </div>
     </div>
   );
-}, (prevProps, nextProps) => {
-  // Custom comparison function for better performance
-  return (
-    prevProps.product.id === nextProps.product.id &&
-    prevProps.isInComparison === nextProps.isInComparison &&
-    prevProps.showBreadcrumbs === nextProps.showBreadcrumbs &&
-    prevProps.context === nextProps.context
-  );
 });
 
-ProductCard.displayName = 'ProductCard';
+ProductCardFixed.displayName = 'ProductCardFixed';

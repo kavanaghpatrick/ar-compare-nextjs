@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { SearchBar } from '@/components/SearchBar';
 import { ProductCard } from '@/components/ProductCard';
+import { ProductCardFixed } from '@/components/ProductCardFixed';
+import categoryStyles from '@/components/CategoryCard.module.css';
 import { NavigationSimple } from '@/components/NavigationSimple';
 import { Footer } from '@/components/Footer';
 import { MarketSummary } from '@/components/MarketSummary';
@@ -262,14 +264,14 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                 <div className="category-cards">
                   <button
                     onClick={() => setSelectedCategory('')}
-                    className={`category-card ${!selectedCategory ? 'active' : ''}`}
+                    className={`${categoryStyles.categoryCard} ${!selectedCategory ? categoryStyles.active : ''}`}
                   >
-                    <Award className="category-icon" />
+                    <Award className={categoryStyles.categoryIcon} />
                     <div>
-                      <span className="category-name">All Models</span>
-                      <span className="category-description">Complete collection</span>
+                      <span className={categoryStyles.categoryName}>All Models</span>
+                      <span className={categoryStyles.categoryDescription}>Complete collection</span>
                     </div>
-                    <span className="category-count">{initialProducts.length}</span>
+                    <span className={categoryStyles.categoryCount}>{initialProducts.length}</span>
                   </button>
                   
                   {categories.map(category => {
@@ -285,14 +287,14 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                       <button
                         key={category}
                         onClick={() => setSelectedCategory(category === selectedCategory ? '' : category)}
-                        className={`category-card ${selectedCategory === category ? 'active' : ''}`}
+                        className={`${categoryStyles.categoryCard} ${selectedCategory === category ? categoryStyles.active : ''}`}
                       >
-                        <Eye className="category-icon" />
+                        <Eye className={categoryStyles.categoryIcon} />
                         <div>
-                          <span className="category-name">{category}</span>
-                          <span className="category-description">{categoryDescription}</span>
+                          <span className={categoryStyles.categoryName}>{category}</span>
+                          <span className={categoryStyles.categoryDescription}>{categoryDescription}</span>
                         </div>
-                        <span className="category-count">{categoryCount}</span>
+                        <span className={categoryStyles.categoryCount}>{categoryCount}</span>
                       </button>
                     );
                   })}
@@ -347,10 +349,9 @@ export function HomeClientEnhanced({ initialProducts, searchParams: serverSearch
                   {filteredProducts.map((product, index) => (
                     <div
                       key={product.id}
-                      className="product-card-wrapper"
-                      style={{ animationDelay: `${index * 0.1}s` }}
+                      className={`product-card-wrapper animation-delay-${index % 10}`}
                     >
-                      <ProductCard
+                      <ProductCardFixed
                         product={product}
                         onCompare={handleToggleComparison}
                         onQuickView={handleQuickView}
