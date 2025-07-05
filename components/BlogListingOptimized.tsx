@@ -2,11 +2,11 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { NavigationSimple } from '@/components/NavigationSimple';
 import { Footer } from '@/components/Footer';
 import { BlogPost, BlogCategory } from '@/types';
 import { Calendar, Clock, Search, Star, TrendingUp, BookOpen, Filter } from 'lucide-react';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface BlogListingOptimizedProps {
   initialPosts: BlogPost[];
@@ -148,9 +148,11 @@ export function BlogListingOptimized({
                   <Link href={`/blog/${post.slug}`} className="block h-full">
                     <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg mb-6 flex items-center justify-center relative overflow-hidden">
                       {post.image && post.image !== '/api/placeholder/800/400' ? (
-                        <Image
+                        <OptimizedImage
                           src={post.image}
                           alt={post.imageAlt}
+                          width={800}
+                          height={450}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -265,9 +267,11 @@ export function BlogListingOptimized({
                   <Link href={`/blog/${post.slug}`} className="block h-full flex flex-col">
                     <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
                       {post.image && post.image !== '/api/placeholder/800/400' ? (
-                        <Image
+                        <OptimizedImage
                           src={post.image}
                           alt={post.imageAlt}
+                          width={400}
+                          height={225}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

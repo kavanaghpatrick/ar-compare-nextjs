@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils';
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width: number; // Required for layout stability
+  height: number; // Required for layout stability
   className?: string;
   priority?: boolean;
   fill?: boolean;
@@ -16,13 +16,14 @@ interface OptimizedImageProps {
   quality?: number;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
+  aspectRatio?: boolean; // Use aspect-ratio container for responsive design
 }
 
 export function OptimizedImage({
   src,
   alt,
-  width = 400,
-  height = 300,
+  width,
+  height,
   className,
   priority = false,
   fill = false,
@@ -30,6 +31,7 @@ export function OptimizedImage({
   quality = 85,
   placeholder = 'empty',
   blurDataURL,
+  aspectRatio = false,
   ...props
 }: OptimizedImageProps) {
   const [isLoading, setLoading] = useState(true);
@@ -94,6 +96,45 @@ export function OptimizedImage({
     );
   }
 
+  // Calculate aspect ratio for responsive container
+  const aspectRatioValue = (height / width) * 100;
+
+  if (aspectRatio && !fill) {
+    // Use aspect-ratio container for responsive design
+    return (
+      <div 
+        className={cn("relative overflow-hidden w-full", className)}
+        style={{ paddingBottom: `${aspectRatioValue}%` }}
+      >
+        <Image
+          src={getOptimizedSrc(src)}
+          alt={alt}
+          fill
+          priority={priority}
+          quality={quality}
+          sizes={sizes || "100vw"}
+          placeholder={placeholder === 'blur' ? 'blur' : 'empty'}
+          blurDataURL={blurDataURL || (placeholder === 'blur' ? defaultBlurDataURL : undefined)}
+          className={cn(
+            "transition-all duration-300 object-cover",
+            isLoading ? "scale-110 blur-sm" : "scale-100 blur-0"
+          )}
+          onLoad={() => setLoading(false)}
+          onError={() => {
+            setHasError(true);
+            setLoading(false);
+          }}
+          {...props}
+        />
+        
+        {/* Loading skeleton with exact dimensions */}
+        {isLoading && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className={cn("relative overflow-hidden", !fill && "inline-block")}>
       <Image
@@ -120,13 +161,13 @@ export function OptimizedImage({
         {...props}
       />
       
-      {/* Loading skeleton */}
+      {/* Loading skeleton with exact dimensions */}
       {isLoading && (
         <div
           className={cn(
-            "absolute inset-0 bg-gray-200 animate-pulse",
-            !fill && `w-[${width}px] h-[${height}px]`
+            "absolute inset-0 bg-gray-200 animate-pulse"
           )}
+          style={!fill ? { width: `${width}px`, height: `${height}px` } : {}}
         />
       )}
     </div>

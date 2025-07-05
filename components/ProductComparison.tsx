@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { EnhancedProduct } from '@/types';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface ProductComparisonProps {
   currentProduct: EnhancedProduct;
@@ -208,7 +209,14 @@ export function ProductComparison({
               >
                 <div className="product-header">
                   <div className="product-image">
-                    <img src={product.image} alt={product.name} />
+                    <OptimizedImage
+                      src={product.image}
+                      alt={product.name}
+                      width={100}
+                      height={100}
+                      className="object-contain w-full h-full"
+                      sizes="100px"
+                    />
                   </div>
                   <div className="product-info">
                     <h4 className="product-name">{product.name}</h4>

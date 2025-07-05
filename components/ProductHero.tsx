@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Star, ShoppingCart, GitCompare, ExternalLink, Zap, Shield, Truck, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { EnhancedProduct } from '@/types';
 import { cn } from '@/lib/utils';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface ProductHeroProps {
   product: EnhancedProduct;
@@ -64,15 +64,18 @@ export function ProductHero({ product, onAddToCompare, onBuyOnAmazon }: ProductH
                 onMouseEnter={() => setImageHovered(true)}
                 onMouseLeave={() => setImageHovered(false)}
               >
-                <Image
+                <OptimizedImage
                   src={product.image}
                   alt={product.name}
+                  width={600}
+                  height={600}
                   fill
                   className={cn(
                     "object-contain p-8 transition-transform duration-300",
                     imageHovered && "scale-105"
                   )}
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
                 />
                 
                 {/* Floating Badges */}

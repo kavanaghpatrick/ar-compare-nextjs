@@ -5,6 +5,7 @@ import { NavigationSimple } from '@/components/NavigationSimple';
 import { Footer } from '@/components/Footer';
 import { BlogPost } from '@/types';
 import { Calendar, Clock, ArrowLeft, Share2, ChevronRight, BookOpen } from 'lucide-react';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface BlogPostClientProps {
   post: BlogPost;
@@ -118,10 +119,19 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
         </div>
       </header>
 
-      {/* Featured Image */}
+      {/* Featured Image with explicit dimensions */}
       <div className="max-w-4xl mx-auto px-4 mb-12">
-        <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
-          <span className="text-white/60">Article Image</span>
+        <div className="relative rounded-xl overflow-hidden">
+          <OptimizedImage
+            src={post.image || '/api/placeholder/1200/675'}
+            alt={post.title}
+            width={1200}
+            height={675}
+            aspectRatio
+            className="object-cover w-full"
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            priority
+          />
         </div>
       </div>
 
@@ -176,8 +186,16 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
             {relatedPosts.map((relatedPost) => (
               <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>
                 <article className="product-card group cursor-pointer h-full">
-                  <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center">
-                    <span className="text-white/40 text-sm">Article Image</span>
+                  <div className="relative aspect-video rounded-lg mb-4 overflow-hidden">
+                    <OptimizedImage
+                      src={relatedPost.image || '/api/placeholder/400/225'}
+                      alt={relatedPost.title}
+                      width={400}
+                      height={225}
+                      aspectRatio
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
                   
                   <div className="flex items-center gap-3 mb-3">
