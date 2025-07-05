@@ -19,15 +19,14 @@ function ComparisonCart({
   isMinimized = false, 
   position = 'fixed' 
 }: ComparisonCartProps = {}) {
-  const { comparison, removeItem, clearComparison } = useComparison();
+  const { comparison, removeItem, clearComparison, isHydrated } = useComparison();
   const [showCart, setShowCart] = useState(!isMinimized);
-  const [isClient, setIsClient] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsClient(true);
+    if (!isHydrated) return;
     
     // Check if mobile
     const checkMobile = () => {
@@ -38,7 +37,7 @@ function ComparisonCart({
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [isHydrated]);
   
   // Auto-minimize on product detail pages for better UX
   useEffect(() => {
@@ -59,8 +58,26 @@ function ComparisonCart({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [showCart]);
 
-  // Don't render anything until client-side hydration is complete
-  if (!isClient) return null;
+  // Render skeleton until client-side hydration is complete
+  if (!isHydrated) {
+    // Don't show skeleton if there are no items or on compare page
+    if (comparison.items.length === 0 || pathname === '/compare') {
+      return null;
+    }
+    
+    return (
+      <div className="comparison-cart fixed">
+        <div className="cart-header">
+          <div className="cart-title">
+            <div className="h-5 bg-gray-200 rounded w-24 animate-pulse"></div>
+          </div>
+          <div className="cart-controls">
+            <div className="h-6 bg-gray-200 rounded w-6 animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const isOnComparePage = pathname === '/compare';
   

@@ -49,12 +49,15 @@ export default function ProductTabsClient({ product }: ProductTabsClientProps) {
     // In a real app, this would handle purchase tracking and redirection
     console.log(`Purchase clicked for ${product.name} from ${source}`);
     
-    if (source === 'amazon' && product.amazon?.asin) {
-      // Open Amazon page in new tab
-      window.open(`https://amazon.com/dp/${product.amazon.asin}`, '_blank');
-    } else if (source === 'direct') {
-      // Handle direct purchase or redirect to brand website
-      window.open(`https://www.${product.brand.toLowerCase()}.com`, '_blank');
+    // Check if window exists before using it
+    if (typeof window !== 'undefined') {
+      if (source === 'amazon' && product.amazon?.asin) {
+        // Open Amazon page in new tab
+        window.open(`https://amazon.com/dp/${product.amazon.asin}`, '_blank');
+      } else if (source === 'direct') {
+        // Handle direct purchase or redirect to brand website
+        window.open(`https://www.${product.brand.toLowerCase()}.com`, '_blank');
+      }
     }
   };
 

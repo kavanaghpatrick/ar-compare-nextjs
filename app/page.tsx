@@ -1,10 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-// import { HomeClient } from '@/components/HomeClient';
-// import { SafeHomeClient as HomeClient } from '@/components/SafeHomeClient';
-// import { HomeClientErrorBoundary as HomeClient } from '@/components/HomeClientErrorBoundary';
-// import { HomeClientImmediate as HomeClient } from '@/components/HomeClientImmediate';
-import { HomeClientEnhanced as HomeClient } from '@/components/HomeClientEnhanced';
+import { HomeClient } from '@/components/HomeClient';
 import arGlassesData from '@/data/products';
 import { SimpleLoading } from '@/components/SimpleLoading';
 

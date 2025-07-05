@@ -25,11 +25,10 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
     productsCount: initialProducts?.length,
     serverSearchParams 
   });
-  const { addItem, removeItem, isInComparison } = useComparison();
+  const { addItem, removeItem, isInComparison, isHydrated } = useComparison();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
-  const [isClient, setIsClient] = useState(false);
   
   // Safely use searchParams with try-catch to handle potential SSR issues
   let clientSearchParams: URLSearchParams | null = null;
@@ -40,21 +39,16 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
   }
   
   // Get URL parameters - prefer client-side params when available
-  const urlSearch = (isClient && clientSearchParams ? clientSearchParams.get('search') : serverSearchParams.search) || '';
-  const urlCategory = (isClient && clientSearchParams ? clientSearchParams.get('category') : serverSearchParams.category) || '';
-
-  useEffect(() => {
-    console.log('[HomeClient] useEffect - setting isClient to true');
-    setIsClient(true);
-  }, []);
+  const urlSearch = (isHydrated && clientSearchParams ? clientSearchParams.get('search') : serverSearchParams.search) || '';
+  const urlCategory = (isHydrated && clientSearchParams ? clientSearchParams.get('category') : serverSearchParams.category) || '';
 
   useEffect(() => {
     // Only update state from URL params after client-side hydration
-    if (isClient) {
+    if (isHydrated) {
       setSearchTerm(urlSearch);
       setSelectedCategory(urlCategory);
     }
-  }, [isClient, urlSearch, urlCategory]);
+  }, [isHydrated, urlSearch, urlCategory]);
 
   // Memoize filtered products calculation
   const filteredProducts = useMemo(() => {
@@ -127,7 +121,29 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
   // Remove loading state that causes hydration mismatch
   // Instead, use CSS to hide content until hydrated
 
-  console.log('[HomeClient] Rendering full component, isClient is true');
+  // Show loading skeleton until hydrated
+  if (!isHydrated) {
+    return (
+      <div className="app-container">
+        <NavigationSimple />
+        <div className="animate-pulse">
+          <div className="hero-enhanced">
+            <div className="hero-container">
+              <div className="h-12 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+              <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto mb-8"></div>
+              <div className="flex justify-center gap-4">
+                <div className="h-10 bg-gray-200 rounded w-32"></div>
+                <div className="h-10 bg-gray-200 rounded w-32"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  console.log('[HomeClient] Rendering full component, isHydrated is true');
   
   // Generate structured data for SEO
   const structuredData = {

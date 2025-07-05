@@ -10,7 +10,7 @@ import arGlassesData from '@/data/products';
 import { useNavigationGuard } from '@/hooks/useNavigationGuard';
 
 export function Navigation() {
-  const { comparison } = useComparison();
+  const { comparison, isHydrated } = useComparison();
   const pathname = usePathname();
   const guardedRouter = useNavigationGuard();
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,6 +39,8 @@ export function Navigation() {
 
   // Handle click outside to close dropdowns
   useEffect(() => {
+    if (!isHydrated) return;
+    
     const handleClickOutside = (event: MouseEvent) => {
       if (!event.target || typeof document === 'undefined') return;
       
@@ -89,7 +91,7 @@ export function Navigation() {
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
-  }, []);
+  }, [isHydrated]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -101,6 +103,31 @@ export function Navigation() {
       // Ignore state update errors during route changes
     }
   }, [pathname]);
+
+  // Render skeleton during hydration
+  if (!isHydrated) {
+    return (
+      <header className="header">
+        <div className="header-container">
+          <div className="h-8 bg-gray-200 rounded w-32 animate-pulse"></div>
+          <div className="header-search desktop-only">
+            <div className="h-10 bg-gray-200 rounded-lg w-full max-w-md animate-pulse"></div>
+          </div>
+          <nav className="nav desktop-only">
+            <div className="flex gap-4">
+              <div className="h-6 bg-gray-200 rounded w-20 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-24 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-28 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-16 animate-pulse"></div>
+            </div>
+          </nav>
+          <div className="header-actions">
+            <div className="h-8 bg-gray-200 rounded w-8 animate-pulse"></div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="header">

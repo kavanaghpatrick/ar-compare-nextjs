@@ -13,6 +13,7 @@ interface ComparisonContextType {
   removeItem: (productId: string) => void;
   clearComparison: () => void;
   isInComparison: (productId: string) => boolean;
+  isHydrated: boolean;
 }
 
 const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
@@ -118,7 +119,8 @@ export function ComparisonProvider({ children }: { children: React.ReactNode }) 
     removeItem,
     clearComparison,
     isInComparison,
-  }), [comparison, addItem, removeItem, clearComparison, isInComparison]);
+    isHydrated,
+  }), [comparison, addItem, removeItem, clearComparison, isInComparison, isHydrated]);
 
   return (
     <ComparisonContext.Provider value={contextValue}>
