@@ -2,6 +2,7 @@ import React from 'react';
 import { Eye, Zap, Volume2, Weight, ExternalLink, Search, Crown, Star, DollarSign, Gamepad2, Briefcase, Glasses, Wrench, Target } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '@/types';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface ProductCardProps {
   product: Product;
@@ -50,6 +51,19 @@ export const ProductCard = React.memo(({
 
   return (
     <div className="product-card" role="article" aria-labelledby={`product-title-${product.id}`}>
+      {/* Product Image with explicit dimensions */}
+      <div className="relative mb-4 rounded-lg overflow-hidden bg-gray-100">
+        <OptimizedImage
+          src={product.image}
+          alt={product.fullName}
+          width={400}
+          height={300}
+          aspectRatio
+          className="object-cover w-full h-full"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+      </div>
+      
       <h2 id={`product-title-${product.id}`} className="product-title">{product.fullName}</h2>
       
       <div className="product-category-indicator">

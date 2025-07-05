@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { X, Star, ExternalLink, ShoppingCart, Eye, Zap, Volume2, Weight } from 'lucide-react';
 import { Product } from '@/types';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface QuickViewProps {
   product: Product | null;
@@ -92,10 +93,14 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
 
         <div className="quick-view-content">
           <div className="quick-view-image-section">
-            <img 
-              src={product.image} 
+            <OptimizedImage
+              src={product.image}
               alt={product.fullName}
-              className="quick-view-image"
+              width={400}
+              height={400}
+              className="quick-view-image object-contain"
+              sizes="400px"
+              priority
             />
             <div className="quick-view-badges">
               {product.availability === 'Pre-order' && (

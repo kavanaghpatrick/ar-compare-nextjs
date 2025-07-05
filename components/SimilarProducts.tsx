@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { EnhancedProduct } from '@/types';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface SimilarProductsProps {
   currentProduct: EnhancedProduct;
@@ -435,9 +436,13 @@ export function SimilarProducts({
                 <div key={recommendation.product.id} className="recommendation-card">
                   <div className="card-header">
                     <div className="product-image">
-                      <img 
-                        src={recommendation.product.image} 
+                      <OptimizedImage
+                        src={recommendation.product.image}
                         alt={recommendation.product.name}
+                        width={120}
+                        height={120}
+                        className="object-contain w-full h-full"
+                        sizes="120px"
                       />
                     </div>
                     <div className="recommendation-type">
@@ -532,9 +537,13 @@ export function SimilarProducts({
           {recommendations[0]?.products.slice(0, 4).map((recommendation) => (
             <div key={recommendation.product.id} className="also-viewed-item">
               <div className="item-image">
-                <img 
-                  src={recommendation.product.image} 
+                <OptimizedImage
+                  src={recommendation.product.image}
                   alt={recommendation.product.name}
+                  width={80}
+                  height={80}
+                  className="object-contain w-full h-full"
+                  sizes="80px"
                 />
               </div>
               <div className="item-info">
