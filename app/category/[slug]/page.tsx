@@ -85,9 +85,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   
   return (
     <PageLayout>
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
         {/* Category Header */}
-        <div className="mb-8">
+        <section className="mb-8">
           <nav className="text-white/60 text-sm mb-4">
             <Link href="/" className="hover:text-white transition-colors">
               Home
@@ -130,7 +130,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <div className="text-2xl font-bold text-white">{brands.length}</div>
             </div>
           </div>
-        </div>
+        </section>
         
         {/* Products Grid */}
         {categoryProducts.length > 0 ? (
@@ -179,7 +179,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               ))}
           </div>
         </div>
-      </div>
+      </main>
     </PageLayout>
   );
 }

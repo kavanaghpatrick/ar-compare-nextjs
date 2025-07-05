@@ -18,8 +18,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* About Section */}
-          <div className="lg:col-span-1">
-            <h3 className="text-white font-bold text-lg mb-4">AR Compare</h3>
+          <section className="lg:col-span-1">
+            <h2 className="text-white font-bold text-lg mb-4">AR Compare</h2>
             <p className="text-white/60 text-sm mb-4">
               Your comprehensive guide to comparing AR glasses and smart glasses. 
               Find the perfect device for your needs with detailed specs and reviews.
@@ -41,11 +41,11 @@ export function Footer() {
                 </svg>
               </a>
             </div>
-          </div>
+          </section>
           
           {/* Popular Products */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Popular AR Glasses</h4>
+          <section>
+            <h3 className="text-white font-semibold mb-4">Popular AR Glasses</h3>
             <ul className="space-y-2">
               {popularProducts.map(product => (
                 <li key={product.id}>
@@ -66,11 +66,11 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </section>
           
           {/* Categories */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Categories</h4>
+          <section>
+            <h3 className="text-white font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
               {categories.map(category => {
                 const slug = category.toLowerCase().replace(/\s+/g, '-');
@@ -94,11 +94,11 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </section>
           
           {/* Brands */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Top Brands</h4>
+          <section>
+            <h3 className="text-white font-semibold mb-4">Top Brands</h3>
             <ul className="space-y-2">
               {brands.map(brand => {
                 const brandSlug = brand.toLowerCase().replace(/\s+/g, '-');
@@ -122,11 +122,11 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </section>
           
           {/* Resources */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Resources</h4>
+          <section>
+            <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -177,7 +177,7 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </section>
         </div>
         
         {/* Bottom Bar */}

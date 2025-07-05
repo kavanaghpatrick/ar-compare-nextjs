@@ -66,9 +66,9 @@ export default async function BrandPage({ params }: BrandPageProps) {
   
   return (
     <PageLayout>
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
         {/* Brand Header */}
-        <div className="mb-8">
+        <section className="mb-8">
           <nav className="text-white/60 text-sm mb-4">
             <Link href="/" className="hover:text-white transition-colors">
               Home
@@ -111,6 +111,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
               <div className="text-2xl font-bold text-white">{categories.length}</div>
             </div>
           </div>
+        </section>
           
           {/* Company Info */}
           {companyInfo && (
@@ -137,7 +138,6 @@ export default async function BrandPage({ params }: BrandPageProps) {
               </div>
             </div>
           )}
-        </div>
         
         {/* Products Grid */}
         <div className="products-grid">
@@ -238,7 +238,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
               })}
           </div>
         </div>
-      </div>
+      </main>
     </PageLayout>
   );
 }

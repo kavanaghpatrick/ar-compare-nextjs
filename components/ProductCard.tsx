@@ -50,7 +50,7 @@ export const ProductCard = React.memo(({
   };
 
   return (
-    <div className="product-card" role="article" aria-labelledby={`product-title-${product.id}`}>
+    <article className="product-card" aria-labelledby={`product-title-${product.id}`}>
       {/* Product Image with explicit dimensions */}
       <div className="relative mb-4 rounded-lg overflow-hidden bg-gray-100">
         <OptimizedImage
@@ -176,7 +176,7 @@ export const ProductCard = React.memo(({
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }, (prevProps, nextProps) => {
   // Custom comparison function for better performance

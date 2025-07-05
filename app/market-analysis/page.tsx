@@ -97,8 +97,9 @@ export default function MarketAnalysisPage() {
     <div className="app-container">
       <NavigationSimple />
       
+      <main id="main-content">
       {/* Hero Section with Enhanced Design */}
-      <div className="relative overflow-hidden">
+      <section className="relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 opacity-50"></div>
         <div className="absolute inset-0">
@@ -141,7 +142,7 @@ export default function MarketAnalysisPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-6xl mx-auto px-6 pb-8">
 
@@ -587,7 +588,7 @@ export default function MarketAnalysisPage() {
           </div>
         </div>
       </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
