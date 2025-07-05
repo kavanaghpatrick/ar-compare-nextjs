@@ -275,7 +275,7 @@ export function BlogListingOptimized({
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          loading={index < 6 ? 'eager' : 'lazy'}
+                          priority={index < 6}
                         />
                       ) : (
                         <span className="text-white/40 text-sm" aria-hidden="true">Article Image</span>

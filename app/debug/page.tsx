@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { DebugHomeClient } from '@/components/DebugHomeClient';
+import { HomeClient } from '@/components/HomeClient';
 import arGlassesData from '@/data/products';
 
 export default async function DebugPage({
@@ -15,7 +15,7 @@ export default async function DebugPage({
   
   return (
     <Suspense fallback={<div>Loading from Suspense...</div>}>
-      <DebugHomeClient 
+      <HomeClient 
         initialProducts={arGlassesData}
         searchParams={params}
       />

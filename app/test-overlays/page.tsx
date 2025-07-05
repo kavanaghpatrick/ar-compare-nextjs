@@ -11,9 +11,10 @@ import { QuickView } from '@/components/QuickView';
 import { ComparisonCart } from '@/components/ComparisonCart';
 import { useComparison } from '@/contexts/ComparisonContext';
 import arGlassesData from '@/data/products';
+import { Product } from '@/types';
 
 export default function TestOverlaysPage() {
-  const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [showQuickView, setShowQuickView] = useState(false);
   const { addItem, clearComparison } = useComparison();
 

@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TrendingUp, Target, BarChart3, Search, Activity, Zap, Users, Globe, GitCompare, Filter, PieChart } from 'lucide-react';
-import { NavigationSimple } from '@/components/NavigationSimple';
+import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
 // Lazy load heavy components for better performance
@@ -95,7 +95,7 @@ const InteractiveFeaturesSummary = dynamic(() => import('@/components/Interactiv
 export default function MarketAnalysisPage() {
   return (
     <div className="app-container">
-      <NavigationSimple />
+      <Navigation />
       
       <main id="main-content">
       {/* Hero Section with Enhanced Design */}
@@ -587,6 +587,7 @@ export default function MarketAnalysisPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
       </main>
       <Footer />
