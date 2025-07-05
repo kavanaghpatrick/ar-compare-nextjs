@@ -1,24 +1,27 @@
 
 > ar-compare-nextjs@0.1.0 dev
-> next dev --turbopack
+> next dev
 
-   ▲ Next.js 15.3.4 (Turbopack)
+   ▲ Next.js 15.3.4
    - Local:        http://localhost:3000
-   - Network:      http://192.168.4.130:3000
+   - Network:      http://192.168.0.219:3000
    - Environments: .env.local
 
  ✓ Starting...
- ✓ Compiled middleware in 57ms
- ✓ Ready in 672ms
+ ✓ Ready in 1810ms
+ ✓ Compiled /middleware in 192ms (109 modules)
  ○ Compiling / ...
- ✓ Compiled / in 1126ms
+ ✓ Compiled / in 2.2s (959 modules)
+[HomeClient] Component rendering... { productsCount: 8, serverSearchParams: {} }
  ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
- GET / 200 in 1279ms
- ✓ Compiled middleware in 1ms
- ✓ Compiled middleware in 0ms
- ✓ Compiled in 159ms
- ✓ Compiled in 146ms
- ✓ Compiled in 88ms
- ✓ Compiled middleware in 0ms
- ✓ Compiled middleware in 0ms
- ✓ Compiled in 216ms
+ GET / 200 in 2364ms
+ ✓ Compiled in 122ms (404 modules)
+[HomeClient] Component rendering... { productsCount: 8, serverSearchParams: {} }
+ GET / 200 in 22ms
+[HomeClient] Component rendering... { productsCount: 8, serverSearchParams: {} }
+ GET / 200 in 25ms
+ ✓ Compiled in 375ms (404 modules)
+ ✓ Compiled in 123ms (404 modules)
+ ✓ Compiled in 388ms (404 modules)
+ ✓ Compiled in 345ms (404 modules)
+ ✓ Compiled in 342ms (404 modules)
