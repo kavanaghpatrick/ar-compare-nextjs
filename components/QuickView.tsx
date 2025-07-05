@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { X, Star, ExternalLink, ShoppingCart, Eye, Zap, Volume2, Weight } from 'lucide-react';
 import { Product } from '@/types';
@@ -15,6 +16,12 @@ interface QuickViewProps {
 export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
   const { addItem, removeItem, isInComparison } = useComparison();
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -58,14 +65,14 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
     ));
   };
 
-  if (!isVisible || !product) return null;
+  if (!isVisible || !product || !mounted) return null;
 
   const hasDiscount = product.price < product.originalPrice;
   const discountPercentage = hasDiscount 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
 
-  return (
+  const modalContent = (
     <div 
       className={`quick-view-overlay ${isOpen ? 'open' : ''}`}
       onClick={onClose}
@@ -185,4 +192,7 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
       </div>
     </div>
   );
+
+  // Use React Portal to render modal at document body level
+  return createPortal(modalContent, document.body);
 }
