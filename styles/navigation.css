@@ -4,7 +4,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--z-sticky);
   background: rgba(15, 16, 26, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -73,7 +73,7 @@
   position: absolute;
   left: 1rem;
   color: rgba(255, 255, 255, 0.5);
-  z-index: 10;
+  z-index: var(--z-dropdown);
 }
 
 .search-clear {
@@ -176,7 +176,7 @@
   padding: 0.5rem;
   margin-top: 0.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 50;
+  z-index: var(--z-dropdown);
   animation: dropdownFadeIn 0.2s ease-out;
 }
 
@@ -289,7 +289,7 @@
   padding: 0.5rem;
   margin-top: 0.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 50;
+  z-index: var(--z-dropdown);
 }
 
 /* Mobile Menu */
