@@ -141,7 +141,7 @@ export function Navigation() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="nav desktop-only">
+        <nav className="nav desktop-only" aria-label="Main navigation">
           <Link 
             href="/" 
             className={`nav-link ${
@@ -271,7 +271,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile Navigation */}
-          <nav className="mobile-nav">
+          <nav className="mobile-nav" aria-label="Mobile navigation">
             <Link href="/" className={`mobile-nav-link ${
               pathname === '/' ? 'active' : ''
             }`}>

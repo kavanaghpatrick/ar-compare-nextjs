@@ -24,7 +24,7 @@ export default function ComparePage() {
     return (
       <div className="app-container">
         <NavigationSimple />
-        <main className="comparison-main">
+        <main className="comparison-main" id="main-content">
           <div className="comparison-container">
             <div className="text-center py-12">
               <div className="text-white/40 text-4xl mb-4">⚠️</div>
@@ -56,7 +56,7 @@ export default function ComparePage() {
         <NavigationSimple />
         <ComparisonCart />
         
-        <main className="comparison-main">
+        <main className="comparison-main" id="main-content">
           <div className="comparison-container">
             <div className="text-center py-12">
               <div className="text-white/40 text-4xl mb-4">📊</div>
@@ -168,7 +168,7 @@ const ComparisonProductCard = React.memo(({
     </div>
 
     <div className="comparison-card-content">
-      <h3 className="comparison-product-title">{product.fullName}</h3>
+      <h2 className="comparison-product-title">{product.fullName}</h2>
       <div className="comparison-price">${product.price}</div>
       
       <div className="comparison-rating">
@@ -188,7 +188,7 @@ const ComparisonProductCard = React.memo(({
       {/* Key Specs Grid */}
       <div className="comparison-specs">
         <div className="spec-group">
-          <h4>Display</h4>
+          <h3>Display</h3>
           <div className="spec-row">
             <span className="spec-label">Type:</span>
             <span className="spec-value">{product.specifications.display.type}</span>
@@ -208,7 +208,7 @@ const ComparisonProductCard = React.memo(({
         </div>
 
         <div className="spec-group">
-          <h4>Design</h4>
+          <h3>Design</h3>
           <div className="spec-row">
             <span className="spec-label">Weight:</span>
             <span className="spec-value">{product.specifications.design.weight}</span>
@@ -220,7 +220,7 @@ const ComparisonProductCard = React.memo(({
         </div>
 
         <div className="spec-group">
-          <h4>Audio</h4>
+          <h3>Audio</h3>
           <div className="spec-row">
             <span className="spec-label">Speakers:</span>
             <span className="spec-value">{product.specifications.audio.speakers}</span>
@@ -228,7 +228,7 @@ const ComparisonProductCard = React.memo(({
         </div>
 
         <div className="spec-group">
-          <h4>Connectivity</h4>
+          <h3>Connectivity</h3>
           <div className="spec-row">
             <span className="spec-label">Connection:</span>
             <span className="spec-value">{product.specifications.connectivity.connection}</span>
@@ -239,9 +239,9 @@ const ComparisonProductCard = React.memo(({
       {/* Pros and Cons */}
       <div className="comparison-pros-cons">
         <div className="pros-section">
-          <h4 className="pros-title">
+          <h3 className="pros-title">
             ✓ Pros
-          </h4>
+          </h3>
           <ul className="pros-list">
             {product.pros.slice(0, 3).map((pro, index) => (
               <li key={index}>{pro}</li>
@@ -249,9 +249,9 @@ const ComparisonProductCard = React.memo(({
           </ul>
         </div>
         <div className="cons-section">
-          <h4 className="cons-title">
+          <h3 className="cons-title">
             ✗ Cons
-          </h4>
+          </h3>
           <ul className="cons-list">
             {product.cons.slice(0, 3).map((con, index) => (
               <li key={index}>{con}</li>
