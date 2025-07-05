@@ -329,7 +329,9 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
 
       {/* Enhanced Products Section */}
       <main id="main-content">
-        <section className="products-section-enhanced">
+        <section 
+          className="products-section-enhanced"
+        >
           <div className="products-container">
           {/* Enhanced Search Section */}
           <div className="search-section">
@@ -406,7 +408,7 @@ export function HomeClient({ initialProducts, searchParams: serverSearchParams }
           </div>
 
           {/* Products Grid */}
-          <div className="products-grid-enhanced">
+          <div className="products-grid">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}

@@ -13,17 +13,16 @@ interface ProductPageProps {
 
 async function getProduct(id: string): Promise<EnhancedProduct | null> {
   try {
+    // During build time, use direct data import instead of API fetch
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL && !process.env.NEXT_PUBLIC_API_URL) {
+      // Import the enhanced data directly for static generation
+      const { default: enhancedArGlassesData } = await import('@/data/products');
+      return enhancedArGlassesData.find(p => p.id === id) || null;
+    }
+    
     // Use environment variable for API URL, or construct it based on VERCEL_URL
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
-    
-    // During build time, we need to handle the case where API might not be available
-    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL && !process.env.NEXT_PUBLIC_API_URL) {
-      // For static generation, return null or use static data
-      console.warn('API URL not configured during build. Using static data fallback.');
-      // You could import static data here as a fallback
-      return null;
-    }
     
     const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: 'force-cache',
@@ -42,8 +41,23 @@ async function getProduct(id: string): Promise<EnhancedProduct | null> {
     return response.json();
   } catch (error) {
     console.error('Error fetching product:', error);
-    return null;
+    // Fallback to direct data import if API fails
+    try {
+      const { default: enhancedArGlassesData } = await import('@/data/products');
+      return enhancedArGlassesData.find(p => p.id === id) || null;
+    } catch (fallbackError) {
+      console.error('Fallback data import failed:', fallbackError);
+      return null;
+    }
   }
+}
+
+// Generate static params for all products
+export async function generateStaticParams() {
+  const { default: enhancedArGlassesData } = await import('@/data/products');
+  return enhancedArGlassesData.map((product) => ({
+    id: product.id,
+  }));
 }
 
 // Removed renderStars function as it's now handled by ProductHero component
