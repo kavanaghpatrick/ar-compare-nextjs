@@ -19,7 +19,24 @@ export default function ComparePage() {
   const { comparison, removeItem, clearComparison } = useComparison();
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
 
-  // Error boundary for the comparison data
+  // FIXED: Move useMemo BEFORE any conditional returns to comply with Rules of Hooks
+  // Memoize the comparison products calculation
+  const comparisonProducts = useMemo(() => {
+    // Handle case where comparison or items is invalid
+    if (!comparison || !Array.isArray(comparison.items)) {
+      return [];
+    }
+    return comparison.items
+      .map(item => arGlassesData.find(product => product.id === item.productId))
+      .filter((product): product is Product => product !== undefined)
+      .sort((a, b) => {
+        const aItem = comparison.items.find(item => item.productId === a.id);
+        const bItem = comparison.items.find(item => item.productId === b.id);
+        return (aItem?.position || 0) - (bItem?.position || 0);
+      });
+  }, [comparison]);
+
+  // Error boundary for the comparison data - now AFTER hooks
   if (!comparison || !Array.isArray(comparison.items)) {
     return (
       <div className="app-container">
@@ -37,18 +54,6 @@ export default function ComparePage() {
       </div>
     );
   }
-
-  // Memoize the comparison products calculation
-  const comparisonProducts = useMemo(() => {
-    return comparison.items
-      .map(item => arGlassesData.find(product => product.id === item.productId))
-      .filter((product): product is Product => product !== undefined)
-      .sort((a, b) => {
-        const aItem = comparison.items.find(item => item.productId === a.id);
-        const bItem = comparison.items.find(item => item.productId === b.id);
-        return (aItem?.position || 0) - (bItem?.position || 0);
-      });
-  }, [comparison.items]);
 
   if (comparison.items.length === 0) {
     return (

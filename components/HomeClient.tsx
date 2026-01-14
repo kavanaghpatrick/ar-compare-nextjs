@@ -21,22 +21,14 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ initialProducts, searchParams: serverSearchParams }: HomeClientProps) {
-  console.log('[HomeClient] Component rendering...', { 
-    productsCount: initialProducts?.length,
-    serverSearchParams 
-  });
   const { addItem, removeItem, isInComparison, isHydrated } = useComparison();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
-  
-  // Safely use searchParams with try-catch to handle potential SSR issues
-  let clientSearchParams: URLSearchParams | null = null;
-  try {
-    clientSearchParams = useSearchParams();
-  } catch (error) {
-    console.warn('useSearchParams error:', error);
-  }
+
+  // FIXED: Call useSearchParams unconditionally (React Hooks rule)
+  // The hook itself handles SSR gracefully in Next.js 15
+  const clientSearchParams = useSearchParams();
   
   // Get URL parameters - prefer client-side params when available
   const urlSearch = (isHydrated && clientSearchParams ? clientSearchParams.get('search') : serverSearchParams.search) || '';

@@ -8,30 +8,24 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { 
-  GitCompare, 
-  Plus, 
-  X, 
-  Star, 
-  TrendingUp, 
-  Target, 
+import { TooltipProvider } from '@/components/ui/tooltip';
+import {
+  GitCompare,
+  Plus,
+  X,
+  Star,
+  Target,
   Zap,
-  Award,
   DollarSign,
-  Eye,
   RefreshCw,
   Download,
   Share2,
-  Maximize2,
   Crown,
   Check,
   AlertTriangle,
   Info,
   BarChart3,
-  PieChart,
   ArrowUpDown,
-  Filter,
   Search
 } from 'lucide-react';
 

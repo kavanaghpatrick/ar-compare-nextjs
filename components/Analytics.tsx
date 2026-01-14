@@ -6,7 +6,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 declare global {
   interface Window {
     gtag?: (command: string, targetId: string, config?: Record<string, unknown>) => void;
-    dataLayer?: any[];
+    dataLayer?: unknown[];
   }
 }
 
@@ -25,7 +25,7 @@ export function Analytics() {
         if (script.parentNode) {
           script.parentNode.removeChild(script);
         }
-      } catch (error) {
+      } catch {
         // Ignore cleanup errors
       }
     });
@@ -52,8 +52,8 @@ export function Analytics() {
       document.head.appendChild(script1);
       document.head.appendChild(script2);
       scriptsRef.current = [script1, script2];
-    } catch (error) {
-      console.error('Failed to load analytics scripts:', error);
+    } catch {
+      // Failed to load analytics scripts - non-critical
     }
 
     return () => {
@@ -63,7 +63,7 @@ export function Analytics() {
           if (script.parentNode) {
             script.parentNode.removeChild(script);
           }
-        } catch (error) {
+        } catch {
           // Ignore cleanup errors during React unmount
         }
       });

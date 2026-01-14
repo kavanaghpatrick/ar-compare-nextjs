@@ -1,14 +1,13 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { 
-  Eye, 
-  Zap, 
-  Volume2, 
-  Weight, 
-  Star, 
-  ArrowUpDown, 
-  CheckCircle, 
+import {
+  Eye,
+  Zap,
+  Weight,
+  Star,
+  ArrowUpDown,
+  CheckCircle,
   XCircle,
   Minus,
   Plus,

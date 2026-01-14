@@ -5,8 +5,8 @@
 This document summarizes the systematic z-index management implementation for the AR Compare application, completed as part of Phase 4 of the structural fixes outlined in PRD_STRUCTURAL_FIXES.md.
 
 ## Implementation Date
-- **Date:** 2025-07-05
-- **Branch:** phase4-zindex
+- **Initial:** 2025-07-05
+- **Updated:** 2026-01-14 (audit and fix of missing variable definitions)
 
 ## CSS Variables Defined
 
@@ -15,17 +15,18 @@ All z-index values are now centrally managed through CSS variables defined in `/
 ```css
 :root {
   /* Z-Index Scale - Centralized Management */
-  --z-base: 0;
-  --z-dropdown: 50;
-  --z-sticky: 100;
-  --z-fixed: 150;
-  --z-cart: 200;
-  --z-modal-backdrop: 250;
-  --z-modal: 300;
-  --z-popover: 350;
-  --z-tooltip: 400;
-  --z-notification: 450;
-  --z-max: 500;
+  --z-base: 0;           /* Default stacking level */
+  --z-elevated: 10;      /* Slightly raised elements */
+  --z-dropdown: 50;      /* Dropdown menus, select options */
+  --z-sticky: 100;       /* Sticky headers, navigation bars */
+  --z-fixed: 150;        /* Fixed position elements */
+  --z-cart: 200;         /* Shopping cart, comparison tray */
+  --z-modal-backdrop: 250; /* Modal/dialog backdrop overlay */
+  --z-modal: 300;        /* Modal/dialog content */
+  --z-popover: 350;      /* Popovers, floating panels */
+  --z-tooltip: 400;      /* Tooltips (highest interactive) */
+  --z-notification: 450; /* Toast notifications */
+  --z-max: 500;          /* Reserved for critical overlays */
 }
 ```
 
@@ -64,9 +65,24 @@ All Radix UI components now use CSS variables instead of hard-coded z-index valu
 - **Z-Index:** `var(--z-modal-backdrop)` (250) - defined in `quickview.css`
 - **Position:** Fixed positioning maintained
 
-#### Navigation Component
+#### Navigation Component (`/styles/navigation.css`)
 - **Header:** `var(--z-sticky)` (100)
 - **Dropdowns:** `var(--z-dropdown)` (50)
+
+#### PageNavigation Component (`/components/PageNavigation.tsx`)
+- **Mobile toggle:** `var(--z-fixed)` (150)
+- **Desktop floating nav:** `var(--z-fixed)` (150)
+- **Mobile overlay:** `var(--z-modal-backdrop)` (250)
+- **Back to top button:** `var(--z-fixed)` (150)
+
+#### Loading Component (`/components/Loading.tsx`)
+- **Fullscreen overlay:** `var(--z-modal-backdrop)` (250)
+
+#### PerformanceMonitor Component (`/components/PerformanceMonitor.tsx`)
+- **Debug overlay:** `var(--z-notification)` (450)
+
+#### Skip to Content Links
+- **All skip links:** `var(--z-max)` (500) - highest priority for accessibility
 
 ## Stacking Hierarchy
 

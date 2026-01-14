@@ -93,7 +93,7 @@ export function PageNavigation({ className = '' }: PageNavigationProps) {
   return (
     <>
       {/* Mobile Navigation Toggle */}
-      <div className={`fixed bottom-4 left-4 z-50 lg:hidden ${className}`}>
+      <div className={`fixed bottom-4 left-4 lg:hidden [z-index:var(--z-fixed)] ${className}`}>
         <Button
           onClick={() => setIsExpanded(!isExpanded)}
           className="rounded-full w-12 h-12 shadow-lg bg-blue-600 hover:bg-blue-700"
@@ -108,7 +108,7 @@ export function PageNavigation({ className = '' }: PageNavigationProps) {
       </div>
 
       {/* Desktop Floating Navigation */}
-      <Card className={`fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block shadow-xl ${className}`}>
+      <Card className={`fixed right-4 top-1/2 transform -translate-y-1/2 [z-index:var(--z-fixed)] hidden lg:block shadow-xl ${className}`}>
         <CardContent className="p-2">
           <div className="flex flex-col space-y-1">
             {navigationItems.map((item) => {
@@ -150,7 +150,7 @@ export function PageNavigation({ className = '' }: PageNavigationProps) {
 
       {/* Mobile Expanded Navigation */}
       {isExpanded && (
-        <div className="fixed inset-0 z-40 lg:hidden">
+        <div className="fixed inset-0 [z-index:var(--z-modal-backdrop)] lg:hidden">
           <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsExpanded(false)} />
           <Card className="absolute bottom-20 left-4 right-4 shadow-xl">
             <CardContent className="p-4">
@@ -195,7 +195,7 @@ export function PageNavigation({ className = '' }: PageNavigationProps) {
       )}
 
       {/* Floating Back to Top Button */}
-      <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
+      <div className={`fixed bottom-4 right-4 [z-index:var(--z-fixed)] ${className}`}>
         <Button
           onClick={scrollToTop}
           className="rounded-full w-12 h-12 shadow-lg bg-gray-900 hover:bg-gray-800 text-white"

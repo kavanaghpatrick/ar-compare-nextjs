@@ -19,8 +19,8 @@ export function Loading({
     lg: 'w-12 h-12'
   };
 
-  const containerClasses = fullScreen 
-    ? 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50'
+  const containerClasses = fullScreen
+    ? 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center [z-index:var(--z-modal-backdrop)]'
     : 'flex items-center justify-center p-8';
 
   return (

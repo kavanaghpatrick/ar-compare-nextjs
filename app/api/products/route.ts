@@ -1,26 +1,29 @@
 import { NextResponse } from 'next/server';
 import { arGlassesData } from '@/data/products'; // Import basic product data
-import { Product, ApiResponse, ProductsApiResponse, ApiErrorResponse } from '@/types';
+import { Product, ProductsApiResponse, ApiErrorResponse } from '@/types';
 import logger from '@/lib/logger';
+import { ProductFiltersSchema, parseSearchParams, createValidationErrorResponse } from '@/lib/api-validation';
 
 // GET /api/products - Get all products
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    
-    // Parse query parameters
-    const category = searchParams.get('category');
-    const brand = searchParams.get('brand');
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
-    const sortBy = searchParams.get('sortBy') || 'name';
-    const sortOrder = searchParams.get('sortOrder') || 'asc';
-    const limit = searchParams.get('limit');
-    const offset = searchParams.get('offset');
+
+    // FIXED: Validate and parse query parameters with Zod
+    const validationResult = parseSearchParams(searchParams, ProductFiltersSchema);
+
+    if (!validationResult.success) {
+      return NextResponse.json(
+        createValidationErrorResponse(validationResult.error),
+        { status: 400 }
+      );
+    }
+
+    const { category, brand, minPrice, maxPrice, sortBy, sortOrder, limit, offset } = validationResult.data;
 
     let filteredProducts: Product[] = [...arGlassesData];
 
-    // Apply filters
+    // Apply filters (values are already validated and typed by Zod)
     if (category) {
       filteredProducts = filteredProducts.filter(
         product => product.category.toLowerCase() === category.toLowerCase()
@@ -33,14 +36,12 @@ export async function GET(request: Request) {
       );
     }
 
-    if (minPrice) {
-      const min = parseFloat(minPrice);
-      filteredProducts = filteredProducts.filter(product => product.price >= min);
+    if (minPrice !== undefined) {
+      filteredProducts = filteredProducts.filter(product => product.price >= minPrice);
     }
 
-    if (maxPrice) {
-      const max = parseFloat(maxPrice);
-      filteredProducts = filteredProducts.filter(product => product.price <= max);
+    if (maxPrice !== undefined) {
+      filteredProducts = filteredProducts.filter(product => product.price <= maxPrice);
     }
 
     // Apply sorting
@@ -74,12 +75,11 @@ export async function GET(request: Request) {
       }
     });
 
-    // Apply pagination
+    // Apply pagination (values are already validated by Zod)
     let paginatedProducts = filteredProducts;
-    if (limit) {
-      const limitNum = parseInt(limit);
-      const offsetNum = offset ? parseInt(offset) : 0;
-      paginatedProducts = filteredProducts.slice(offsetNum, offsetNum + limitNum);
+    if (limit !== undefined) {
+      const offsetNum = offset ?? 0;
+      paginatedProducts = filteredProducts.slice(offsetNum, offsetNum + limit);
     }
 
     const response: ProductsApiResponse = {
@@ -87,10 +87,10 @@ export async function GET(request: Request) {
       total: filteredProducts.length,
       count: paginatedProducts.length,
       filters: {
-        category,
-        brand,
-        minPrice,
-        maxPrice,
+        category: category ?? null,
+        brand: brand ?? null,
+        minPrice: minPrice !== undefined ? String(minPrice) : null,
+        maxPrice: maxPrice !== undefined ? String(maxPrice) : null,
         sortBy,
         sortOrder
       }

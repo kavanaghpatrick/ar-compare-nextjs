@@ -1,17 +1,14 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  Star, 
-  Eye, 
-  Weight, 
-  Zap, 
-  TrendingUp, 
-  TrendingDown, 
-  ArrowUpRight, 
-  ArrowDownRight,
+import {
+  Star,
+  Eye,
+  Weight,
+  Zap,
+  TrendingUp,
+  TrendingDown,
+  ArrowUpRight,
   Users,
   Shuffle,
   Heart,

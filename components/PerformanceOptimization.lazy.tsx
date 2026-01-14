@@ -167,63 +167,79 @@ export function initializePrefetching(
 export function initializePerformanceMonitoring() {
   if (typeof window === 'undefined') return;
 
+  // Track observers for cleanup
+  const observers: PerformanceObserver[] = [];
+  let loadHandler: (() => void) | null = null;
+
   // Core Web Vitals monitoring
   const reportWebVitals = () => {
     // LCP (Largest Contentful Paint)
     if ('PerformanceObserver' in window) {
-      const lcpObserver = new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        console.log('LCP:', lastEntry.startTime);
-        
-        // Report to analytics
-        if (window.gtag) {
-          window.gtag('event', 'web_vitals', {
-            name: 'LCP',
-            value: Math.round(lastEntry.startTime),
-            event_category: 'performance'
-          });
-        }
-      });
-      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+      try {
+        const lcpObserver = new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          const lastEntry = entries[entries.length - 1];
 
-      // FID (First Input Delay) 
-      const fidObserver = new PerformanceObserver((entryList) => {
-        entryList.getEntries().forEach((entry) => {
-          const fidEntry = entry as PerformanceEventTiming;
-          console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
-          
+          // Report to analytics (no console.log in production)
           if (window.gtag) {
             window.gtag('event', 'web_vitals', {
-              name: 'FID',
-              value: Math.round(fidEntry.processingStart - fidEntry.startTime),
+              name: 'LCP',
+              value: Math.round(lastEntry.startTime),
               event_category: 'performance'
             });
           }
         });
-      });
-      fidObserver.observe({ entryTypes: ['first-input'] });
+        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+        observers.push(lcpObserver);
+      } catch {
+        // LCP observation not supported
+      }
 
-      // CLS (Cumulative Layout Shift)
-      let clsValue = 0;
-      const clsObserver = new PerformanceObserver(function(entryList) {
-        for (const entry of entryList.getEntries()) {
-          const layoutShiftEntry = entry as LayoutShift;
-          if (!layoutShiftEntry.hadRecentInput) {
-            clsValue += layoutShiftEntry.value;
-          }
-        }
-        console.log('CLS:', clsValue);
-        
-        if (window.gtag) {
-          window.gtag('event', 'web_vitals', {
-            name: 'CLS', 
-            value: Math.round(clsValue * 1000),
-            event_category: 'performance'
+      try {
+        // FID (First Input Delay)
+        const fidObserver = new PerformanceObserver((entryList) => {
+          entryList.getEntries().forEach((entry) => {
+            const fidEntry = entry as PerformanceEventTiming;
+
+            if (window.gtag) {
+              window.gtag('event', 'web_vitals', {
+                name: 'FID',
+                value: Math.round(fidEntry.processingStart - fidEntry.startTime),
+                event_category: 'performance'
+              });
+            }
           });
-        }
-      });
-      clsObserver.observe({ entryTypes: ['layout-shift'] });
+        });
+        fidObserver.observe({ entryTypes: ['first-input'] });
+        observers.push(fidObserver);
+      } catch {
+        // FID observation not supported
+      }
+
+      try {
+        // CLS (Cumulative Layout Shift)
+        let clsValue = 0;
+        const clsObserver = new PerformanceObserver(function(entryList) {
+          for (const entry of entryList.getEntries()) {
+            const layoutShiftEntry = entry as LayoutShift;
+            if (!layoutShiftEntry.hadRecentInput) {
+              clsValue += layoutShiftEntry.value;
+            }
+          }
+
+          if (window.gtag) {
+            window.gtag('event', 'web_vitals', {
+              name: 'CLS',
+              value: Math.round(clsValue * 1000),
+              event_category: 'performance'
+            });
+          }
+        });
+        clsObserver.observe({ entryTypes: ['layout-shift'] });
+        observers.push(clsObserver);
+      } catch {
+        // CLS observation not supported
+      }
     }
   };
 
@@ -231,8 +247,26 @@ export function initializePerformanceMonitoring() {
   if (document.readyState === 'complete') {
     reportWebVitals();
   } else {
-    window.addEventListener('load', reportWebVitals);
+    loadHandler = reportWebVitals;
+    window.addEventListener('load', loadHandler);
   }
+
+  // Return cleanup function to prevent memory leaks
+  return () => {
+    // Disconnect all PerformanceObservers
+    observers.forEach(observer => {
+      try {
+        observer.disconnect();
+      } catch {
+        // Ignore disconnect errors
+      }
+    });
+
+    // Remove load event listener if it was added
+    if (loadHandler) {
+      window.removeEventListener('load', loadHandler);
+    }
+  };
 }
 
 // Advanced resource hints
@@ -261,8 +295,8 @@ export function initializeAdvancedResourceHints(
       link.href = url;
       createdLinks.push(link);
       document.head.appendChild(link);
-    } catch (error) {
-      console.warn('Failed to add DNS prefetch:', error);
+    } catch {
+      // DNS prefetch failed - non-critical
     }
   });
 
@@ -277,8 +311,8 @@ export function initializeAdvancedResourceHints(
       link.crossOrigin = 'anonymous';
       createdLinks.push(link);
       document.head.appendChild(link);
-    } catch (error) {
-      console.warn('Failed to preload product image:', error);
+    } catch {
+      // Image preload failed - non-critical
     }
   }
 
@@ -294,8 +328,8 @@ export function initializeAdvancedResourceHints(
         link.crossOrigin = 'anonymous';
         createdLinks.push(link);
         document.head.appendChild(link);
-      } catch (error) {
-        console.warn('Failed to preload image:', error);
+      } catch {
+        // Image preload failed - non-critical
       }
     });
   }

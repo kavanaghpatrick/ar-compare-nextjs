@@ -38,12 +38,8 @@ export function PerformanceOptimization({
 }: PerformanceOptimizationProps) {
   // Check if we're in development mode
   const isDevelopment = process.env.NODE_ENV === 'development';
-  
-  // Early return if disabled in development
-  if (isDevelopment && disableInDev) {
-    return null;
-  }
 
+  // FIXED: Move all hooks BEFORE any conditional returns to comply with Rules of Hooks
   // Critical CSS injection for above-the-fold content
   const criticalCSS = useMemo(() => {
     if (!enableCriticalCSS) return '';
@@ -83,7 +79,7 @@ export function PerformanceOptimization({
     };
 
     return baseCriticalCSS + (pageSpecificCSS[pageType] || '');
-  }, [pageType, enableCriticalCSS]);
+  }, [pageType, enableCriticalCSS, isDevelopment, disableInDev]);
 
   // SIMPLIFIED: Resource hints - only critical preconnections
   const resourceHints = useMemo(() => {
@@ -105,7 +101,7 @@ export function PerformanceOptimization({
     // These can be lazy-loaded when actually needed
 
     return hints;
-  }, [enableResourceHints]);
+  }, [enableResourceHints, isDevelopment, disableInDev]);
 
   // COMMENTED OUT: Lazy loading intersection observer setup
   // Heavy operations moved to lazy-loaded utilities
@@ -237,6 +233,11 @@ export function PerformanceOptimization({
       });
     };
   }, [isDevelopment, disableInDev, enableLazyLoading, pageType, product, products]);
+
+  // FIXED: Early return moved AFTER all hooks to comply with Rules of Hooks
+  if (isDevelopment && disableInDev) {
+    return null;
+  }
 
   return (
     <>

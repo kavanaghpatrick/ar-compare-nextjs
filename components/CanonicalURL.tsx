@@ -28,7 +28,7 @@ export function CanonicalURL() {
           if (link.parentNode) {
             link.parentNode.removeChild(link);
           }
-        } catch (error) {
+        } catch {
           // Ignore removal errors
         }
       });
@@ -39,8 +39,8 @@ export function CanonicalURL() {
       canonical.href = `${siteUrl}${pathname}`;
       document.head.appendChild(canonical);
       canonicalRef.current = canonical;
-    } catch (error) {
-      console.error('Failed to update canonical URL:', error);
+    } catch {
+      // Failed to update canonical URL - non-critical
     }
 
     return () => {
@@ -49,7 +49,7 @@ export function CanonicalURL() {
         if (canonicalRef.current && canonicalRef.current.parentNode) {
           canonicalRef.current.parentNode.removeChild(canonicalRef.current);
         }
-      } catch (error) {
+      } catch {
         // Ignore cleanup errors during React unmount
       }
       canonicalRef.current = null;

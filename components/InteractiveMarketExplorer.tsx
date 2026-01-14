@@ -243,7 +243,7 @@ const InteractiveMarketExplorer: React.FC<MarketExplorerProps> = ({ className = 
 
   // Filtered and sorted products
   const filteredAndSortedProducts = useMemo(() => {
-    let filtered = products.filter(product => {
+    const filtered = products.filter(product => {
       // Price range filter
       if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
         return false;

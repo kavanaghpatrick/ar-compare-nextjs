@@ -18,7 +18,6 @@ interface BlogListingClientProps {
 export function BlogListingClient({
   initialPosts,
   featuredPosts,
-  recentPosts,
   categories,
   searchParams
 }: BlogListingClientProps) {

@@ -19,7 +19,6 @@ interface BlogListingOptimizedProps {
 export function BlogListingOptimized({
   initialPosts,
   featuredPosts,
-  recentPosts,
   categories,
   searchParams
 }: BlogListingOptimizedProps) {

@@ -1,22 +1,44 @@
 import { NextResponse } from 'next/server';
+import { PlaceholderParamsSchema, PlaceholderQuerySchema, createValidationErrorResponse } from '@/lib/api-validation';
 
 export async function GET(
   request: Request,
   context: { params: Promise<{ width: string; height: string }> }
 ) {
-  const { width, height } = await context.params;
+  const rawParams = await context.params;
   const { searchParams } = new URL(request.url);
-  
-  // Get optional parameters for customization
-  const title = searchParams.get('title') || 'AR Compare';
-  const subtitle = searchParams.get('subtitle') || 'Compare AR Glasses & Smart Glasses';
-  const bgColor = searchParams.get('bg') || '#0f172a';
-  const textColor = searchParams.get('color') || '#e2e8f0';
-  const accentColor = searchParams.get('accent') || '#3b82f6';
-  
+
+  // FIXED: Validate dimensions with Zod to prevent DoS attacks
+  const paramsResult = PlaceholderParamsSchema.safeParse(rawParams);
+
+  if (!paramsResult.success) {
+    return NextResponse.json(
+      createValidationErrorResponse(paramsResult.error),
+      { status: 400 }
+    );
+  }
+
+  const { width, height } = paramsResult.data;
+
+  // Validate query parameters (optional, with defaults)
+  const queryResult = PlaceholderQuerySchema.safeParse({
+    title: searchParams.get('title'),
+    subtitle: searchParams.get('subtitle'),
+    bg: searchParams.get('bg'),
+    color: searchParams.get('color'),
+    accent: searchParams.get('accent'),
+  });
+
+  // Use validated values or defaults
+  const title = queryResult.success && queryResult.data.title ? queryResult.data.title : 'AR Compare';
+  const subtitle = queryResult.success && queryResult.data.subtitle ? queryResult.data.subtitle : 'Compare AR Glasses & Smart Glasses';
+  const bgColor = queryResult.success && queryResult.data.bg ? queryResult.data.bg : '#0f172a';
+  const textColor = queryResult.success && queryResult.data.color ? queryResult.data.color : '#e2e8f0';
+  const accentColor = queryResult.success && queryResult.data.accent ? queryResult.data.accent : '#3b82f6';
+
   // Determine if this is an OG image based on dimensions
-  const isOGImage = (width === '1200' && height === '630') || 
-                    (width === '1200' && height === '600');
+  const isOGImage = (width === 1200 && height === 630) ||
+                    (width === 1200 && height === 600);
   
   // Create a more sophisticated SVG for OG images
   const svg = isOGImage ? `

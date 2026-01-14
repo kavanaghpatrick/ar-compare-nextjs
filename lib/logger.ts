@@ -3,13 +3,13 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isServer = typeof window === 'undefined';
 
 export const logger = {
-  log: (...args: any[]) => {
+  log: (...args: unknown[]) => {
     if (isDevelopment) {
       console.log(...args);
     }
   },
-  
-  error: (...args: any[]) => {
+
+  error: (...args: unknown[]) => {
     // Always log errors, but in production, you might want to send to an error tracking service
     if (isDevelopment) {
       console.error(...args);
@@ -18,20 +18,20 @@ export const logger = {
       console.error(...args);
     }
   },
-  
-  warn: (...args: any[]) => {
+
+  warn: (...args: unknown[]) => {
     if (isDevelopment) {
       console.warn(...args);
     }
   },
-  
-  info: (...args: any[]) => {
+
+  info: (...args: unknown[]) => {
     if (isDevelopment) {
       console.info(...args);
     }
   },
-  
-  debug: (...args: any[]) => {
+
+  debug: (...args: unknown[]) => {
     if (isDevelopment) {
       console.debug(...args);
     }

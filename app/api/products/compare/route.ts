@@ -2,10 +2,7 @@ import { NextResponse } from 'next/server';
 import arGlassesData from '@/data/products';
 import { EnhancedProduct } from '@/types';
 import logger from '@/lib/logger';
-
-interface CompareRequest {
-  productIds: string[];
-}
+import { CompareRequestSchema, createValidationErrorResponse } from '@/lib/api-validation';
 
 interface ComparisonResult {
   products: EnhancedProduct[];
@@ -37,22 +34,19 @@ interface ComparisonResult {
 // POST /api/products/compare - Compare multiple products
 export async function POST(request: Request) {
   try {
-    const body: CompareRequest = await request.json();
-    const { productIds } = body;
+    const body = await request.json();
 
-    if (!productIds || !Array.isArray(productIds) || productIds.length < 2) {
+    // FIXED: Validate request body with Zod
+    const validationResult = CompareRequestSchema.safeParse(body);
+
+    if (!validationResult.success) {
       return NextResponse.json(
-        { error: 'At least 2 product IDs are required for comparison' },
+        createValidationErrorResponse(validationResult.error),
         { status: 400 }
       );
     }
 
-    if (productIds.length > 5) {
-      return NextResponse.json(
-        { error: 'Maximum 5 products can be compared at once' },
-        { status: 400 }
-      );
-    }
+    const { productIds } = validationResult.data;
 
     const products = productIds
       .map(id => arGlassesData.find(p => p.id === id))
