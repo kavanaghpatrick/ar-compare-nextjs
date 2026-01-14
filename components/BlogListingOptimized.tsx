@@ -146,10 +146,10 @@ export function BlogListingOptimized({
                 <article key={post.id} className="product-card group h-full">
                   <Link href={`/blog/${post.slug}`} className="block h-full">
                     <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg mb-6 flex items-center justify-center relative overflow-hidden">
-                      {post.image && post.image !== '/api/placeholder/800/400' ? (
+                      {post.image ? (
                         <OptimizedImage
                           src={post.image}
-                          alt={post.imageAlt}
+                          alt={post.imageAlt || post.title}
                           width={800}
                           height={450}
                           fill
@@ -265,10 +265,10 @@ export function BlogListingOptimized({
                 <article key={post.id} className="product-card group h-full flex flex-col">
                   <Link href={`/blog/${post.slug}`} className="block h-full flex flex-col">
                     <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
-                      {post.image && post.image !== '/api/placeholder/800/400' ? (
+                      {post.image ? (
                         <OptimizedImage
                           src={post.image}
-                          alt={post.imageAlt}
+                          alt={post.imageAlt || post.title}
                           width={400}
                           height={225}
                           fill

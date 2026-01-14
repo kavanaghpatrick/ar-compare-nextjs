@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { BlogPost } from '@/types';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { useMemo } from 'react';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface RelatedPostsProps {
   posts: BlogPost[];
@@ -109,9 +110,21 @@ export function RelatedPosts({
         {relatedPosts.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`}>
             <article className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl border border-white/10 p-6 hover:border-white/20 transition-all duration-300 group cursor-pointer h-full">
-              {/* Article Image Placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300">
-                <BookOpen className="text-white/70 w-8 h-8" />
+              {/* Article Image */}
+              <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300 relative overflow-hidden">
+                {post.image ? (
+                  <OptimizedImage
+                    src={post.image}
+                    alt={post.title}
+                    width={400}
+                    height={225}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                ) : (
+                  <BookOpen className="text-white/70 w-8 h-8" />
+                )}
               </div>
               
               {/* Article Meta */}

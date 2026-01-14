@@ -3839,20 +3839,23 @@ html {
   }
 }
 
-/* Product Card Component Styles */
+/* Product Card Component Styles - Dark Theme */
 .product-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
-  color: #111827;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  color: white;
+  backdrop-filter: blur(10px);
 }
 
-/* Simple hover effect */
+/* Hover effect */
 .product-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
 }
 
 .product-card:focus-within {
@@ -3911,7 +3914,7 @@ html {
 
 .product-category-text {
   font-size: 0.75rem;
-  color: #4b5563 !important;
+  color: rgba(147, 197, 253, 1) !important; /* blue-300 for dark theme */
   font-weight: 500;
 }
 
@@ -3944,18 +3947,18 @@ html {
   font-weight: 400;
 }
 
-/* Product Title & Description */
+/* Product Title & Description - Dark Theme */
 .product-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #111827 !important;
+  color: white !important;
   margin-bottom: 0.5rem;
   line-height: 1.4;
 }
 
 .product-description {
   font-size: 0.875rem;
-  color: #6b7280 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -3984,31 +3987,30 @@ html {
 }
 
 .star-empty {
-  color: #e5e7eb;
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .rating-text {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151 !important;
+  color: white !important;
 }
 
 .rating-reviews {
   font-size: 0.75rem;
-  color: #9ca3af !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Specs Grid */
+/* Specs Grid - Dark Theme */
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.875rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .light-bg .specs-grid,
@@ -4028,14 +4030,14 @@ html {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.813rem;
-  color: #4b5563 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   padding: 0.375rem 0.5rem;
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
 
 .spec-item:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .spec-item svg {
@@ -4086,26 +4088,27 @@ html {
 
 .action-btn-details {
   background: transparent;
-  color: #4b5563;
-  border: 1px solid #e5e7eb;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .action-btn-details:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
 }
 
 .action-btn-quick-view {
   background: transparent;
-  color: #6b7280;
-  border: 1px solid #e5e7eb;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.5rem 0.75rem;
 }
 
 .action-btn-quick-view:hover {
-  background: #f3f4f6;
-  color: #374151;
-  border-color: #d1d5db;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .action-btn-legacy {

@@ -52,7 +52,7 @@ export const ProductCard = React.memo(({
   return (
     <article className="product-card" aria-labelledby={`product-title-${product.id}`}>
       {/* Product Image with explicit dimensions */}
-      <div className="relative mb-4 rounded-lg overflow-hidden bg-gray-100">
+      <div className="relative mb-4 rounded-lg overflow-hidden bg-white/10">
         <OptimizedImage
           src={product.image}
           alt={product.fullName}
