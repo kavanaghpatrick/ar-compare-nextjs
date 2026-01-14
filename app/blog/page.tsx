@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { BlogListingClient } from '@/components/BlogListingClient';
+import { BlogListingOptimized } from '@/components/BlogListingOptimized';
 import { blogPosts, getFeaturedPosts, getRecentPosts } from '@/data/blog/posts';
 import { blogCategories } from '@/data/blog/categories';
 import { SimpleLoading } from '@/components/SimpleLoading';
@@ -66,7 +66,7 @@ export default async function BlogPage({
 
   return (
     <Suspense fallback={<SimpleLoading />}>
-      <BlogListingClient 
+      <BlogListingOptimized
         initialPosts={blogPosts}
         featuredPosts={featuredPosts}
         recentPosts={recentPosts}

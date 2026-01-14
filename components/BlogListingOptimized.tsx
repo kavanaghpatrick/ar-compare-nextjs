@@ -277,7 +277,7 @@ export function BlogListingOptimized({
                           priority={index < 6}
                         />
                       ) : (
-                        <span className="text-white/40 text-sm" aria-hidden="true">Article Image</span>
+                        <span className="text-white/70 text-sm" aria-hidden="true">Article Image</span>
                       )}
                     </div>
                     

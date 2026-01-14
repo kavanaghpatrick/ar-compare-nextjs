@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://arcompare.com'),
   title: {
     default: 'AR Compare - Compare AR Glasses & Smart Glasses',
     template: '%s | AR Compare'

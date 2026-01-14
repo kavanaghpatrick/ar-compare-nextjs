@@ -915,7 +915,7 @@ const AISearchInterface: React.FC<{
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([]);
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
 
-  const loadSuggestions = async () => {
+  const loadSuggestions = useCallback(async () => {
     setLoadingSuggestions(true);
     try {
       const suggestionsList = await suggestions();
@@ -925,11 +925,11 @@ const AISearchInterface: React.FC<{
     } finally {
       setLoadingSuggestions(false);
     }
-  };
+  }, [suggestions]);
 
   useEffect(() => {
     loadSuggestions();
-  }, []);
+  }, [loadSuggestions]);
 
   return (
     <div className="space-y-4">

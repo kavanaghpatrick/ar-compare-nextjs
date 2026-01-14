@@ -19,18 +19,19 @@ interface PageNavigationProps {
   className?: string;
 }
 
+// Static navigation items - defined outside component to avoid recreation on each render
+const navigationItems = [
+  { id: 'market-insights', label: 'Market Overview', icon: TrendingUp },
+  { id: 'buying-guide', label: 'Buying Guide', icon: Target },
+  { id: 'search-section', label: 'Search & Filter', icon: Search },
+  { id: 'products-section', label: 'All Products', icon: Grid3X3 },
+  { id: 'faq-section', label: 'FAQ', icon: HelpCircle },
+];
+
 export function PageNavigation({ className = '' }: PageNavigationProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-
-  const navigationItems = [
-    { id: 'market-insights', label: 'Market Overview', icon: TrendingUp },
-    { id: 'buying-guide', label: 'Buying Guide', icon: Target },
-    { id: 'search-section', label: 'Search & Filter', icon: Search },
-    { id: 'products-section', label: 'All Products', icon: Grid3X3 },
-    { id: 'faq-section', label: 'FAQ', icon: HelpCircle },
-  ];
 
   useEffect(() => {
     const toggleVisibility = () => {

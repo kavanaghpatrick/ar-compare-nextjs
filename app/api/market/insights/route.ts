@@ -3,13 +3,18 @@ import { marketAnalysis } from '@/data/market-analysis';
 import { getTopProducts, compareProducts, analyzeMarketPosition } from '@/lib/market-utils';
 import logger from '@/lib/logger';
 
+// Cache headers for market data (5min browser, 30min CDN)
+const cacheHeaders = {
+  'Cache-Control': 'public, max-age=300, s-maxage=1800, stale-while-revalidate=3600',
+};
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type');
     const productId = searchParams.get('productId');
     const metric = searchParams.get('metric');
-    
+
     switch (type) {
       case 'overview':
         return NextResponse.json({
@@ -23,25 +28,25 @@ export async function GET(request: NextRequest) {
               innovation: getTopProducts('innovation', 3)
             }
           }
-        });
+        }, { headers: cacheHeaders });
 
       case 'competitive-matrix':
         return NextResponse.json({
           success: true,
           data: marketAnalysis.competitiveMatrix
-        });
+        }, { headers: cacheHeaders });
 
       case 'market-segments':
         return NextResponse.json({
           success: true,
           data: marketAnalysis.marketSegments
-        });
+        }, { headers: cacheHeaders });
 
       case 'trends':
         return NextResponse.json({
           success: true,
           data: marketAnalysis.marketTrends
-        });
+        }, { headers: cacheHeaders });
 
       case 'buyer-personas':
         return NextResponse.json({

@@ -13,7 +13,7 @@ export default function ProductNotFound() {
           
           <div className="not-found-content">
             <div className="not-found-icon">
-              <Search size={64} className="text-white/40" />
+              <Search size={64} className="text-white/70" />
             </div>
             
             <h1 className="not-found-title">Product Not Found</h1>

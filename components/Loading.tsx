@@ -24,9 +24,14 @@ export function Loading({
     : 'flex items-center justify-center p-8';
 
   return (
-    <div className={containerClasses}>
+    <div
+      className={containerClasses}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <div className="text-center">
-        <Loader2 className={`${sizeClasses[size]} animate-spin text-blue-400 mx-auto mb-2`} />
+        <Loader2 className={`${sizeClasses[size]} animate-spin text-blue-400 mx-auto mb-2`} aria-hidden="true" />
         <p className="text-white/80">{message}</p>
       </div>
     </div>

@@ -44,7 +44,7 @@ export default function ComparePage() {
         <main className="comparison-main" id="main-content">
           <div className="comparison-container">
             <div className="text-center py-12">
-              <div className="text-white/40 text-4xl mb-4">⚠️</div>
+              <div className="text-white/70 text-4xl mb-4">⚠️</div>
               <h1 className="text-2xl font-bold text-white mb-2">Loading comparison...</h1>
               <p className="text-white/80 mb-6">Please wait while we load your comparison.</p>
               <Link href="/" className="btn btn-primary">Back to Home</Link>
@@ -64,7 +64,7 @@ export default function ComparePage() {
         <main className="comparison-main" id="main-content">
           <div className="comparison-container">
             <div className="text-center py-12">
-              <div className="text-white/40 text-4xl mb-4">📊</div>
+              <div className="text-white/70 text-4xl mb-4">📊</div>
               <h1 className="text-2xl font-bold text-white mb-2">No products to compare</h1>
               <p className="text-white/80 mb-6">
                 Add some products to your comparison to see them side by side.

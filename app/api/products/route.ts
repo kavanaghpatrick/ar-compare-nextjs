@@ -96,14 +96,18 @@ export async function GET(request: Request) {
       }
     };
     
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      headers: {
+        'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+      },
+    });
   } catch (error) {
     logger.error('Error fetching products:', error);
     const errorResponse: ApiErrorResponse = {
       success: false,
       error: 'Failed to fetch products'
     };
-    
+
     return NextResponse.json(errorResponse, { status: 500 });
   }
 }

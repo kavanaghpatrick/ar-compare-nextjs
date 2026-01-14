@@ -21,7 +21,11 @@ export async function GET(
       return NextResponse.json(errorResponse, { status: 404 });
     }
 
-    return NextResponse.json(product);
+    return NextResponse.json(product, {
+      headers: {
+        'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    });
   } catch (error) {
     logger.error('Error fetching product:', error);
     const errorResponse: ApiErrorResponse = {

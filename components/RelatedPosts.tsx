@@ -111,7 +111,7 @@ export function RelatedPosts({
             <article className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl border border-white/10 p-6 hover:border-white/20 transition-all duration-300 group cursor-pointer h-full">
               {/* Article Image Placeholder */}
               <div className="aspect-video bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg mb-4 flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300">
-                <BookOpen className="text-white/40 w-8 h-8" />
+                <BookOpen className="text-white/70 w-8 h-8" />
               </div>
               
               {/* Article Meta */}

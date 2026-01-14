@@ -101,7 +101,9 @@ function ComparisonCart({
       <div className="cart-header">
         <div className="cart-title">
           <ShoppingCart className="cart-icon" aria-hidden="true" />
-          <span>Compare ({comparison.items.length}/6)</span>
+          <span aria-live="polite" aria-atomic="true">
+            Compare ({comparison.items.length}/6)
+          </span>
           {comparison.items.length >= 6 && (
             <span className="cart-limit-warning" aria-label="Maximum items reached">
               Max
