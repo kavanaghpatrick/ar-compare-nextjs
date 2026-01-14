@@ -9,9 +9,9 @@ export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  // Rate limiting
+  // Rate limiting - use x-forwarded-for header (set by proxies/load balancers)
   const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-                   request.ip ||
+                   request.headers.get('x-real-ip') ||
                    'unknown';
   const rateLimitResult = apiRateLimiter(clientIp);
   const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);

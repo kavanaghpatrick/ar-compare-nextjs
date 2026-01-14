@@ -37,7 +37,7 @@ interface ComparisonResult {
 export async function POST(request: NextRequest) {
   // Rate limiting (stricter for compare endpoint)
   const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-                   request.ip ||
+                   request.headers.get('x-real-ip') ||
                    'unknown';
   const rateLimitResult = compareRateLimiter(clientIp);
   const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);

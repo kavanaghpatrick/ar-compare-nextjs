@@ -8,9 +8,9 @@ import { apiRateLimiter, getRateLimitHeaders } from '@/lib/rate-limit';
 
 // GET /api/products - Get all products
 export async function GET(request: NextRequest) {
-  // Rate limiting
+  // Rate limiting - use x-forwarded-for header (set by proxies/load balancers)
   const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-                   request.ip ||
+                   request.headers.get('x-real-ip') ||
                    'unknown';
   const rateLimitResult = apiRateLimiter(clientIp);
   const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);
