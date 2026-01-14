@@ -1,8 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import arGlassesData from '@/data/products';
 import { EnhancedProduct } from '@/types';
 import logger from '@/lib/logger';
-import { CompareRequestSchema, createValidationErrorResponse } from '@/lib/api-validation';
+import { CompareRequestSchema } from '@/lib/api-validation';
+import { apiSuccess, notFound, internalError, validationError, rateLimited } from '@/lib/api-response';
+import { compareRateLimiter, getRateLimitHeaders } from '@/lib/rate-limit';
 
 interface ComparisonResult {
   products: EnhancedProduct[];
@@ -32,18 +34,30 @@ interface ComparisonResult {
 }
 
 // POST /api/products/compare - Compare multiple products
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // Rate limiting (stricter for compare endpoint)
+  const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+                   request.ip ||
+                   'unknown';
+  const rateLimitResult = compareRateLimiter(clientIp);
+  const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);
+
+  if (!rateLimitResult.allowed) {
+    return rateLimited(rateLimitResult.retryAfter!, rateLimitHeaders);
+  }
+
   try {
     const body = await request.json();
 
-    // FIXED: Validate request body with Zod
+    // Validate request body with Zod
     const validationResult = CompareRequestSchema.safeParse(body);
 
     if (!validationResult.success) {
-      return NextResponse.json(
-        createValidationErrorResponse(validationResult.error),
-        { status: 400 }
-      );
+      const zodError = validationResult.error;
+      return validationError('Invalid request parameters', zodError.errors.map(e => ({
+        field: e.path.join('.'),
+        message: e.message,
+      })));
     }
 
     const { productIds } = validationResult.data;
@@ -55,10 +69,7 @@ export async function POST(request: Request) {
     if (products.length !== productIds.length) {
       const foundIds = products.map(p => p.id);
       const missingIds = productIds.filter(id => !foundIds.includes(id));
-      return NextResponse.json(
-        { error: `Products not found: ${missingIds.join(', ')}` },
-        { status: 404 }
-      );
+      return notFound(`Products not found: ${missingIds.join(', ')}`);
     }
 
     // Build comparison object
@@ -92,17 +103,17 @@ export async function POST(request: Request) {
       };
     });
 
-    const result: ComparisonResult = {
-      products,
-      comparison
-    };
-
-    return NextResponse.json(result);
+    return apiSuccess(
+      {
+        products,
+        comparison,
+      },
+      {
+        headers: rateLimitHeaders,
+      }
+    );
   } catch (error) {
     logger.error('Error comparing products:', error);
-    return NextResponse.json(
-      { error: 'Failed to compare products' },
-      { status: 500 }
-    );
+    return internalError('Failed to compare products');
   }
 }

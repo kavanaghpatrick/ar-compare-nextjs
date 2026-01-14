@@ -32,16 +32,25 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
       // Store original overflow value
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-      
+
+      // Handle Escape key to close modal
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      document.addEventListener('keydown', handleKeyDown);
+
       return () => {
         // Restore original overflow value
         document.body.style.overflow = originalOverflow;
+        document.removeEventListener('keydown', handleKeyDown);
       };
     } else {
       const timer = setTimeout(() => setIsVisible(false), 300);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const handleToggleComparison = () => {
     if (!product) return;

@@ -151,8 +151,17 @@ export function PageNavigation({ className = '' }: PageNavigationProps) {
 
       {/* Mobile Expanded Navigation */}
       {isExpanded && (
-        <div className="fixed inset-0 [z-index:var(--z-modal-backdrop)] lg:hidden">
-          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsExpanded(false)} />
+        <div
+          className="fixed inset-0 [z-index:var(--z-modal-backdrop)] lg:hidden"
+          onKeyDown={(e) => e.key === 'Escape' && setIsExpanded(false)}
+        >
+          <button
+            className="absolute inset-0 bg-black bg-opacity-50 cursor-default"
+            onClick={() => setIsExpanded(false)}
+            onKeyDown={(e) => e.key === 'Escape' && setIsExpanded(false)}
+            aria-label="Close navigation menu"
+            tabIndex={-1}
+          />
           <Card className="absolute bottom-20 left-4 right-4 shadow-xl">
             <CardContent className="p-4">
               <div className="grid grid-cols-2 gap-2">

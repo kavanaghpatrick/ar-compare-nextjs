@@ -1,22 +1,36 @@
-import { NextResponse } from 'next/server';
-import { arGlassesData } from '@/data/products'; // Import basic product data
-import { Product, ProductsApiResponse, ApiErrorResponse } from '@/types';
+import { NextRequest } from 'next/server';
+import { arGlassesData } from '@/data/products';
+import { Product } from '@/types';
 import logger from '@/lib/logger';
-import { ProductFiltersSchema, parseSearchParams, createValidationErrorResponse } from '@/lib/api-validation';
+import { ProductFiltersSchema, parseSearchParams } from '@/lib/api-validation';
+import { apiSuccess, internalError, validationError, rateLimited } from '@/lib/api-response';
+import { apiRateLimiter, getRateLimitHeaders } from '@/lib/rate-limit';
 
 // GET /api/products - Get all products
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  // Rate limiting
+  const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+                   request.ip ||
+                   'unknown';
+  const rateLimitResult = apiRateLimiter(clientIp);
+  const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);
+
+  if (!rateLimitResult.allowed) {
+    return rateLimited(rateLimitResult.retryAfter!, rateLimitHeaders);
+  }
+
   try {
     const { searchParams } = new URL(request.url);
 
-    // FIXED: Validate and parse query parameters with Zod
+    // Validate and parse query parameters with Zod
     const validationResult = parseSearchParams(searchParams, ProductFiltersSchema);
 
     if (!validationResult.success) {
-      return NextResponse.json(
-        createValidationErrorResponse(validationResult.error),
-        { status: 400 }
-      );
+      const zodError = validationResult.error;
+      return validationError('Invalid request parameters', zodError.errors.map(e => ({
+        field: e.path.join('.'),
+        message: e.message,
+      })));
     }
 
     const { category, brand, minPrice, maxPrice, sortBy, sortOrder, limit, offset } = validationResult.data;
@@ -82,32 +96,37 @@ export async function GET(request: Request) {
       paginatedProducts = filteredProducts.slice(offsetNum, offsetNum + limit);
     }
 
-    const response: ProductsApiResponse = {
-      products: paginatedProducts,
-      total: filteredProducts.length,
-      count: paginatedProducts.length,
-      filters: {
-        category: category ?? null,
-        brand: brand ?? null,
-        minPrice: minPrice !== undefined ? String(minPrice) : null,
-        maxPrice: maxPrice !== undefined ? String(maxPrice) : null,
-        sortBy,
-        sortOrder
-      }
-    };
-    
-    return NextResponse.json(response, {
-      headers: {
-        'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+    const offsetNum = offset ?? 0;
+    const limitNum = limit ?? filteredProducts.length;
+
+    return apiSuccess(
+      {
+        products: paginatedProducts,
+        filters: {
+          category: category ?? null,
+          brand: brand ?? null,
+          minPrice: minPrice !== undefined ? String(minPrice) : null,
+          maxPrice: maxPrice !== undefined ? String(maxPrice) : null,
+          sortBy,
+          sortOrder,
+        },
       },
-    });
+      {
+        pagination: {
+          total: filteredProducts.length,
+          count: paginatedProducts.length,
+          offset: offsetNum,
+          limit: limitNum,
+          hasMore: offsetNum + paginatedProducts.length < filteredProducts.length,
+        },
+        headers: {
+          ...rateLimitHeaders,
+          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
+    );
   } catch (error) {
     logger.error('Error fetching products:', error);
-    const errorResponse: ApiErrorResponse = {
-      success: false,
-      error: 'Failed to fetch products'
-    };
-
-    return NextResponse.json(errorResponse, { status: 500 });
+    return internalError('Failed to fetch products');
   }
 }
